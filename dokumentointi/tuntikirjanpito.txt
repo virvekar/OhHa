@@ -1,0 +1,6 @@
+Tuntikirjanpito
+
+Ma 13.1.2014 1 h tutustuminen git:iin
+ti 14.1 1 h aloitusluento
+ke 15.1 1,5 h aihemäärittely ja git harjoittelu
+to 16.1 0,7 h labtooliin kirjautuminen, asioiden lisaaminen reporsitioon 
