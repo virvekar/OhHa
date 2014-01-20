@@ -23,7 +23,9 @@ public class Kayttoliittyma
         ennuste.LueSaaennuste();
         ennuste.TulostaSaaennuste();
         
-        Lumikerros lumikerros=new Lumikerros(koeKartta);
+        Lumikerros lumikerros=new Lumikerros(koeKartta,ennuste);
         lumikerros.AlustaLumikerros();
+        lumikerros.lisaaLuntaYhdenSekunninSateenVerran();
+        lumikerros.TulostaLumikerros();
     }
 }

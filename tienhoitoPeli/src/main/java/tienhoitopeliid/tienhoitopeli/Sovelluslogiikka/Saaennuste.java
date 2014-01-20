@@ -28,10 +28,16 @@ public class Saaennuste {
         this.lumisateenMaara=Integer.parseInt(ennuste.get(1));
       
     }
+    public int GetEnnusteenPituus(){
+        return this.ennusteenPituus;
+    }
+    public int GetLumisateenMaara(){
+        return this.lumisateenMaara;
+    }
     
     public void TulostaSaaennuste(){
 
-        System.out.println("Seuraavan "+this.ennusteenPituus+ " sekunnin aikana tiedossa "+this.lumisateenMaara+ " mm lunta.");
+        System.out.println("Seuraavan "+this.ennusteenPituus+ " sekunnin aikana tiedossa "+this.lumisateenMaara+ " cm lunta.");
     }
     
 }
