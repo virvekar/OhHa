@@ -17,14 +17,12 @@ public class Lumikerros {
     private Kartta kartta;
     private Saaennuste ennuste;
     private int sekunti;
-    private ArrayList<ArrayList<Double>> lumikerroksenPaksuus;
     private HashMap lumikerrosKoordinaateissa;
     
     public Lumikerros(Kartta annettuKartta, Saaennuste annettuEnnuste){
         this.kartta=annettuKartta;
         this.ennuste=annettuEnnuste;
         this.sekunti=0;
-        this.lumikerroksenPaksuus=new ArrayList<ArrayList<Double>>();
         this.lumikerrosKoordinaateissa=new HashMap();
     }
     public void AlustaLumikerros(){
