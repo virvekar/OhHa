@@ -1,6 +1,7 @@
 package tienhoitopeliid.tienhoitopeli;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import tienhoitopeliid.tienhoitopeli.Sovelluslogiikka.Kartta;
 import tienhoitopeliid.tienhoitopeli.Sovelluslogiikka.Lumikerros;
 import tienhoitopeliid.tienhoitopeli.Sovelluslogiikka.Saaennuste;
@@ -27,5 +28,7 @@ public class Kayttoliittyma
         lumikerros.AlustaLumikerros();
         lumikerros.lisaaLuntaYhdenSekunninSateenVerran();
         lumikerros.TulostaLumikerros();
+        
+
     }
 }

@@ -7,6 +7,7 @@
 package tienhoitopeliid.tienhoitopeli.Sovelluslogiikka;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -17,59 +18,73 @@ public class Lumikerros {
     private Saaennuste ennuste;
     private int sekunti;
     private ArrayList<ArrayList<Double>> lumikerroksenPaksuus;
+    private HashMap lumikerrosKoordinaateissa;
     
     public Lumikerros(Kartta annettuKartta, Saaennuste annettuEnnuste){
         this.kartta=annettuKartta;
         this.ennuste=annettuEnnuste;
         this.sekunti=0;
         this.lumikerroksenPaksuus=new ArrayList<ArrayList<Double>>();
+        this.lumikerrosKoordinaateissa=new HashMap();
     }
     public void AlustaLumikerros(){
         ArrayList<Integer> kartanKoko = this.kartta.KartanKoko();
         ArrayList<String> karttaPohja= this.kartta.GetKarttaPohja();
         int riviPiste;
+        int riviNumero=0;
         
         //Kay lapi kaikki rivit
         for(String rivi : karttaPohja){
-            
-            ArrayList<Double> lumiRivi= new ArrayList<Double>();
+  
             //Kay lapi rivin jokaisen pisteen
-            for(riviPiste=0; riviPiste<kartanKoko.get(0); riviPiste ++){
-                if(rivi.charAt(riviPiste)=='o'){
-                    lumiRivi.add(0.0);
-                }else{
-                    lumiRivi.add(-1.0);
-                }
-                
+            for(riviPiste=0; riviPiste<kartanKoko.get(0); riviPiste ++){    
+            ArrayList<Integer> avainkoordinaatit=new ArrayList<Integer>();
+            avainkoordinaatit.add(riviNumero);
+            avainkoordinaatit.add(riviPiste);
+            
+              if(rivi.charAt(riviPiste)=='x'){
+                  this.lumikerrosKoordinaateissa.put(avainkoordinaatit,(double) -1.0);
+              }else{
+                  this.lumikerrosKoordinaateissa.put(avainkoordinaatit, (double) 0.0);
+              }
             }
-            this.lumikerroksenPaksuus.add(lumiRivi);
+       riviNumero++;
         }
     }
+    
     public void TulostaLumikerros(){
-        for (ArrayList<Double> rivi : this.lumikerroksenPaksuus){
-            System.out.println(rivi);
-        }
+      ArrayList<Integer> kartanKoko = this.kartta.KartanKoko();
+      String tulosteRivi="";
+      for (int i=0; i<kartanKoko.get(1); i++){
+          
+          for (int j=0; j<kartanKoko.get(0); j++){
+              ArrayList<Integer> koordinaatit= new ArrayList<Integer>();
+              koordinaatit.add(i);
+              koordinaatit.add(j);
+              tulosteRivi=tulosteRivi.concat(this.lumikerrosKoordinaateissa.get(koordinaatit)+" ");
+          }
+          System.out.println(tulosteRivi);
+          tulosteRivi="";
+      }
+      
     }
     public void lisaaLuntaYhdenSekunninSateenVerran(){
         double sekunnissaSataa= ((double) ennuste.GetLumisateenMaara()) / ((double) ennuste.GetEnnusteenPituus());
-       
+        ArrayList<Integer> kartanKoko = this.kartta.KartanKoko();
         int rivi=0;
-        
-        for(ArrayList<Double> lumirivi : this.lumikerroksenPaksuus){
+        for (int i=0; i<kartanKoko.get(1); i++){
             
-            ArrayList<Double> uusiLumiRivi =new ArrayList<Double>();
-            for(double lumenMaara : lumirivi){
-                if (lumenMaara < 0.0){
-                    uusiLumiRivi.add(-1.0);
-                } else{
-                    double uusiLumiMaara;
-                    uusiLumiMaara=lumenMaara+sekunnissaSataa;
-                    uusiLumiRivi.add(uusiLumiMaara);
+             for (int j=0; j<kartanKoko.get(0); j++){
+                ArrayList<Integer> koordinaatit= new ArrayList<Integer>();
+                koordinaatit.add(i);
+                koordinaatit.add(j);
+                double vanhaLumiMaara= (double) this.lumikerrosKoordinaateissa.get(koordinaatit);
+                if (vanhaLumiMaara>=0){
+                  double uusiLumiMaara=vanhaLumiMaara+sekunnissaSataa;
+                  this.lumikerrosKoordinaateissa.put(koordinaatit,uusiLumiMaara);
                 }
-                this.lumikerroksenPaksuus.set(rivi, uusiLumiRivi);
-                
-            }
-            rivi++;
+             }
         }
+        
     }
 }
