@@ -85,4 +85,7 @@ public class Lumikerros {
         }
         
     }
+    public HashMap GetLumikerrosKoordinaateissa(){
+        return this.lumikerrosKoordinaateissa;
+    }
 }

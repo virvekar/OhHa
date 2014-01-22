@@ -2,7 +2,7 @@ package tienhoitopeliid.tienhoitopeli;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import tienhoitopeliid.tienhoitopeli.Sovelluslogiikka.Auraaja;
+import tienhoitopeliid.tienhoitopeli.Sovelluslogiikka.ReitinLukija;
 import tienhoitopeliid.tienhoitopeli.Sovelluslogiikka.Kartta;
 import tienhoitopeliid.tienhoitopeli.Sovelluslogiikka.Lumikerros;
 import tienhoitopeliid.tienhoitopeli.Sovelluslogiikka.Saaennuste;
@@ -30,8 +30,8 @@ public class Kayttoliittyma
         lumikerros.lisaaLuntaYhdenSekunninSateenVerran();
         lumikerros.TulostaLumikerros();
         
-        Auraaja auraaja= new Auraaja(koeKartta);
-        auraaja.KirjaaReitti();
+        ReitinLukija reitinLukija= new ReitinLukija(koeKartta, lumikerros);
+        reitinLukija.KirjaaReitti();
         
 
     }
