@@ -39,7 +39,7 @@
     <configuration>
         <instrumentation>
             <includes>
-                <include>tienhoitoPeli.logiikka/*.class</include>
+                <include>tienhoitoPeli.src.test./*.class</include>
                 <include>tienhoitoPeli.tekoaly/*.class</include>
             </includes>
         </instrumentation>
