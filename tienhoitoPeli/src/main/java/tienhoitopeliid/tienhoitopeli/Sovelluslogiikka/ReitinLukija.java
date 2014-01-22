@@ -15,7 +15,6 @@ import java.util.Scanner;
  */
 public class ReitinLukija {
 
-    private Scanner lukija;
     private ArrayList<ArrayList<Integer>> reitti;
     private Kartta kartta;
     private Lumikerros lumikerros;
@@ -23,54 +22,32 @@ public class ReitinLukija {
     public ReitinLukija(Kartta annettuKartta, Lumikerros annettuLumikerros) {
         this.kartta = annettuKartta;
         this.lumikerros = annettuLumikerros;
-        this.lukija = new Scanner(System.in);
         this.reitti = new ArrayList<ArrayList<Integer>>();
 
     }
 
-    public void KirjaaReitti() {
-
-        this.KirjaaEnsimmainenPiste();
-        boolean lopetuskomentoAnnettu = false;
-        
-        System.out.println("Liiku painamalla seuraavia nappaimia: i=ylos, k=alas, j=vasemmalle, l=oikealle");
-        System.out.println("Lopeta liikkuminen painamalla p");
-
-        while (!lopetuskomentoAnnettu) {
-            String komento = lukija.nextLine();
-            if (komento != null && !komento.isEmpty()) {
-                lopetuskomentoAnnettu = this.SuoritaKomentoJosSeLoytyy(komento);
-            } else {
-                System.out.println("Tuntematon komento");
-            }
-        }
-        System.out.println(reitti);
-
-    }
-
-    public void KirjaaEnsimmainenPiste() {
-        boolean ekaPisteEiHyvaksytty = true;
-        while (ekaPisteEiHyvaksytty) {
-            ArrayList<Integer> reittiPiste = this.KysyEnsimmainenPiste();
-            boolean onnistuiko = this.TarkistaPisteJaLisaaReitille(reittiPiste);
-            if (onnistuiko) {
-                ekaPisteEiHyvaksytty = false;
-            } else {
-                System.out.println("Piste ei kelpaa. Anna uusiPiste");
-            }
-        }
-    }
-
-    public ArrayList<Integer> KysyEnsimmainenPiste() {
-        System.out.println("Milta vaakarivilta aloitetaan (ylin=1)?");
-        String aloitusRivi = this.lukija.nextLine();
-        System.out.println("Milta pystyRivilta aloitetaan (vasemmalla=1)?");
-        String aloitusSarake = this.lukija.nextLine();
-
+    public boolean KirjaaEnsimmainenPiste(String aloitusRivi, String aloitusSarake) {
         int aRivi = Integer.parseInt(aloitusRivi) - 1;
         int aSarake = Integer.parseInt(aloitusSarake) - 1;
         ArrayList<Integer> reittiPiste = this.LuoUusiKoordinaattiPiste(aRivi, aSarake);
-        return reittiPiste;
+
+        boolean onnistuiko = this.TarkistaPisteJaLisaaReitille(reittiPiste);
+
+        return !onnistuiko;
+
+    }
+
+    public boolean KirjaaReitti(String komento) {
+
+        boolean lopetuskomentoAnnettu = false;
+
+        if (komento != null && !komento.isEmpty()) {
+            lopetuskomentoAnnettu = this.SuoritaKomentoJosSeLoytyy(komento);
+            return lopetuskomentoAnnettu;
+        } else {
+            System.out.println("Tuntematon komento");
+            return false;
+        }
     }
 
     public boolean TarkistaOnkoRajojenSisalla(ArrayList<Integer> piste) {
@@ -165,5 +142,8 @@ public class ReitinLukija {
         int sarake = reitti.get(reitti.size() - 1).get(1) + 1;
         ArrayList<Integer> uusiPiste = this.LuoUusiKoordinaattiPiste(rivi, sarake);
         boolean onnistuiko = this.TarkistaPisteJaLisaaReitille(uusiPiste);
+    }
+    public ArrayList<ArrayList<Integer>> GetReitti(){
+        return this.reitti;
     }
 }
