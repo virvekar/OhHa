@@ -27,14 +27,19 @@ public class ReitinLukija {
     }
 
     public boolean KirjaaEnsimmainenPiste(String aloitusRivi, String aloitusSarake) {
-        int aRivi = Integer.parseInt(aloitusRivi) - 1;
-        int aSarake = Integer.parseInt(aloitusSarake) - 1;
-        ArrayList<Integer> reittiPiste = this.LuoUusiKoordinaattiPiste(aRivi, aSarake);
+        if (aloitusRivi != null && aloitusSarake != null && !aloitusRivi.isEmpty() && !aloitusSarake.isEmpty()) {
+            if(OnkoInteger(aloitusRivi) && OnkoInteger(aloitusSarake)){
+            int aRivi = Integer.parseInt(aloitusRivi) - 1;
+            int aSarake = Integer.parseInt(aloitusSarake) - 1;
+            ArrayList<Integer> reittiPiste = this.LuoUusiKoordinaattiPiste(aRivi, aSarake);
 
-        boolean onnistuiko = this.TarkistaPisteJaLisaaReitille(reittiPiste);
+            boolean onnistuiko = this.TarkistaPisteJaLisaaReitille(reittiPiste);
 
-        return !onnistuiko;
-
+            return !onnistuiko;
+            }
+        }
+        System.out.println("Tuntematon komento");
+        return false;
     }
 
     public boolean KirjaaReitti(String komento) {
@@ -92,28 +97,33 @@ public class ReitinLukija {
     }
 
     public boolean SuoritaKomentoJosSeLoytyy(String komento) {
-        char kirjain = komento.charAt(0);
-        if (kirjain == 'p') {
-            return true;
-        } else {
-            if (kirjain == 'i') {
-                this.LiikuYlos();
+        if (komento != null && !komento.isEmpty()) {
 
-            } else if (kirjain == 'k') {
-                this.LiikuAlas();
-
-            } else if (kirjain == 'j') {
-                this.LiikuVasemmalle();
-
-            } else if (kirjain == 'l') {
-                this.LiikuOikealle();
-
+            char kirjain = komento.charAt(0);
+            if (kirjain == 'p') {
+                return true;
             } else {
-                System.out.println("Tuntematon komento");
+                if (kirjain == 'i') {
+                    this.LiikuYlos();
 
+                } else if (kirjain == 'k') {
+                    this.LiikuAlas();
+
+                } else if (kirjain == 'j') {
+                    this.LiikuVasemmalle();
+
+                } else if (kirjain == 'l') {
+                    this.LiikuOikealle();
+
+                } else {
+                    System.out.println("Tuntematon komento");
+
+                }
+                return false;
             }
-            return false;
         }
+        System.out.println("Tuntematon komento");
+        return false;
     }
 
     public void LiikuYlos() {
@@ -143,7 +153,17 @@ public class ReitinLukija {
         ArrayList<Integer> uusiPiste = this.LuoUusiKoordinaattiPiste(rivi, sarake);
         boolean onnistuiko = this.TarkistaPisteJaLisaaReitille(uusiPiste);
     }
-    public ArrayList<ArrayList<Integer>> GetReitti(){
+
+    public ArrayList<ArrayList<Integer>> GetReitti() {
         return this.reitti;
+    }
+    
+    public static boolean OnkoInteger(String teksti){
+        try{
+            Integer.parseInt(teksti);
+        }catch(NumberFormatException e){
+            return false;
+        }
+        return true;
     }
 }
