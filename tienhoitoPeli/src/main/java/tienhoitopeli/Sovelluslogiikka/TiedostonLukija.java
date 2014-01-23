@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package tienhoitopeliid.tienhoitopeli.Sovelluslogiikka;
+package tienhoitopeli.Sovelluslogiikka;
 
 import java.io.BufferedReader;
 import java.io.File;

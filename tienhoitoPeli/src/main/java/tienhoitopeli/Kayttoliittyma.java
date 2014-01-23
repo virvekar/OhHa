@@ -1,12 +1,12 @@
-package tienhoitopeliid.tienhoitopeli;
+package tienhoitopeli;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
-import tienhoitopeliid.tienhoitopeli.Sovelluslogiikka.ReitinLukija;
-import tienhoitopeliid.tienhoitopeli.Sovelluslogiikka.Kartta;
-import tienhoitopeliid.tienhoitopeli.Sovelluslogiikka.Lumikerros;
-import tienhoitopeliid.tienhoitopeli.Sovelluslogiikka.Saaennuste;
+import tienhoitopeli.Sovelluslogiikka.ReitinLukija;
+import tienhoitopeli.Sovelluslogiikka.Kartta;
+import tienhoitopeli.Sovelluslogiikka.Lumikerros;
+import tienhoitopeli.Sovelluslogiikka.Saaennuste;
 
 /**
  * Hello world!
@@ -17,18 +17,18 @@ public class Kayttoliittyma {
     public static void main(String[] args) {
         Scanner lukija = new Scanner(System.in);
 
-        Kartta koeKartta = new Kartta();
+        Kartta koeKartta = new Kartta("src/main/java/tienhoitopeli/kartat/kartta1.txt");
         koeKartta.LueKartta();
         koeKartta.TulostaKartta();
         koeKartta.TulostaSelite();
 
-        Saaennuste ennuste = new Saaennuste();
+        Saaennuste ennuste = new Saaennuste("src/main/java/tienhoitopeli/saaennusteet/saaennuste1.txt");
         ennuste.LueSaaennuste();
         ennuste.TulostaSaaennuste();
 
         Lumikerros lumikerros = new Lumikerros(koeKartta, ennuste);
         lumikerros.AlustaLumikerros();
-        lumikerros.lisaaLuntaYhdenSekunninSateenVerran();
+        lumikerros.LisaaLuntaYhdenSekunninSateenVerran();
         lumikerros.TulostaLumikerros();
 
         ReitinLukija reitinLukija = new ReitinLukija(koeKartta, lumikerros);
@@ -52,7 +52,7 @@ public class Kayttoliittyma {
 
         while (!lopetuskomentoAnnettu) {
             String komento = lukija.nextLine();
-            lopetuskomentoAnnettu=reitinLukija.KirjaaReitti(komento);
+            lopetuskomentoAnnettu=reitinLukija.KirjaaReittiPisteJosKomentoKelpaa(komento);
         }
         
 

@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tienhoitopeliid.tienhoitopeli.Sovelluslogiikka;
+package tienhoitopeli.Sovelluslogiikka;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
+
 
 /**
  *
@@ -28,21 +28,21 @@ public class ReitinLukija {
 
     public boolean KirjaaEnsimmainenPiste(String aloitusRivi, String aloitusSarake) {
         if (aloitusRivi != null && aloitusSarake != null && !aloitusRivi.isEmpty() && !aloitusSarake.isEmpty()) {
-            if(OnkoInteger(aloitusRivi) && OnkoInteger(aloitusSarake)){
-            int aRivi = Integer.parseInt(aloitusRivi) - 1;
-            int aSarake = Integer.parseInt(aloitusSarake) - 1;
-            ArrayList<Integer> reittiPiste = this.LuoUusiKoordinaattiPiste(aRivi, aSarake);
+            if (OnkoInteger(aloitusRivi) && OnkoInteger(aloitusSarake)) {
+                int aRivi = Integer.parseInt(aloitusRivi) - 1;
+                int aSarake = Integer.parseInt(aloitusSarake) - 1;
+                ArrayList<Integer> reittiPiste = this.LuoUusiKoordinaattiPiste(aRivi, aSarake);
 
-            boolean onnistuiko = this.TarkistaPisteJaLisaaReitille(reittiPiste);
+                boolean onnistuiko = this.TarkistaPisteJaLisaaReitille(reittiPiste);
 
-            return !onnistuiko;
+                return !onnistuiko;
             }
         }
         System.out.println("Tuntematon komento");
         return false;
     }
 
-    public boolean KirjaaReitti(String komento) {
+    public boolean KirjaaReittiPisteJosKomentoKelpaa(String komento) {
 
         boolean lopetuskomentoAnnettu = false;
 
@@ -157,11 +157,11 @@ public class ReitinLukija {
     public ArrayList<ArrayList<Integer>> GetReitti() {
         return this.reitti;
     }
-    
-    public static boolean OnkoInteger(String teksti){
-        try{
+
+    public static boolean OnkoInteger(String teksti) {
+        try {
             Integer.parseInt(teksti);
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             return false;
         }
         return true;

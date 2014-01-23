@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package tienhoitopeliid.tienhoitopeli.Sovelluslogiikka;
+package tienhoitopeli.Sovelluslogiikka;
 
 import java.util.ArrayList;
 
@@ -17,13 +17,17 @@ public class Saaennuste {
     private String ennusteTiedosto;
     private int lumisateenMaara;
     
-    public Saaennuste(){
-        this.ennusteTiedosto="/home/virvemaa/OhHa/tienhoitoPeli/src/main/java/tienhoitopeliid/tienhoitopeli/saaennusteet/saaennuste1.txt";
+    public Saaennuste(String tiedostonNimi){
+        this.ennusteTiedosto=tiedostonNimi;
     }
     
     public void LueSaaennuste(){
         TiedostonLukija saaennusteenLukija=new TiedostonLukija(this.ennusteTiedosto);
         ArrayList<String> ennuste=saaennusteenLukija.LueTiedosto();
+       if(ennuste.isEmpty()){
+            System.out.println("Ohjelmaa suoritettaessa tapahtui virhe. Ennustetta ei loytynyt.");
+            System.exit(0);
+        }
         this.ennusteenPituus=Integer.parseInt(ennuste.get(0));
         this.lumisateenMaara=Integer.parseInt(ennuste.get(1));
       

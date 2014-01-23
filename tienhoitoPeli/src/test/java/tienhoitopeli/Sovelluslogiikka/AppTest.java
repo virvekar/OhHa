@@ -1,4 +1,4 @@
-package tienhoitopeliid.tienhoitopeli;
+package tienhoitopeli.Sovelluslogiikka;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

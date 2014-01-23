@@ -1,4 +1,4 @@
-package tienhoitopeliid.tienhoitopeli;
+package tienhoitopeli.Sovelluslogiikka;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -12,10 +12,10 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import tienhoitopeliid.tienhoitopeli.Sovelluslogiikka.Kartta;
-import tienhoitopeliid.tienhoitopeli.Sovelluslogiikka.Lumikerros;
-import tienhoitopeliid.tienhoitopeli.Sovelluslogiikka.ReitinLukija;
-import tienhoitopeliid.tienhoitopeli.Sovelluslogiikka.Saaennuste;
+import tienhoitopeli.Sovelluslogiikka.Kartta;
+import tienhoitopeli.Sovelluslogiikka.Lumikerros;
+import tienhoitopeli.Sovelluslogiikka.ReitinLukija;
+import tienhoitopeli.Sovelluslogiikka.Saaennuste;
 
 /**
  *
@@ -42,9 +42,9 @@ public class ReitinLukijaTest {
 
     @Before
     public void setUp() {
-        kartta = new Kartta();
+        kartta = new Kartta("src/main/java/tienhoitopeli/kartat/kartta1.txt");
         kartta.LueKartta();
-        ennuste = new Saaennuste();
+        ennuste = new Saaennuste("src/main/java/tienhoitopeli/saaennusteet/saaennuste1.txt");
         ennuste.LueSaaennuste();
         lumikerros = new Lumikerros(kartta, ennuste);
         lumikerros.AlustaLumikerros();
@@ -303,59 +303,64 @@ public class ReitinLukijaTest {
         piste.add(4);
         piste.add(1);
         boolean onnistuiko1 = this.reitinLukija.TarkistaPisteJaLisaaReitille(piste);
-        boolean onnistuiko2=this.reitinLukija.SuoritaKomentoJosSeLoytyy("i");
+        boolean onnistuiko2 = this.reitinLukija.SuoritaKomentoJosSeLoytyy("i");
         ArrayList<ArrayList<Integer>> reitti = this.reitinLukija.GetReitti();
         ArrayList<Integer> uusiPiste = new ArrayList<Integer>();
         uusiPiste.add(3);
         uusiPiste.add(1);
         assertEquals(uusiPiste, reitti.get(1));
-        
+
     }
+
     @Test
     public void SuoritaKomentoToimiiSyotteelleAlas() {
         piste.add(3);
         piste.add(1);
         boolean onnistuiko1 = this.reitinLukija.TarkistaPisteJaLisaaReitille(piste);
-        boolean onnistuiko2=this.reitinLukija.SuoritaKomentoJosSeLoytyy("k");
+        boolean onnistuiko2 = this.reitinLukija.SuoritaKomentoJosSeLoytyy("k");
         ArrayList<ArrayList<Integer>> reitti = this.reitinLukija.GetReitti();
         ArrayList<Integer> uusiPiste = new ArrayList<Integer>();
         uusiPiste.add(4);
         uusiPiste.add(1);
         assertEquals(uusiPiste, reitti.get(1));
-        
+
     }
+
     @Test
     public void SuoritaKomentoToimiiSyotteelleVasemmalle() {
         piste.add(4);
         piste.add(1);
         boolean onnistuiko1 = this.reitinLukija.TarkistaPisteJaLisaaReitille(piste);
-        boolean onnistuiko2=this.reitinLukija.SuoritaKomentoJosSeLoytyy("j");
+        boolean onnistuiko2 = this.reitinLukija.SuoritaKomentoJosSeLoytyy("j");
         ArrayList<ArrayList<Integer>> reitti = this.reitinLukija.GetReitti();
         ArrayList<Integer> uusiPiste = new ArrayList<Integer>();
         uusiPiste.add(4);
         uusiPiste.add(0);
         assertEquals(uusiPiste, reitti.get(1));
-        
+
     }
+
     @Test
     public void SuoritaKomentoToimiiSyotteelleOikealle() {
         piste.add(4);
         piste.add(1);
         boolean onnistuiko1 = this.reitinLukija.TarkistaPisteJaLisaaReitille(piste);
-        boolean onnistuiko2=this.reitinLukija.SuoritaKomentoJosSeLoytyy("l");
+        boolean onnistuiko2 = this.reitinLukija.SuoritaKomentoJosSeLoytyy("l");
         ArrayList<ArrayList<Integer>> reitti = this.reitinLukija.GetReitti();
         ArrayList<Integer> uusiPiste = new ArrayList<Integer>();
         uusiPiste.add(4);
         uusiPiste.add(2);
         assertEquals(uusiPiste, reitti.get(1));
     }
+
     @Test
-    public void SuoritaKomentoPalauttaaTrueSyotteellePysahdy(){
-        boolean onnistuiko=this.reitinLukija.SuoritaKomentoJosSeLoytyy("p");
-        assertEquals(true,onnistuiko);
+    public void SuoritaKomentoPalauttaaTrueSyotteellePysahdy() {
+        boolean onnistuiko = this.reitinLukija.SuoritaKomentoJosSeLoytyy("p");
+        assertEquals(true, onnistuiko);
     }
+
     @Test
-    public void SuoritaKomentoEiLisaaPistettaSyotteellePysahdy(){
+    public void SuoritaKomentoEiLisaaPistettaSyotteellePysahdy() {
         piste.add(1);
         piste.add(1);
         boolean onnistuiko = this.reitinLukija.TarkistaPisteJaLisaaReitille(piste);
@@ -363,8 +368,9 @@ public class ReitinLukijaTest {
         ArrayList<ArrayList<Integer>> reitti = this.reitinLukija.GetReitti();
         assertEquals(1, reitti.size());
     }
+
     @Test
-    public void SuoritaKomentoEiLisaaPistettaTuntemattomalleSyotteelle(){
+    public void SuoritaKomentoEiLisaaPistettaTuntemattomalleSyotteelle() {
         piste.add(1);
         piste.add(1);
         boolean onnistuiko = this.reitinLukija.TarkistaPisteJaLisaaReitille(piste);
@@ -372,8 +378,9 @@ public class ReitinLukijaTest {
         ArrayList<ArrayList<Integer>> reitti = this.reitinLukija.GetReitti();
         assertEquals(1, reitti.size());
     }
+
     @Test
-    public void SuoritaKomentoEiLisaaPistettaTyhjalleSyotteelle(){
+    public void SuoritaKomentoEiLisaaPistettaTyhjalleSyotteelle() {
         piste.add(1);
         piste.add(1);
         boolean onnistuiko = this.reitinLukija.TarkistaPisteJaLisaaReitille(piste);
@@ -381,12 +388,87 @@ public class ReitinLukijaTest {
         ArrayList<ArrayList<Integer>> reitti = this.reitinLukija.GetReitti();
         assertEquals(1, reitti.size());
     }
-     @Test
-    public void SuoritaKomentoEiLisaaPistettaNullSyotteelle(){
+
+    @Test
+    public void SuoritaKomentoEiLisaaPistettaNullSyotteelle() {
         piste.add(1);
         piste.add(1);
         boolean onnistuiko = this.reitinLukija.TarkistaPisteJaLisaaReitille(piste);
         reitinLukija.SuoritaKomentoJosSeLoytyy(null);
+        ArrayList<ArrayList<Integer>> reitti = this.reitinLukija.GetReitti();
+        assertEquals(1, reitti.size());
+    }
+    @Test
+    public void KirjaaEnsimmainenPisteKirjaaPisteen(){
+        boolean onnistuiko=this.reitinLukija.KirjaaEnsimmainenPiste("2", "2");
+        piste.add(1);
+        piste.add(1);
+        ArrayList<ArrayList<Integer>> reitti = this.reitinLukija.GetReitti();
+        assertEquals(piste,reitti.get(0));
+    }
+     @Test
+    public void KirjaaEnsimmainenPisteEiKirjaaRakennusPistetta(){
+        boolean onnistuiko=this.reitinLukija.KirjaaEnsimmainenPiste("1", "1");
+ 
+        ArrayList<ArrayList<Integer>> reitti = this.reitinLukija.GetReitti();
+        assertEquals(0,reitti.size());
+    }
+    @Test
+    public void KirjaaEnsimmainenPisteEiKirjaaRajojenUlkopuolistaPistetta(){
+        boolean onnistuiko=this.reitinLukija.KirjaaEnsimmainenPiste("-1", "-1");
+ 
+        ArrayList<ArrayList<Integer>> reitti = this.reitinLukija.GetReitti();
+        assertEquals(0,reitti.size());
+    }
+
+    @Test
+    public void KirjaaEnsimmainePisteEiToimiTyhjallaKomennolla() {
+        boolean onnistuiko = this.reitinLukija.KirjaaEnsimmainenPiste("", "");
+        assertEquals(false, onnistuiko);
+    }
+    @Test
+    public void KirjaaEnsimmainePisteEiToimiNullKomennolla() {
+        boolean onnistuiko = this.reitinLukija.KirjaaEnsimmainenPiste(null, null);
+        assertEquals(false, onnistuiko);
+    }
+    @Test
+    public void KirjaaEnsimmainePisteEiToimiEiNumeroKomennolla() {
+        boolean onnistuiko = this.reitinLukija.KirjaaEnsimmainenPiste("numero", "numero");
+        assertEquals(false, onnistuiko);
+    }
+    @Test
+    public void KirjaaReittiKirjaaReittiPisteen(){
+        this.reitinLukija.KirjaaEnsimmainenPiste("2", "2");
+        boolean onnistuiko = this.reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("k");
+        ArrayList<ArrayList<Integer>> reitti = this.reitinLukija.GetReitti();
+        piste.add(2);
+        piste.add(1);
+        assertEquals(piste, reitti.get(1));
+    }
+    @Test
+    public void KirjaaReittiEiKirjaaHuonoaReittiPistettaHuonollaKomennolla(){
+        this.reitinLukija.KirjaaEnsimmainenPiste("2", "2");
+        boolean onnistuiko = this.reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("j");
+        ArrayList<ArrayList<Integer>> reitti = this.reitinLukija.GetReitti();
+        assertEquals(1, reitti.size());
+    }
+    @Test
+    public void KirjaaReittiPalauttaaFalseJosAnnetaanLopetusKomento(){
+        this.reitinLukija.KirjaaEnsimmainenPiste("2", "2");
+        boolean onnistuiko = this.reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("p");
+        assertEquals(true,onnistuiko);
+    }
+    @Test
+    public void KirjaaReittiEiKirjaaHuonoaReittiPistettaTyhjallaKomennolla(){
+        this.reitinLukija.KirjaaEnsimmainenPiste("2", "2");
+        boolean onnistuiko = this.reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("");
+        ArrayList<ArrayList<Integer>> reitti = this.reitinLukija.GetReitti();
+        assertEquals(1, reitti.size());
+    }
+    @Test
+    public void KirjaaReittiEiKirjaaHuonoaReittiPistettaNullKomennolla(){
+        this.reitinLukija.KirjaaEnsimmainenPiste("2", "2");
+        boolean onnistuiko = this.reitinLukija.KirjaaReittiPisteJosKomentoKelpaa(null);
         ArrayList<ArrayList<Integer>> reitti = this.reitinLukija.GetReitti();
         assertEquals(1, reitti.size());
     }

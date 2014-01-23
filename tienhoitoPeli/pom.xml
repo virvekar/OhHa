@@ -39,8 +39,7 @@
     <configuration>
         <instrumentation>
             <includes>
-                <include>tienhoitoPeli.src.test./*.class</include>
-                <include>tienhoitoPeli.tekoaly/*.class</include>
+                <include>tienhoitopeli.Sovelluslogiikka*</include>
             </includes>
         </instrumentation>
     </configuration>
@@ -52,12 +51,10 @@
     <version>0.30</version>
     <configuration>
         <targetClasses>
-            <param>tienhoitoPeli.logiikka*</param>
-            <param>tienhoitoPeli.tekoaly*</param>
+            <param>tienhoitopeli.Sovelluslogiikka*</param>
         </targetClasses>
         <targetTests>
-            <param>tienhoitoPeli.logiikka*</param>
-            <param>.tienhoitoPeli.tekoaly*</param>
+            <param>tienhoitopeli.Sovelluslogiikka*</param>
         </targetTests>
     </configuration>
         </plugin>

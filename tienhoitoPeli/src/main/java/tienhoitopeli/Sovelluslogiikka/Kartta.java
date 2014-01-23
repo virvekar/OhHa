@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package tienhoitopeliid.tienhoitopeli.Sovelluslogiikka;
+package tienhoitopeli.Sovelluslogiikka;
 
 
 import java.util.ArrayList;
@@ -18,9 +18,9 @@ public class Kartta {
     private String karttaTiedostonNimi;
     private ArrayList<String> karttaPohja;
     
-    public Kartta(){
+    public Kartta(String tiedostonNimi){
         
-        this.karttaTiedostonNimi="/home/virvemaa/OhHa/tienhoitoPeli/src/main/java/tienhoitopeliid/tienhoitopeli/kartat/kartta1.txt";
+        this.karttaTiedostonNimi=tiedostonNimi;
         this.karttaPohja= new ArrayList<String>();
     }
     
@@ -28,6 +28,10 @@ public class Kartta {
         // Lukee karttapohjan tiedostosta ja tallentaa sen riveittain ArrayListiin.
         TiedostonLukija kartanLukija=new TiedostonLukija(this.karttaTiedostonNimi);
         this.karttaPohja=kartanLukija.LueTiedosto();
+        if(this.karttaPohja.isEmpty()){
+            System.out.println("Ohjelmaa suoritettaessa tapahtui virhe. Karttaa ei loytynyt.");
+            System.exit(0);
+        }
        
     }
     public ArrayList<String> GetKarttaPohja(){
