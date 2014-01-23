@@ -21,8 +21,6 @@ import static org.junit.Assert.*;
  */
 public class LumikerrosTest {
     private Kartta kartta;
-    private Saaennuste ennuste;
-    private Lumikerros lumikerros;
     
     public LumikerrosTest() {
     }
@@ -99,6 +97,20 @@ public class LumikerrosTest {
         koordinaatit.add(1);
         double kerrosKoordinaateissa=(double) kerros.get(koordinaatit);
         boolean vastaus=kerrosKoordinaateissa>0.01;
+        assertEquals(vastaus,true);
+    }
+    public void LisaaLuntaYhdenSekunninSateenVerranKadulleEiLisaaRakennuksenPaalle(){
+        Saaennuste ennuste = new Saaennuste("src/main/java/tienhoitopeli/saaennusteet/saaennuste1.txt");
+        ennuste.LueSaaennuste();
+        Lumikerros lumikerros = new Lumikerros(kartta, ennuste);
+        lumikerros.AlustaLumikerros();
+        lumikerros.LisaaLuntaYhdenSekunninSateenVerran();
+        HashMap kerros=lumikerros.GetLumikerrosKoordinaateissa();
+        ArrayList<Integer> koordinaatit=new ArrayList<Integer>();
+        koordinaatit.add(0);
+        koordinaatit.add(0);
+        double kerrosKoordinaateissa=(double) kerros.get(koordinaatit);
+        boolean vastaus=kerrosKoordinaateissa<-0.01;
         assertEquals(vastaus,true);
     }
     @Test
