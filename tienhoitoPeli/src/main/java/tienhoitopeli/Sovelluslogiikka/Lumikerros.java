@@ -15,13 +15,11 @@ import java.util.HashMap;
 public class Lumikerros {
 
     private Kartta kartta;
-    private Saaennuste ennuste;
     private int sekunti;
     private HashMap lumikerrosKoordinaateissa;
 
-    public Lumikerros(Kartta annettuKartta, Saaennuste annettuEnnuste) {
+    public Lumikerros(Kartta annettuKartta) {
         this.kartta = annettuKartta;
-        this.ennuste = annettuEnnuste;
         this.sekunti = 0;
         this.lumikerrosKoordinaateissa = new HashMap();
     }
@@ -68,8 +66,8 @@ public class Lumikerros {
 
     }
 
-    public void LisaaLuntaYhdenSekunninSateenVerran() {
-        double sekunnissaSataa = ((double) ennuste.GetLumisateenMaara()) / ((double) ennuste.GetEnnusteenPituus());
+    public void LisaaLuntaYhdenSekunninSateenVerran(int sateenMaara, int sateenPituus) {
+        double sekunnissaSataa = ((double) sateenMaara) / ((double) sateenPituus);
         ArrayList<Integer> kartanKoko = this.kartta.KartanKoko();
         int rivi = 0;
         for (int i = 0; i < kartanKoko.get(1); i++) {
@@ -87,8 +85,22 @@ public class Lumikerros {
         }
 
     }
+    public int laskeRuudutJoissaOnLunta(){
+        
+        int ruutujenMaara=0;
+        for (Object arvo:this.lumikerrosKoordinaateissa.values()){
+            double lumenMaara=( double) arvo;
+            if(lumenMaara>0.0001){
+                ruutujenMaara++;
+            }
+        }
+        return ruutujenMaara;
+    }
 
     public HashMap GetLumikerrosKoordinaateissa() {
         return this.lumikerrosKoordinaateissa;
+    }
+    public void PoistaLumikerros(ArrayList<Integer> koordinaatit){
+        this.lumikerrosKoordinaateissa.put(koordinaatit, 0.0);
     }
 }

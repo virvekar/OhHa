@@ -3,10 +3,13 @@ package tienhoitopeli;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
+import tienhoitopeli.Sovelluslogiikka.Auraaja;
 import tienhoitopeli.Sovelluslogiikka.ReitinLukija;
 import tienhoitopeli.Sovelluslogiikka.Kartta;
 import tienhoitopeli.Sovelluslogiikka.Lumikerros;
+import tienhoitopeli.Sovelluslogiikka.Saa;
 import tienhoitopeli.Sovelluslogiikka.Saaennuste;
+import tienhoitopeli.Sovelluslogiikka.TienhoidonSuorittaja;
 
 /**
  * Hello world!
@@ -25,11 +28,11 @@ public class Kayttoliittyma {
         Saaennuste ennuste = new Saaennuste("src/main/java/tienhoitopeli/saaennusteet/saaennuste1.txt");
         ennuste.LueSaaennuste();
         ennuste.TulostaSaaennuste();
+        
+        Saa saa=new Saa(ennuste);
 
-        Lumikerros lumikerros = new Lumikerros(koeKartta, ennuste);
+        Lumikerros lumikerros = new Lumikerros(koeKartta);
         lumikerros.AlustaLumikerros();
-        lumikerros.LisaaLuntaYhdenSekunninSateenVerran();
-        lumikerros.TulostaLumikerros();
 
         ReitinLukija reitinLukija = new ReitinLukija(koeKartta, lumikerros);
 
@@ -55,8 +58,10 @@ public class Kayttoliittyma {
             lopetuskomentoAnnettu=reitinLukija.KirjaaReittiPisteJosKomentoKelpaa(komento);
         }
         
-
-        
-
+        Auraaja auraaja=new Auraaja(lumikerros,reitinLukija);
+        TienhoidonSuorittaja tienhoidonSuorittaja=new TienhoidonSuorittaja(auraaja,saa,lumikerros);
+        tienhoidonSuorittaja.SuoritaTienhoito();
+        System.out.println("Kuluja tuli "+tienhoidonSuorittaja.laskeKulut()+" euroa");
+        lumikerros.TulostaLumikerros();
     }
 }

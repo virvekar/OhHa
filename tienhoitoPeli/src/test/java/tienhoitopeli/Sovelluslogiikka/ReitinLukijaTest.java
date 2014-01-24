@@ -28,6 +28,7 @@ public class ReitinLukijaTest {
     Lumikerros lumikerros;
     ReitinLukija reitinLukija;
     ArrayList<Integer> piste;
+    Saa saa;
 
     public ReitinLukijaTest() {
     }
@@ -46,7 +47,8 @@ public class ReitinLukijaTest {
         kartta.LueKartta();
         ennuste = new Saaennuste("src/main/java/tienhoitopeli/saaennusteet/saaennuste1.txt");
         ennuste.LueSaaennuste();
-        lumikerros = new Lumikerros(kartta, ennuste);
+        saa= new Saa(ennuste);
+        lumikerros = new Lumikerros(kartta);
         lumikerros.AlustaLumikerros();
         reitinLukija = new ReitinLukija(kartta, lumikerros);
         piste = new ArrayList<Integer>();
