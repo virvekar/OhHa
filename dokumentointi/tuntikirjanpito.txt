@@ -7,4 +7,6 @@ to 16.1 0,7 h labtooliin kirjautuminen, asioiden lisaaminen reporsitioon
 ma 20.1 4,5 h koodauksen aloitus, luokat Kartta, SaaEnnuste ja Lumikerros
 ti 21.1 1,5 h lisää peruskoodia, ReitinKirjaaja luokka
 ke 22.1 3,75 h Ensimmaiset testit
-to 23.1
+to 23.1 4 h lisaa testejä
+pe 24.1 1,66 h Luokat TienhoidonSuorittaja, Saa, Auraajaja Kululaskuri
+
