@@ -49,7 +49,6 @@ public class SuoritaTienhoitoTest {
         saa = new Saa(ennuste);
         lumikerros = new Lumikerros(kartta);
         lumikerros.AlustaLumikerros();
-        lumikerros.LisaaLuntaYhdenSekunninSateenVerran(saa.getSateenMaara(), saa.getSateenPituus());
         reitinLukija = new ReitinLukija(kartta, lumikerros);
         
         auraaja = new Auraaja(lumikerros, reitinLukija);
