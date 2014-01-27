@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package tienhoitopeli.Sovelluslogiikka;
 
 /**
@@ -11,18 +10,27 @@ package tienhoitopeli.Sovelluslogiikka;
  * @author virvemaa
  */
 public class Kululaskuri {
+
     private int kulujenMaara;
-    
-    public Kululaskuri(){
-        this.kulujenMaara=0;
+
+    public Kululaskuri() {
+        this.kulujenMaara = 0;
     }
-    public void laskeBensakulu(int ajetutRuudut){
-        this.kulujenMaara+=ajetutRuudut*5;
+
+    public void LisaaBensakulu(int ajetutRuudut) {
+        if (ajetutRuudut > 0) {
+            this.kulujenMaara += ajetutRuudut * 5;
+        }
+
     }
-    public void lisaaKolariKulut(int kolareidenMaara){
-        this.kulujenMaara+=kolareidenMaara*1000;
+
+    public void LisaaKolariKulut(int kolareidenMaara) {
+        if (kolareidenMaara > 0) {
+            this.kulujenMaara += kolareidenMaara * 1000;
+        }
     }
-    public int getKulujenMaara(){
+
+    public int getKulujenMaara() {
         return this.kulujenMaara;
     }
 }

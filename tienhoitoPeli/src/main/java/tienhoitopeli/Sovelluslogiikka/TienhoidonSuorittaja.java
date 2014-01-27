@@ -42,8 +42,8 @@ public class TienhoidonSuorittaja {
     }
     
     public int laskeKulut(){
-        kululaskuri.lisaaKolariKulut(lumikerros.laskeRuudutJoissaOnLunta());
-        kululaskuri.laskeBensakulu(this.auraaja.AnnaAuraajanReitti().size());
+        kululaskuri.LisaaKolariKulut(lumikerros.laskeRuudutJoissaOnLunta());
+        kululaskuri.LisaaBensakulu(this.auraaja.AnnaAuraajanReitti().size());
         return kululaskuri.getKulujenMaara();
     }
     public int PalautaSuurempi(int luku1, int luku2){

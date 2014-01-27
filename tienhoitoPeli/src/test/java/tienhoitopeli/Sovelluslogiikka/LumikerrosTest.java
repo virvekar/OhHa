@@ -21,6 +21,10 @@ import static org.junit.Assert.*;
  */
 public class LumikerrosTest {
     private Kartta kartta;
+    private Lumikerros lumikerros;
+    private Saaennuste ennuste;
+    private Saa saa;
+    private ArrayList<Integer> koordinaatit;
     
     public LumikerrosTest() {
     }
@@ -37,6 +41,12 @@ public class LumikerrosTest {
     public void setUp() {
         kartta = new Kartta("src/main/java/tienhoitopeli/kartat/kartta1.txt");
         kartta.LueKartta();
+        ennuste = new Saaennuste("src/main/java/tienhoitopeli/saaennusteet/saaennuste1.txt");
+        ennuste.LueSaaennuste();
+        saa=new Saa(ennuste);
+        lumikerros = new Lumikerros(kartta);
+        lumikerros.AlustaLumikerros();
+        koordinaatit=new ArrayList<Integer>();
         
     }
     
@@ -49,23 +59,14 @@ public class LumikerrosTest {
     //
     @Test
     public void LumikerroksestaTuleeOikeanKokoinen() {
-        Saaennuste ennuste = new Saaennuste("src/main/java/tienhoitopeli/saaennusteet/saaennuste1.txt");
-        ennuste.LueSaaennuste();
-        Saa saa=new Saa(ennuste);
-        Lumikerros lumikerros = new Lumikerros(kartta);
-        lumikerros.AlustaLumikerros();
+
         HashMap kerros=lumikerros.GetLumikerrosKoordinaateissa();
         assertEquals(5*5,kerros.size());
     }
     @Test
     public void LumikerrosRakennuksenPaallaOnNegatiivinen(){
-        Saaennuste ennuste = new Saaennuste("src/main/java/tienhoitopeli/saaennusteet/saaennuste1.txt");
-        ennuste.LueSaaennuste();
-        Saa saa=new Saa(ennuste);
-        Lumikerros lumikerros = new Lumikerros(kartta);
-        lumikerros.AlustaLumikerros();
+
         HashMap kerros=lumikerros.GetLumikerrosKoordinaateissa();
-        ArrayList<Integer> koordinaatit=new ArrayList<Integer>();
         koordinaatit.add(0);
         koordinaatit.add(0);
         double kerrosKoordinaateissa=(double) kerros.get(koordinaatit);
@@ -74,13 +75,8 @@ public class LumikerrosTest {
     }
     @Test
     public void LumikerrosKadullaOnAluksiNolla(){
-        Saaennuste ennuste = new Saaennuste("src/main/java/tienhoitopeli/saaennusteet/saaennuste1.txt");
-        ennuste.LueSaaennuste();
-        Saa saa=new Saa(ennuste);
-        Lumikerros lumikerros = new Lumikerros(kartta);
-        lumikerros.AlustaLumikerros();
+
         HashMap kerros=lumikerros.GetLumikerrosKoordinaateissa();
-        ArrayList<Integer> koordinaatit=new ArrayList<Integer>();
         koordinaatit.add(0);
         koordinaatit.add(1);
         double kerrosKoordinaateissa=(double) kerros.get(koordinaatit);
@@ -89,49 +85,22 @@ public class LumikerrosTest {
     }
     @Test
     public void LisaaLuntaYhdenSekunninSateenVerranKadulleLisaaLunta(){
-        Saaennuste ennuste = new Saaennuste("src/main/java/tienhoitopeli/saaennusteet/saaennuste1.txt");
-        ennuste.LueSaaennuste();
-       Saa saa=new Saa(ennuste);
-        Lumikerros lumikerros = new Lumikerros(kartta);
-        lumikerros.AlustaLumikerros();
         lumikerros.LisaaLuntaYhdenSekunninSateenVerran(saa.getSateenMaara(),saa.getSateenPituus());
         HashMap kerros=lumikerros.GetLumikerrosKoordinaateissa();
-        ArrayList<Integer> koordinaatit=new ArrayList<Integer>();
         koordinaatit.add(0);
         koordinaatit.add(1);
         double kerrosKoordinaateissa=(double) kerros.get(koordinaatit);
         boolean vastaus=kerrosKoordinaateissa>0.01;
         assertEquals(vastaus,true);
     }
-    public void LisaaLuntaYhdenSekunninSateenVerranKadulleEiLisaaRakennuksenPaalle(){
-        Saaennuste ennuste = new Saaennuste("src/main/java/tienhoitopeli/saaennusteet/saaennuste1.txt");
-        ennuste.LueSaaennuste();
-       Saa saa=new Saa(ennuste);
-        Lumikerros lumikerros = new Lumikerros(kartta);
-        lumikerros.AlustaLumikerros();
+    public void LisaaLuntaYhdenSekunninSateenVerranKadulleEiLisaaRakennuksenPaalle(){        
         lumikerros.LisaaLuntaYhdenSekunninSateenVerran(saa.getSateenMaara(),saa.getSateenPituus());
         HashMap kerros=lumikerros.GetLumikerrosKoordinaateissa();
-        ArrayList<Integer> koordinaatit=new ArrayList<Integer>();
         koordinaatit.add(0);
         koordinaatit.add(0);
         double kerrosKoordinaateissa=(double) kerros.get(koordinaatit);
         boolean vastaus=kerrosKoordinaateissa<-0.01;
         assertEquals(vastaus,true);
     }
-    @Test
-    public void LisaaLuntaYhdenSekunninSateenVerranKadulleLisaaOikeanMaaran(){
-        Saaennuste ennuste = new Saaennuste("src/main/java/tienhoitopeli/saaennusteet/saaennuste2.txt");
-        ennuste.LueSaaennuste();
-        Saa saa=new Saa(ennuste);
-        Lumikerros lumikerros = new Lumikerros(kartta);
-        lumikerros.AlustaLumikerros();
-        lumikerros.LisaaLuntaYhdenSekunninSateenVerran(saa.getSateenMaara(),saa.getSateenPituus());
-        HashMap kerros=lumikerros.GetLumikerrosKoordinaateissa();
-        ArrayList<Integer> koordinaatit=new ArrayList<Integer>();
-        koordinaatit.add(0);
-        koordinaatit.add(1);
-        double kerrosKoordinaateissa=(double) kerros.get(koordinaatit);
-        boolean vastaus=kerrosKoordinaateissa>1.99 && kerrosKoordinaateissa<2.01;
-        assertEquals(vastaus,true);
-    }
+    
 }

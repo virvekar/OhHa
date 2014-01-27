@@ -25,9 +25,10 @@ public class Kayttoliittyma {
         koeKartta.TulostaKartta();
         koeKartta.TulostaSelite();
 
-        Saaennuste ennuste = new Saaennuste("src/main/java/tienhoitopeli/saaennusteet/saaennuste1.txt");
+        Saaennuste ennuste = new Saaennuste("src/main/java/tienhoitopeli/saaennusteet/saaennuste2.txt");
         ennuste.LueSaaennuste();
         ennuste.TulostaSaaennuste();
+        System.out.println("Aurausajoneuvo auraa yhden ruudun yhdessa sekunnissa");
         
         Saa saa=new Saa(ennuste);
 
