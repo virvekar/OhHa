@@ -6,6 +6,7 @@
 
 package tienhoitopeli.GraafinenKayttoliittyma;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,10 +27,23 @@ public class Ruudukko {
         
     }
     
-    public void piirra(Graphics graphics){
+    public void Piirra(Graphics graphics){
+        int ruudunKoko=400/this.rivit;
         for(Object objektiKoordinaatit: this.lumikerrosKoordinaateissa.keySet()){
             ArrayList<Integer> koordinaatit=(ArrayList<Integer>) objektiKoordinaatit;
-            
+            int y=koordinaatit.get(0)*ruudunKoko;
+            int x=koordinaatit.get(1)*ruudunKoko;
+            if((double)this.lumikerrosKoordinaateissa.get(koordinaatit)<-0.01){
+                Ruutu ruutu=new Ruutu(x,y,ruudunKoko,Color.BLACK);
+                ruutu.Piirra(graphics);
+            }
+            else if((double)this.lumikerrosKoordinaateissa.get(koordinaatit)<0.1){
+                Ruutu ruutu=new Ruutu(x,y,ruudunKoko,Color.LIGHT_GRAY); 
+                ruutu.Piirra(graphics);
+            }else{
+                Ruutu ruutu=new Ruutu(x,y,ruudunKoko,Color.WHITE); 
+                ruutu.Piirra(graphics);
+            }
         }
     }
 }

@@ -17,15 +17,22 @@ public class Ruutu {
     private int x;
     private int y;
     private Color color;
+    private int koko;
     
-    public Ruutu(int x, int y, Color color){
+    public Ruutu(int x, int y, int koko,Color color){
         this.x=x;
         this.y=y;
         this.color=color;
+        this.koko=koko;
+    }
+    
+    public void Siirry(int xSiirtyma, int ySiirtyma){
+        this.x+=xSiirtyma;
+        this.y+=ySiirtyma;
     }
     
     public void Piirra(Graphics graphics){
         graphics.setColor(this.color);
-        graphics.fillRect(this.x,this.y,10,10);
+        graphics.fillRect(this.x,this.y,koko,koko);
     }
 }

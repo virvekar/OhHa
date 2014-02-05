@@ -8,6 +8,7 @@ package tienhoitopeli.GraafinenKayttoliittyma;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.HashMap;
 import javax.swing.JPanel;
 
 /**
@@ -15,16 +16,22 @@ import javax.swing.JPanel;
  * @author virvemaa
  */
 public class Piirtoalusta extends JPanel{
+    private HashMap lumikerrosKoordinaateissa;
+    private int rivit;
+    private int sarakkeet;
     
-    public Piirtoalusta(){
+    public Piirtoalusta(HashMap kerros, int rivit, int sarakkeet){
+        this.lumikerrosKoordinaateissa=kerros;
+        this.rivit=rivit;
+        this.sarakkeet=sarakkeet;
         super.setBackground(Color.WHITE);
     }
     
     @Override
     protected void paintComponent(Graphics graphics){
         super.paintComponent(graphics);
+        Ruudukko ruudukko=new Ruudukko(this.lumikerrosKoordinaateissa,this.rivit,this.sarakkeet);
         
-        Ruutu ruutu=new Ruutu(0,0,Color.BLACK);
-        ruutu.Piirra(graphics);
+        ruudukko.Piirra(graphics);
     }
 }

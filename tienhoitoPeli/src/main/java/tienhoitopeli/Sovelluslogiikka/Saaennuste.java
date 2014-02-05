@@ -56,9 +56,9 @@ public class Saaennuste {
         return this.lumisateenMaara;
     }
 
-    public void TulostaSaaennuste() {
+    public String AnnaSaaennuste() {
 
-        System.out.println("Seuraavan " + this.ennusteenPituus + " sekunnin aikana tiedossa " + this.lumisateenMaara + " cm lunta.");
+        return "Seuraavan " + this.ennusteenPituus + " sekunnin aikana tiedossa " + this.lumisateenMaara + " cm lunta.";
     }
 
     public boolean OnkoSopivaLuku(int luku) {

@@ -11,11 +11,14 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.HashMap;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+import tienhoitopeli.Sovelluslogiikka.ReitinLukija;
 
 /**
  *
@@ -24,9 +27,25 @@ import javax.swing.WindowConstants;
 public class GraafinenKayttoliittyma implements Runnable {
     
     private JFrame frame;
+    private HashMap lumikerrosKoordinaateissa;
+    private int rivit;
+    private int sarakkeet;
+    private String ennuste;
+    private ReitinLukija reitinLukija;
+    private JLabel ohjeKentta;
+    private JTextField riviKentta;
+    private JButton reittiValmis;
+    private Piirtoalusta piirtoalusta;
+    private JLabel ennusteTeksti;
+    private JLabel tulosKentta;
     
-    public GraafinenKayttoliittyma(){
-        
+    
+    public GraafinenKayttoliittyma(HashMap kerros, int rivit, int sarakkeet,String ennuste,ReitinLukija reitinLukija){
+        this.lumikerrosKoordinaateissa=kerros;
+        this.rivit=rivit;
+        this.sarakkeet=sarakkeet;
+        this.ennuste=ennuste;
+        this.reitinLukija=reitinLukija;
     }
     
     
@@ -50,7 +69,8 @@ public class GraafinenKayttoliittyma implements Runnable {
         
         container.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        JTextArea ohjeKentta=new JTextArea("Ohjekentta");
+        
+        ohjeKentta=new JLabel("Anna sen rivin numero, jolta aloitetaan. Ylin rivi on 1.");
         ohjeKentta.setFont(font);
         ohjeKentta.setBackground(Color.YELLOW);
         c.fill=GridBagConstraints.HORIZONTAL;
@@ -59,29 +79,35 @@ public class GraafinenKayttoliittyma implements Runnable {
         c.gridwidth=1; //montako cellia levea
         c.gridx=0; //monesko cell vasemmalta
         c.gridy=0; //monesko cell oikealta
+        c.weightx=0.5;
         container.add(ohjeKentta,c);
         
-        JTextArea syoteKentta=new JTextArea();
+        riviKentta=new JTextField();
         c.fill=GridBagConstraints.HORIZONTAL;
         c.ipady=102; //kentan korkeus
-        c.ipadx=200; //kentan leveys
+        c.ipadx=50; //kentan leveys
         c.gridwidth=1; //montako cellia levea
         c.gridx=1; //monesko cell vasemmalta
         c.gridy=0; //monesko cell oikealta
-        container.add(syoteKentta,c);
+        c.weightx=0.5;
         
-        JButton reittiValmis=new JButton("Reitti valmis");
+        AloitusSyotteenKuuntelija aloitusKuuntelija=new AloitusSyotteenKuuntelija(riviKentta,this.reitinLukija,ohjeKentta);
+        riviKentta.addActionListener(aloitusKuuntelija);
+        container.add(riviKentta,c);
+        
+        
+        reittiValmis=new JButton("Reitti valmis");
         c.ipady=100;
-        c.ipadx=100;
+      //  c.ipadx=100;
         c.gridy=0;
         c.gridx=2;
         c.gridwidth=1;
         c.fill = GridBagConstraints.HORIZONTAL;
         reittiValmis.setBackground(Color.YELLOW);
-       // c.weightx=0.5;
+       c.weightx=0.5;
         container.add(reittiValmis,c);
         
-        Piirtoalusta piirtoalusta=new Piirtoalusta();
+        piirtoalusta=new Piirtoalusta(this.lumikerrosKoordinaateissa,this.rivit,this.sarakkeet);
         c.ipady=400;
         c.ipadx=1000;
         c.gridy=1;
@@ -89,7 +115,7 @@ public class GraafinenKayttoliittyma implements Runnable {
         c.gridwidth=3;
         container.add(piirtoalusta,c);
         
-        JTextArea ennusteTeksti=new JTextArea("Huomenna sataa lunta");
+        ennusteTeksti=new JLabel(this.ennuste);
         c.ipady=100;
         c.ipadx=700;
         c.gridy=2;
@@ -100,7 +126,7 @@ public class GraafinenKayttoliittyma implements Runnable {
         ennusteTeksti.setFont(font);
         container.add(ennusteTeksti,c);
         
-        JTextArea tulosKentta=new JTextArea("kuluja tuli x euroa");
+        tulosKentta=new JLabel("kuluja tuli x euroa");
         tulosKentta.setFont(font);
         tulosKentta.setBackground(Color.GREEN);
         c.fill=GridBagConstraints.HORIZONTAL;
@@ -115,6 +141,9 @@ public class GraafinenKayttoliittyma implements Runnable {
     }
     public JFrame getFrame(){
         return frame;
+    }
+    public void AsetaEnnuste(String ennuste){
+        this.ennusteTeksti.setText(ennuste);
     }
     
     
