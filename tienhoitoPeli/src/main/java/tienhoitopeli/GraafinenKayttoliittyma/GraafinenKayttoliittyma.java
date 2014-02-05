@@ -18,7 +18,9 @@ import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
+import tienhoitopeli.Sovelluslogiikka.Lumikerros;
 import tienhoitopeli.Sovelluslogiikka.ReitinLukija;
+import tienhoitopeli.Sovelluslogiikka.Saa;
 
 /**
  *
@@ -32,20 +34,24 @@ public class GraafinenKayttoliittyma implements Runnable {
     private int sarakkeet;
     private String ennuste;
     private ReitinLukija reitinLukija;
+    private Lumikerros lumikerros;
+    private Saa saa;
     private JLabel ohjeKentta;
     private JTextField riviKentta;
     private JButton reittiValmis;
     private Piirtoalusta piirtoalusta;
-    private JLabel ennusteTeksti;
+    private JTextArea ennusteTeksti;
     private JLabel tulosKentta;
     
     
-    public GraafinenKayttoliittyma(HashMap kerros, int rivit, int sarakkeet,String ennuste,ReitinLukija reitinLukija){
+    public GraafinenKayttoliittyma(HashMap kerros, int rivit, int sarakkeet,String ennuste,ReitinLukija reitinLukija, Lumikerros lumikerros, Saa saa){
         this.lumikerrosKoordinaateissa=kerros;
         this.rivit=rivit;
         this.sarakkeet=sarakkeet;
         this.ennuste=ennuste;
         this.reitinLukija=reitinLukija;
+        this.saa=saa;
+        this.lumikerros=lumikerros;
     }
     
     
@@ -72,7 +78,7 @@ public class GraafinenKayttoliittyma implements Runnable {
         
         ohjeKentta=new JLabel("Anna sen rivin numero, jolta aloitetaan. Ylin rivi on 1.");
         ohjeKentta.setFont(font);
-        ohjeKentta.setBackground(Color.YELLOW);
+        ohjeKentta.setBackground(Color.LIGHT_GRAY);
         c.fill=GridBagConstraints.HORIZONTAL;
         c.ipady=102; //kentan korkeus
         c.ipadx=300; //kentan leveys
@@ -106,6 +112,8 @@ public class GraafinenKayttoliittyma implements Runnable {
        c.weightx=0.5;
         container.add(reittiValmis,c);
         
+        
+        
         AurausAuto auto=new AurausAuto(-1000,-1000,400/this.rivit);
         this.piirtoalusta=new Piirtoalusta(this.lumikerrosKoordinaateissa,this.rivit,this.sarakkeet,auto);
         c.ipady=400;
@@ -119,16 +127,16 @@ public class GraafinenKayttoliittyma implements Runnable {
         AloitusSyotteenKuuntelija aloitusKuuntelija=new AloitusSyotteenKuuntelija(riviKentta,this.reitinLukija,ohjeKentta,auto, piirtoalusta);
         riviKentta.addActionListener(aloitusKuuntelija);
         
-        riviKentta.addKeyListener(new NappaimistonKuuntelija(auto,piirtoalusta));
+        riviKentta.addKeyListener(new NappaimistonKuuntelija(auto,piirtoalusta,reitinLukija));
         
-        ennusteTeksti=new JLabel(this.ennuste);
+        ennusteTeksti=new JTextArea(this.ennuste+"\n Aurausajoneuvo liikkuu yhden ruudun yhdessa sekunnissa");
         c.ipady=100;
         c.ipadx=700;
         c.gridy=2;
         c.gridx=0;
         c.gridwidth=2;
         c.fill = GridBagConstraints.HORIZONTAL;
-        ennusteTeksti.setBackground(Color.YELLOW);
+        ennusteTeksti.setBackground(Color.WHITE);
         ennusteTeksti.setFont(font);
         container.add(ennusteTeksti,c);
         
@@ -141,7 +149,10 @@ public class GraafinenKayttoliittyma implements Runnable {
         c.gridwidth=1; //montako cellia levea
         c.gridx=2; //monesko cell vasemmalta
         c.gridy=2; //monesko cell oikealta
-        container.add(tulosKentta,c);     
+        container.add(tulosKentta,c);  
+        
+        ReittiValmisKuuntelija nappiKuuntelija=new ReittiValmisKuuntelija(lumikerros,reitinLukija,saa,tulosKentta);
+        reittiValmis.addActionListener(nappiKuuntelija);
         
     }
     public JFrame getFrame(){

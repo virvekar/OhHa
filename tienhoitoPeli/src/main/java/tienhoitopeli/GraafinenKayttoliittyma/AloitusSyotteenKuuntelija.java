@@ -9,6 +9,7 @@ import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import tienhoitopeli.Sovelluslogiikka.ReitinLukija;
 
@@ -26,12 +27,13 @@ public class AloitusSyotteenKuuntelija implements ActionListener {
     private AurausAuto auto;
     private Component piirtoalusta;
 
-    public AloitusSyotteenKuuntelija(JTextField kentta, ReitinLukija annettuReitinLukija, JLabel ohjeKentta,AurausAuto auto,Component piirtoalusta) {
+    public AloitusSyotteenKuuntelija(JTextField kentta, ReitinLukija annettuReitinLukija,
+            JLabel ohjeKentta, AurausAuto auto, Component piirtoalusta) {
         this.syoteKentta = kentta;
         this.reitinLukija = annettuReitinLukija;
         this.ohjeKentta = ohjeKentta;
-        this.piirtoalusta=piirtoalusta;
-        this.auto=auto;
+        this.piirtoalusta = piirtoalusta;
+        this.auto = auto;
     }
 
     @Override
@@ -45,7 +47,9 @@ public class AloitusSyotteenKuuntelija implements ActionListener {
             boolean onkoVaarin = this.reitinLukija.KirjaaEnsimmainenPiste(aloitusRivi, aloitusSarake);
             if (!onkoVaarin) {
                 this.syoteKentta.setText("");
-                this.auto.MuutaPaikkaa((Integer.parseInt(aloitusSarake)-1)*auto.getYKoko(), (Integer.parseInt(aloitusRivi)-1)*auto.getYKoko());
+                this.ohjeKentta.setText("Suunnittele aurausajon reitti liikkumalla nuolinappaimilla");
+                this.auto.MuutaPaikkaa((Integer.parseInt(aloitusSarake) - 1) * auto.getYKoko(),
+                        (Integer.parseInt(aloitusRivi) - 1) * auto.getYKoko());
                 this.piirtoalusta.repaint();
             } else {
                 this.aloitusRivi = null;

@@ -59,11 +59,11 @@ public class ReitinLukija {
         ArrayList<Integer> kartanKoko = this.kartta.KartanKoko();
 
         //meneeko pisteen rivi yli kartan rajan
-        if (piste.get(0) > kartanKoko.get(0) - 1 || piste.get(0) < 0) {
+        if (piste.get(0) > kartanKoko.get(1) - 1 || piste.get(0) < 0) {
             return false;
         }
         //meneeko pisteen sarake yli kartan rajan
-        if (piste.get(1) > kartanKoko.get(1) - 1 || piste.get(1) < 0) {
+        if (piste.get(1) > kartanKoko.get(0) - 1 || piste.get(1) < 0) {
             return false;
         }
 
@@ -80,6 +80,7 @@ public class ReitinLukija {
     }
 
     public boolean TarkistaPisteJaLisaaReitille(ArrayList<Integer> uusiPiste) {
+
         if (this.TarkistaOnkoRajojenSisalla(uusiPiste)) {
             if (this.TarkistaOnkoPisteKadulla(uusiPiste)) {
                 reitti.add(uusiPiste);
@@ -126,32 +127,33 @@ public class ReitinLukija {
         return false;
     }
 
-    public void LiikuYlos() {
+    public boolean LiikuYlos() {
         int rivi = reitti.get(reitti.size() - 1).get(0) - 1;
         int sarake = reitti.get(reitti.size() - 1).get(1);
         ArrayList<Integer> uusiPiste = this.LuoUusiKoordinaattiPiste(rivi, sarake);
-        boolean onnistuiko = this.TarkistaPisteJaLisaaReitille(uusiPiste);
+        return this.TarkistaPisteJaLisaaReitille(uusiPiste);
     }
 
-    public void LiikuAlas() {
+    public boolean LiikuAlas() {
+       
         int rivi = reitti.get(reitti.size() - 1).get(0) + 1;
         int sarake = reitti.get(reitti.size() - 1).get(1);
         ArrayList<Integer> uusiPiste = this.LuoUusiKoordinaattiPiste(rivi, sarake);
-        boolean onnistuiko = this.TarkistaPisteJaLisaaReitille(uusiPiste);
+        return  this.TarkistaPisteJaLisaaReitille(uusiPiste);
     }
 
-    public void LiikuVasemmalle() {
+    public boolean LiikuVasemmalle() {
         int rivi = reitti.get(reitti.size() - 1).get(0);
         int sarake = reitti.get(reitti.size() - 1).get(1) - 1;
         ArrayList<Integer> uusiPiste = this.LuoUusiKoordinaattiPiste(rivi, sarake);
-        boolean onnistuiko = this.TarkistaPisteJaLisaaReitille(uusiPiste);
+        return this.TarkistaPisteJaLisaaReitille(uusiPiste);
     }
 
-    public void LiikuOikealle() {
+    public boolean LiikuOikealle() {
         int rivi = reitti.get(reitti.size() - 1).get(0);
         int sarake = reitti.get(reitti.size() - 1).get(1) + 1;
         ArrayList<Integer> uusiPiste = this.LuoUusiKoordinaattiPiste(rivi, sarake);
-        boolean onnistuiko = this.TarkistaPisteJaLisaaReitille(uusiPiste);
+        return this.TarkistaPisteJaLisaaReitille(uusiPiste);
     }
 
     public ArrayList<ArrayList<Integer>> GetReitti() {

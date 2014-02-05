@@ -15,6 +15,10 @@ public class Saa {
     private int sateenPituus;
     private int sateenMaara;
     
+    /**
+     * 
+     * @param annettuEnnuste Saaennuste,joka annetaan konstruktorille
+     */
     public Saa(Saaennuste annettuEnnuste){
         this.ennuste=annettuEnnuste;
         this.sateenMaara=ennuste.GetLumisateenMaara();

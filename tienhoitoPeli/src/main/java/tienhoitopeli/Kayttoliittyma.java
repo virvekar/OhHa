@@ -20,14 +20,14 @@ import tienhoitopeli.GraafinenKayttoliittyma.GraafinenKayttoliittyma;
 public class Kayttoliittyma {
 
     public static void main(String[] args) {
-        Kartta kartta = new Kartta("src/main/java/tienhoitopeli/kartat/kartta1.txt");
+        Kartta kartta = new Kartta("src/main/java/tienhoitopeli/kartat/kartta3.txt");
         kartta.LueKartta();
         
         ArrayList<Integer> kartanKoko=kartta.KartanKoko();
         
-        Saaennuste ennuste = new Saaennuste("src/main/java/tienhoitopeli/saaennusteet/saaennuste2.txt");
+        Saaennuste ennuste = new Saaennuste("src/main/java/tienhoitopeli/saaennusteet/saaennuste1.txt");
         ennuste.LueSaaennuste(); 
-       
+        Saa saa=new Saa(ennuste);
         
         Lumikerros lumikerros = new Lumikerros(kartta);
         lumikerros.AlustaLumikerros();
@@ -35,7 +35,7 @@ public class Kayttoliittyma {
         ReitinLukija reitinLukija = new ReitinLukija(kartta, lumikerros);
         
         
-        GraafinenKayttoliittyma graafinenKayttoliittyma=new GraafinenKayttoliittyma(lumikerros.GetLumikerrosKoordinaateissa(),kartanKoko.get(1),kartanKoko.get(0),ennuste.AnnaSaaennuste(),reitinLukija);
+        GraafinenKayttoliittyma graafinenKayttoliittyma=new GraafinenKayttoliittyma(lumikerros.GetLumikerrosKoordinaateissa(),kartanKoko.get(1),kartanKoko.get(0),ennuste.AnnaSaaennuste(),reitinLukija, lumikerros,saa);
  
         SwingUtilities.invokeLater(graafinenKayttoliittyma);
 
