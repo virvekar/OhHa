@@ -9,4 +9,6 @@ ti 21.1 1,5 h lisää peruskoodia, ReitinKirjaaja luokka
 ke 22.1 3,75 h Ensimmaiset testit
 to 23.1 4 h lisaa testejä
 pe 24.1 1,66 h Luokat TienhoidonSuorittaja, Saa, Auraajaja Kululaskuri
-
+ma 27.1 3 h testejä
+ma 3.2 1,5 h OhJa kertaus, graafisen käyttöliittymän suunnittelu
+ti 4.2 2,25 Graafisen käyttöliittymän komponentit
