@@ -25,14 +25,20 @@ public class Ruutu {
         this.color=color;
         this.koko=koko;
     }
-    
-    public void Siirry(int xSiirtyma, int ySiirtyma){
-        this.x+=xSiirtyma;
-        this.y+=ySiirtyma;
+    public void Siirry(int xSiirtyma, int ySiirtyma) {
+        this.x += xSiirtyma;
+        this.y += ySiirtyma;
+    }
+    public void MuutaPaikkaa(int xPaikka, int yPaikka){
+        this.x=xPaikka;
+        this.y=yPaikka;
     }
     
     public void Piirra(Graphics graphics){
         graphics.setColor(this.color);
         graphics.fillRect(this.x,this.y,koko,koko);
+    }
+    public int getKoko(){
+        return this.koko;
     }
 }

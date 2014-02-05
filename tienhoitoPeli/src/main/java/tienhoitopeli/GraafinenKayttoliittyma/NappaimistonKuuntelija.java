@@ -15,17 +15,28 @@ import java.awt.event.KeyListener;
  */
 public class NappaimistonKuuntelija implements KeyListener{
 
-    private Ruutu ruutu;
+    private AurausAuto auto;
     private Component piirtoAlusta;
 
-    public NappaimistonKuuntelija(Ruutu ruutu, Component piirtoAlusta) {
-        this.ruutu = ruutu;
+    public NappaimistonKuuntelija(AurausAuto aurausAuto, Component piirtoAlusta) {
+        this.auto = aurausAuto;
         this.piirtoAlusta=piirtoAlusta;
     }
     
     @Override
     public void keyPressed(KeyEvent e){
-        
+        System.out.println("alas");
+        if(e.getKeyCode()== KeyEvent.VK_LEFT){
+            this.auto.Siirry(-this.auto.getYKoko(), 0);
+        } else if(e.getKeyCode()== KeyEvent.VK_RIGHT){
+            this.auto.Siirry(this.auto.getYKoko(),0);
+        } else if(e.getKeyCode()==KeyEvent.VK_UP){
+            this.auto.Siirry(0,-this.auto.getYKoko());
+        }else if(e.getKeyCode()==KeyEvent.VK_DOWN){
+            this.auto.Siirry(0,this.auto.getYKoko());
+            System.out.println("alas");
+        }
+        this.piirtoAlusta.repaint();
     }
     @Override
     public void keyReleased(KeyEvent e){

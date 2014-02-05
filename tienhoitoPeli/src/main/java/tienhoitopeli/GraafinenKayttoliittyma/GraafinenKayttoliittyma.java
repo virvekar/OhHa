@@ -91,8 +91,7 @@ public class GraafinenKayttoliittyma implements Runnable {
         c.gridy=0; //monesko cell oikealta
         c.weightx=0.5;
         
-        AloitusSyotteenKuuntelija aloitusKuuntelija=new AloitusSyotteenKuuntelija(riviKentta,this.reitinLukija,ohjeKentta);
-        riviKentta.addActionListener(aloitusKuuntelija);
+        
         container.add(riviKentta,c);
         
         
@@ -107,13 +106,20 @@ public class GraafinenKayttoliittyma implements Runnable {
        c.weightx=0.5;
         container.add(reittiValmis,c);
         
-        piirtoalusta=new Piirtoalusta(this.lumikerrosKoordinaateissa,this.rivit,this.sarakkeet);
+        AurausAuto auto=new AurausAuto(-1000,-1000,400/this.rivit);
+        this.piirtoalusta=new Piirtoalusta(this.lumikerrosKoordinaateissa,this.rivit,this.sarakkeet,auto);
         c.ipady=400;
         c.ipadx=1000;
         c.gridy=1;
         c.gridx=0;
         c.gridwidth=3;
         container.add(piirtoalusta,c);
+        
+
+        AloitusSyotteenKuuntelija aloitusKuuntelija=new AloitusSyotteenKuuntelija(riviKentta,this.reitinLukija,ohjeKentta,auto, piirtoalusta);
+        riviKentta.addActionListener(aloitusKuuntelija);
+        
+        riviKentta.addKeyListener(new NappaimistonKuuntelija(auto,piirtoalusta));
         
         ennusteTeksti=new JLabel(this.ennuste);
         c.ipady=100;
@@ -135,8 +141,7 @@ public class GraafinenKayttoliittyma implements Runnable {
         c.gridwidth=1; //montako cellia levea
         c.gridx=2; //monesko cell vasemmalta
         c.gridy=2; //monesko cell oikealta
-        container.add(tulosKentta,c);
-        
+        container.add(tulosKentta,c);     
         
     }
     public JFrame getFrame(){

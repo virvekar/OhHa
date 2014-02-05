@@ -5,6 +5,7 @@
  */
 package tienhoitopeli.GraafinenKayttoliittyma;
 
+import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JLabel;
@@ -22,11 +23,15 @@ public class AloitusSyotteenKuuntelija implements ActionListener {
     private String aloitusRivi;
     private String aloitusSarake;
     private JLabel ohjeKentta;
+    private AurausAuto auto;
+    private Component piirtoalusta;
 
-    public AloitusSyotteenKuuntelija(JTextField kentta, ReitinLukija annettuReitinLukija, JLabel ohjeKentta) {
+    public AloitusSyotteenKuuntelija(JTextField kentta, ReitinLukija annettuReitinLukija, JLabel ohjeKentta,AurausAuto auto,Component piirtoalusta) {
         this.syoteKentta = kentta;
         this.reitinLukija = annettuReitinLukija;
         this.ohjeKentta = ohjeKentta;
+        this.piirtoalusta=piirtoalusta;
+        this.auto=auto;
     }
 
     @Override
@@ -37,10 +42,11 @@ public class AloitusSyotteenKuuntelija implements ActionListener {
             this.ohjeKentta.setText("Anna aloitus sarake.");
         } else if (aloitusSarake == null) {
             this.aloitusSarake = this.syoteKentta.getText();
-            System.out.println(aloitusRivi + aloitusSarake);
-            boolean onnistuiko = this.reitinLukija.KirjaaEnsimmainenPiste(aloitusRivi, aloitusSarake);
-            if (onnistuiko) {
+            boolean onkoVaarin = this.reitinLukija.KirjaaEnsimmainenPiste(aloitusRivi, aloitusSarake);
+            if (!onkoVaarin) {
                 this.syoteKentta.setText("");
+                this.auto.MuutaPaikkaa((Integer.parseInt(aloitusSarake)-1)*auto.getYKoko(), (Integer.parseInt(aloitusRivi)-1)*auto.getYKoko());
+                this.piirtoalusta.repaint();
             } else {
                 this.aloitusRivi = null;
                 this.aloitusSarake = null;
