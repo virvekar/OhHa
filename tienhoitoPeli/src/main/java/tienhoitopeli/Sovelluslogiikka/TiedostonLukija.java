@@ -22,13 +22,20 @@ public class TiedostonLukija {
     private File tiedosto;
     private ArrayList<String> luettuTiedosto;
     
+    /**
+     * 
+     * @param tiedostonNimi tiedostopolku luettavaan tiedostoon
+     */
     public TiedostonLukija(String tiedostonNimi){
         this.tiedosto= new File(tiedostonNimi);
         this.luettuTiedosto=new ArrayList<String>();
     }
     
+    /**
+     * Lukee tiedoston ja tallentaa sen sisallon riveittain arraylistiin
+     * @return ArrayList<String> jossa tiedoston sisalto riveittain
+     */
     public ArrayList<String> LueTiedosto(){
-        // Lukee karttapohjan tiedostosta ja tallentaa sen riveittain ArrayListiin.
         try{
         FileInputStream syoteVirta = new FileInputStream(this.tiedosto);
         InputStreamReader syoteVirranLukija =new InputStreamReader(syoteVirta);

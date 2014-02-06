@@ -14,6 +14,8 @@ import javax.swing.JTextField;
 import tienhoitopeli.Sovelluslogiikka.ReitinLukija;
 
 /**
+ * Ottaa vastaan kayttajan antaman syotteen aloitusruudusta ja sarakkeesta ja
+ * pyytaa reitinlukijaa kirjaamaan pisteen Antaa myos ohjeita ohje ruudussa.
  *
  * @author virvemaa
  */
@@ -23,6 +25,7 @@ public class AloitusSyotteenKuuntelija implements ActionListener {
     private ReitinLukija reitinLukija;
     private String aloitusRivi;
     private String aloitusSarake;
+    private String aloitusAika;
     private JLabel ohjeKentta;
     private AurausAuto auto;
     private Component piirtoalusta;
@@ -38,14 +41,22 @@ public class AloitusSyotteenKuuntelija implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (aloitusRivi == null) {
+        if (this.aloitusAika == null) {
+            this.aloitusAika = this.syoteKentta.getText();
+            if (this.reitinLukija.LisaaAloitusAika(aloitusAika)) {
+                this.ohjeKentta.setText("Anna sen rivin numero, jolta aloitetaan. Ylin rivi on 1.");
+            } else {
+                this.ohjeKentta.setText("Aloitusaika ei kelpaa. Koeta uudestaan.");
+            }
+            this.syoteKentta.setText("");
+        } else if (aloitusRivi == null) {
             this.aloitusRivi = this.syoteKentta.getText();
             this.syoteKentta.setText("");
             this.ohjeKentta.setText("Anna aloitus sarake.");
         } else if (aloitusSarake == null) {
             this.aloitusSarake = this.syoteKentta.getText();
             boolean onkoVaarin = this.reitinLukija.KirjaaEnsimmainenPiste(aloitusRivi, aloitusSarake);
-            if (!onkoVaarin) {
+            if (onkoVaarin) {
                 this.syoteKentta.setText("");
                 this.ohjeKentta.setText("Suunnittele aurausajon reitti liikkumalla nuolinappaimilla");
                 this.auto.MuutaPaikkaa((Integer.parseInt(aloitusSarake) - 1) * auto.getYKoko(),

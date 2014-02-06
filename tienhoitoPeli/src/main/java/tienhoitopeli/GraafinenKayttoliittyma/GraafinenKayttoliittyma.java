@@ -23,7 +23,7 @@ import tienhoitopeli.Sovelluslogiikka.ReitinLukija;
 import tienhoitopeli.Sovelluslogiikka.Saa;
 
 /**
- *
+ *Luo graafisen kayttoliityman, jossa pelia voidaan pelata.
  * @author virvemaa
  */
 public class GraafinenKayttoliittyma implements Runnable {
@@ -76,7 +76,7 @@ public class GraafinenKayttoliittyma implements Runnable {
         container.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         
-        ohjeKentta=new JLabel("Anna sen rivin numero, jolta aloitetaan. Ylin rivi on 1.");
+        ohjeKentta=new JLabel("Milla sekunnilla auraus aloitetaan?");
         ohjeKentta.setFont(font);
         ohjeKentta.setBackground(Color.LIGHT_GRAY);
         c.fill=GridBagConstraints.HORIZONTAL;

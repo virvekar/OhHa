@@ -9,7 +9,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- *
+ *Oranssi ruutuolio jota liikutetaan kartalla.
  * @author virvemaa
  */
 public class AurausAuto {

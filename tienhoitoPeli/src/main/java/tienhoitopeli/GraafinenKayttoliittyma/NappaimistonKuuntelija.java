@@ -11,7 +11,8 @@ import java.awt.event.KeyListener;
 import tienhoitopeli.Sovelluslogiikka.ReitinLukija;
 
 /**
- *
+ *Maaraa mita tapahtuu, kun nuolinappaimia painetaan
+ * Liikuttaa aurausautoa ja tallentaa reitin.
  * @author virvemaa
  */
 public class NappaimistonKuuntelija implements KeyListener {

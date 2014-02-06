@@ -15,7 +15,8 @@ import tienhoitopeli.Sovelluslogiikka.Saa;
 import tienhoitopeli.Sovelluslogiikka.TienhoidonSuorittaja;
 
 /**
- *
+ *Kuuntelija joka on liitetty Reitti valmis nappiin
+ * Nappia painettaessa suoritetaan tienhoito ja lasketaan kulut.
  * @author virvemaa
  */
 public class ReittiValmisKuuntelija implements ActionListener {
@@ -38,7 +39,7 @@ public class ReittiValmisKuuntelija implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         if (this.reitinLukija.GetReitti().size() > 0 && this.painallukset==0) {
             Auraaja auraaja = new Auraaja(lumikerros, reitinLukija);
-            TienhoidonSuorittaja tienhoidonSuorittaja = new TienhoidonSuorittaja(auraaja, saa, lumikerros);
+            TienhoidonSuorittaja tienhoidonSuorittaja = new TienhoidonSuorittaja(auraaja, saa, lumikerros,reitinLukija);
             tienhoidonSuorittaja.SuoritaTienhoito();
             this.tuloskentta.setText("Kuluja tuli " + tienhoidonSuorittaja.laskeKulut() + " euroa");
             this.painallukset++;

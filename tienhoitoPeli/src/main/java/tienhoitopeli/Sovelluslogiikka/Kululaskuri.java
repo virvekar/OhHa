@@ -17,13 +17,20 @@ public class Kululaskuri {
         this.kulujenMaara = 0;
     }
 
+    /**
+     * Laskee bensakulut ja tallentaa ne
+     * @param ajetutRuudut ajettujen ruutujen maara
+     */
     public void LisaaBensakulu(int ajetutRuudut) {
         if (ajetutRuudut > 0) {
             this.kulujenMaara += ajetutRuudut * 5;
         }
 
     }
-
+/**
+ * Laskee kolarikulut ja tallentaa ne
+ * @param kolareidenMaara niiden ruutujen maara joissa on lunta eli joissa synttyy kolareita
+ */
     public void LisaaKolariKulut(int kolareidenMaara) {
         if (kolareidenMaara > 0) {
             this.kulujenMaara += kolareidenMaara * 1000;

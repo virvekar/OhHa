@@ -51,7 +51,7 @@ public class SuoritaTienhoitoEnnuste2Test {
         lumikerros.AlustaLumikerros();
         reitinLukija = new ReitinLukija(kartta, lumikerros);
         auraaja = new Auraaja(lumikerros, reitinLukija);
-        tienhoidonSuorittaja = new TienhoidonSuorittaja(auraaja, saa, lumikerros);
+        tienhoidonSuorittaja = new TienhoidonSuorittaja(auraaja, saa, lumikerros,reitinLukija);
         koordinaattiPiste=new ArrayList<Integer>();
         reitinLukija.KirjaaEnsimmainenPiste("1", "2");
         reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("k");
@@ -109,6 +109,28 @@ public class SuoritaTienhoitoEnnuste2Test {
         HashMap kerros = lumikerros.GetLumikerrosKoordinaateissa();
         double lumiMaara=(double) kerros.get(koordinaattiPiste);
         boolean vastaus = lumiMaara > 9.99 && lumiMaara < 10.01;
+        assertEquals(vastaus, true);
+    }
+    @Test 
+    public void AuraaOikeinKunAurausajankohtaOnLisatty(){
+        reitinLukija.LisaaAloitusAika("4");
+        tienhoidonSuorittaja.SuoritaTienhoito();
+        koordinaattiPiste.add(0);
+        koordinaattiPiste.add(1);
+        HashMap kerros = lumikerros.GetLumikerrosKoordinaateissa();
+        double lumiMaara=(double) kerros.get(koordinaattiPiste);
+        boolean vastaus = lumiMaara > 1.99 && lumiMaara < 2.01;
+        assertEquals(vastaus, true);
+    }
+     @Test 
+    public void AuraaOikeinKunAurausajankohtaOnLisattyVaarin(){
+        reitinLukija.LisaaAloitusAika("poo");
+        tienhoidonSuorittaja.SuoritaTienhoito();
+        koordinaattiPiste.add(0);
+        koordinaattiPiste.add(1);
+        HashMap kerros = lumikerros.GetLumikerrosKoordinaateissa();
+        double lumiMaara=(double) kerros.get(koordinaattiPiste);
+        boolean vastaus = lumiMaara > 7.99 && lumiMaara < 8.01;
         assertEquals(vastaus, true);
     }
 }

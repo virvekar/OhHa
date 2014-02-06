@@ -10,7 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 /**
- *
+ *Pitaa tallessa koordinaattejaan ja kokoaan ja piirtaa itsensa neliona
  * @author virvemaa
  */
 public class Ruutu {

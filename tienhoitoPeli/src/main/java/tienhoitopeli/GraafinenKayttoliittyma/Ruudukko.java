@@ -12,7 +12,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- *
+ *Piirtaa monta ruutu oliota
+ *Kay lapi sijainnit, jotka on maaratty
+ *avaimina lumikerrosKoordinaateissa HashMapissa
+ *Vari riippuu lumen maarasta ruudussa
  * @author virvemaa
  */
 public class Ruudukko {

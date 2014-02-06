@@ -52,7 +52,7 @@ public class SuoritaTienhoitoTest {
         reitinLukija = new ReitinLukija(kartta, lumikerros);
         
         auraaja = new Auraaja(lumikerros, reitinLukija);
-        tienhoidonSuorittaja = new TienhoidonSuorittaja(auraaja, saa, lumikerros);
+        tienhoidonSuorittaja = new TienhoidonSuorittaja(auraaja, saa, lumikerros,reitinLukija);
         koordinaattiLista = new ArrayList<ArrayList<Integer>>();
 
     }
@@ -134,4 +134,5 @@ public class SuoritaTienhoitoTest {
         int luku = tienhoidonSuorittaja.PalautaSuurempi(3, 5);
         assertEquals(5, luku);
     }
+    
 }

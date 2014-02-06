@@ -19,12 +19,26 @@ public class Lumikerros {
     private int sekunti;
     private HashMap lumikerrosKoordinaateissa;
 
+    /**
+     * 
+     * @param annettuKartta Kartta olio joka tietaa kartan ArrayListin<String> oliona
+     */
     public Lumikerros(Kartta annettuKartta) {
         this.kartta = annettuKartta;
         this.sekunti = 0;
         this.lumikerrosKoordinaateissa = new HashMap();
     }
 
+    /**
+     * Alustaa lumikerroksen
+     * Lisaa HashMapiin jokaisen kartan pisteen avaimeksi siten, etta piste on kuvattu
+     * ArrayListina jossa on kaksi lukua 
+     * Ensimmainen luku kertoo rivin ylhaalta laskettuna ja toinen sarakkeet
+     * vasemmalta laskettuna
+     * Avaimet viittaavat double tyyppisiin lukuihin, jotka kertovat lumen maaran
+     * Pisteissa joissa on rakennus lumen maara asetetaan -1,0:aan ja tiepisteissa
+     * lumen maaraksi asetetaan 0,0.
+     */
     public void AlustaLumikerros() {
         ArrayList<Integer> kartanKoko = this.kartta.KartanKoko();
         ArrayList<String> karttaPohja = this.kartta.GetKarttaPohja();
@@ -50,6 +64,9 @@ public class Lumikerros {
         }
     }
 
+    /**
+     * Tulostaa lumikerroksen ruudulle.
+     */
     public void TulostaLumikerros() {
         ArrayList<Integer> kartanKoko = this.kartta.KartanKoko();
         String tulosteRivi = "";
@@ -66,7 +83,12 @@ public class Lumikerros {
         }
 
     }
-
+/**
+ * Laskee paljonko lunta sataa yhdessa sekunnissa ja lisaa sen veran
+ * lunta kaikkiin tiepisteisiin.
+ * @param sateenMaara satavan lumen kokonaismaara
+ * @param sateenPituus kertoo kauanko sade kestaa
+ */
     public void LisaaLuntaYhdenSekunninSateenVerran(int sateenMaara, int sateenPituus) {
         double sekunnissaSataa = ((double) sateenMaara) / ((double) sateenPituus);
         ArrayList<Integer> kartanKoko = this.kartta.KartanKoko();
@@ -86,6 +108,10 @@ public class Lumikerros {
         }
 
     }
+    /**
+     * Laskee monessako ruudussa on lunta.
+     * @return lunta sisaltavien ruutujen maara
+     */
     public int laskeRuudutJoissaOnLunta(){
         
         int ruutujenMaara=0;
@@ -101,6 +127,11 @@ public class Lumikerros {
     public HashMap GetLumikerrosKoordinaateissa() {
         return this.lumikerrosKoordinaateissa;
     }
+    
+    /**
+     * Muuttaa lumen maaraksi 0 halutuissa koordinaateissa.
+     * @param koordinaatit koorinaatit, joista lumi halutaan poistaa
+     */
     public void PoistaLumikerros(ArrayList<Integer> koordinaatit){
         this.lumikerrosKoordinaateissa.put(koordinaatit, 0.0);
     }

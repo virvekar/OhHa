@@ -13,7 +13,7 @@ import java.util.HashMap;
 import javax.swing.JPanel;
 
 /**
- *
+ *JPanel johon piirretaan kartan mukainen ruudukko ja aurausauto
  * @author virvemaa
  */
 public class Piirtoalusta extends JPanel{

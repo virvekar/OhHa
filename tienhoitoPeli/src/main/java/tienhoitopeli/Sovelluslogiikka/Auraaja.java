@@ -8,8 +8,8 @@ package tienhoitopeli.Sovelluslogiikka;
 import java.util.ArrayList;
 
 /**
- *Olio, jonka tehtava on poistaa lumikerros halutusta pisteesta
- * @author virve Karsisto
+ *Olio, jonka tehtava on poistaa lumikerros seuraavasta reittipisteesta
+ * @author Virve Karsisto
  */
 public class Auraaja {
 
@@ -17,12 +17,22 @@ public class Auraaja {
     private ReitinLukija reitinLukija;
     private int reittiPisteNumero;
 
+    /**
+     * 
+     * @param annettuLumikerros Lumikerros olio, joka tietaa lumen maaran eri koordinaateissa
+     * @param annettuReitinLukija Reitinlukija olio, joka tietaa kuljettavan reitin
+     */
     public Auraaja(Lumikerros annettuLumikerros, ReitinLukija annettuReitinLukija) {
         this.lumikerros = annettuLumikerros;
         this.reitinLukija = annettuReitinLukija;
         this.reittiPisteNumero = 0;
     }
 
+    /**
+     * Kysyy seuraavan reittipisteen reitinlukijalta ja pyytaa lumikerrosta
+     * poistamaan siita lumen
+     * Reittipistenumeron kertoo monennessako ruudussa mennaan.
+     */
     public void AuraaSeuraavaPiste() {
         ArrayList<ArrayList<Integer>> reitti = this.reitinLukija.GetReitti();
         if (reitti.size() >= reittiPisteNumero) {
@@ -32,6 +42,10 @@ public class Auraaja {
         }
     }
 
+    /**
+     * Antaa auraajan reitin koordinaaatit
+     * @return ArrayList, johon on tallennettu koordinaattipisteet reitilla
+     */
     public ArrayList<ArrayList<Integer>> AnnaAuraajanReitti() {
         return this.reitinLukija.GetReitti();
     }
