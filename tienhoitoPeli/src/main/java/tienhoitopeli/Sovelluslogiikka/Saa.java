@@ -7,8 +7,9 @@
 package tienhoitopeli.Sovelluslogiikka;
 
 /**
- *
- * @author virvemaa
+ *Olio, jonka tehtavana on luoda todellinen saa ennusteen perusteella
+ * @author Virve Karsisto
+ * 
  */
 public class Saa {
     private Saaennuste ennuste;

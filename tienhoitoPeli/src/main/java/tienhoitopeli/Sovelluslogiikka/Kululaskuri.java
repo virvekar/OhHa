@@ -6,8 +6,8 @@
 package tienhoitopeli.Sovelluslogiikka;
 
 /**
- *
- * @author virvemaa
+ *Olio, joka laskee syntyneiden kulujen maaran
+ * @author Virve Karsisto
  */
 public class Kululaskuri {
 

@@ -10,7 +10,8 @@ import java.util.HashMap;
 
 
 /**
- *
+ *Olio, jonka tehtavana on sailyttaa tietoa ajoneuvon reitista ja lisata
+ * reitille pisteita.
  * @author virvemaa
  */
 public class ReitinLukija {

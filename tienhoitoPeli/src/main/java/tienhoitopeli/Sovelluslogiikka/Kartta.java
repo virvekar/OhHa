@@ -10,13 +10,23 @@ package tienhoitopeli.Sovelluslogiikka;
 import java.util.ArrayList;
 
 /**
- *
- * @author virvemaa
+ * 
+ * Olio, jonka tehtavana on sailyttaa karttatietoa ja jakaa sita eteenpain.
+ * 
+ * @author Virve Karsisto
  */
 public class Kartta {
     
     private String karttaTiedostonNimi;
     private ArrayList<String> karttaPohja;
+    
+    /**
+     * 
+     * @param tiedostonNimi Tiedostopolku, josta kartta loytyy.
+     * 
+     * karttaPohjaan tallennetaan tiedosto. Kukin ArrayListin listapaikat sisaltavat 
+     * kukin yhden tiedoston rivin.
+     */
     
     public Kartta(String tiedostonNimi){
         
@@ -24,6 +34,10 @@ public class Kartta {
         this.karttaPohja= new ArrayList<String>();
     }
     
+    /**
+     * Luo TiedostonLukija olion ja delegoi sille tiedoston lukemisen.
+     * Mikali tiedostoa ei loydy, ohjelma lopetetaan.
+     */
     public void LueKartta(){
         // Lukee karttapohjan tiedostosta ja tallentaa sen riveittain ArrayListiin.
         TiedostonLukija kartanLukija=new TiedostonLukija(this.karttaTiedostonNimi);
@@ -38,14 +52,28 @@ public class Kartta {
         return this.karttaPohja;
     }
    
+    /**
+     * Tulostaa kartan riveittain.
+     */
     public void TulostaKartta(){
         for(String rivi : this.karttaPohja){
             System.out.println(rivi);
         }
     }
+    
+    /**
+     * Tulostaa kartan selitteen.
+     */
     public void TulostaSelite(){
         System.out.println("\n lumeton katu=o, luminen katu=s, rakennus=x \n");
     }
+    
+    /**
+     * Antaa kartan koon.
+     * 
+     * @return ArrayList<Integer> ,jossa ensimmainen luku on kartan leveys ja
+     * toinen kartan korkeus.
+     */
     public ArrayList<Integer> KartanKoko(){
         //Kartan muoto oletetaan suorakaiteeksi
         

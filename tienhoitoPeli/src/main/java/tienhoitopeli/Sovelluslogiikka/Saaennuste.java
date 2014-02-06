@@ -8,19 +8,33 @@ package tienhoitopeli.Sovelluslogiikka;
 import java.util.ArrayList;
 
 /**
- *
+ *Olio, jonka tehtavana on sailyttaa saaennustetietoa ja jakaa sita eteenpain.
+ * 
  * @author virvemaa
  */
 public class Saaennuste {
 
+    /**
+     * int ennusteenPituus kertoo kuinka monen sekunnin ajalle ennuste on
+     * int lumisateenMaara kertoo paljonko sataa yhteensa lunta
+     * String ennusteTiedosto sisaltaa tiedostopolun, josta ennuste loytyy.
+     */
     private int ennusteenPituus;
     private String ennusteTiedosto;
     private int lumisateenMaara;
 
+    /**
+     * 
+     * @param tiedostonNimi polku, josta ennustetiedosto loytyy
+     */
     public Saaennuste(String tiedostonNimi) {
         this.ennusteTiedosto = tiedostonNimi;
     }
 
+    /**
+     * Luo tiedostonLukija olion, jolle se delegoi tiedoston lukemisen
+     * Jos tiedostoa ei loydy tai ennuste on virheellinen, ohjelma lopetetaan.
+     */
     public void LueSaaennuste() {
         TiedostonLukija saaennusteenLukija = new TiedostonLukija(this.ennusteTiedosto);
         ArrayList<String> ennuste = saaennusteenLukija.LueTiedosto();
@@ -35,6 +49,15 @@ public class Saaennuste {
 
     }
 
+    /**
+     * 
+     * Tallentaa ennusteen, mikali syoteen molemmat arvot ovat positiivisia 
+     * lukuja.
+     * 
+     * @param pituus tiedostosta luettu String, joka kertoo ennusteen pituuden
+     * @param maara tiedostosta luettu String, joka kertoo sateen maaran
+     * @return boolean, joka on true, mikali ennusteen kirjaaminen onnistui
+     */
     public boolean KirjaaEnnuste(String pituus, String maara) {
         if (OnkoInteger(pituus) && OnkoInteger(maara)) {
             int pituusLuku = Integer.parseInt(pituus);
@@ -56,11 +79,20 @@ public class Saaennuste {
         return this.lumisateenMaara;
     }
 
+    /**
+     * Antaa saaennusteen tekstimuodossa.
+     * @return String, jossa ennuste on tekstimuodossa.
+     */
     public String AnnaSaaennuste() {
 
         return "Seuraavan " + this.ennusteenPituus + " sekunnin aikana tiedossa " + this.lumisateenMaara + " cm lunta.";
     }
 
+    /**
+     * Kertoo onko luku positiivinen
+     * @param luku luku joka halutaan tarkistaa
+     * @return boolean, joka on true jos luku on positiivinen.
+     */
     public boolean OnkoSopivaLuku(int luku) {
         if (luku <= 0) {
             return false;
@@ -68,6 +100,11 @@ public class Saaennuste {
         return true;
     }
 
+    /**
+     * Kertoo onko annettu String integer.
+     * @param teksti String josta halutaan tarkistaa, onko se luku
+     * @return boolean ,joka on true jos annettu String on luku
+     */
     public static boolean OnkoInteger(String teksti) {
         try {
             Integer.parseInt(teksti);

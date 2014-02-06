@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- *
+ *Olio, joka sailyttaa tietoa lumen maarasta kussakin pisteessa ja osaa
+ * alustaa itsensa ja lisata ja poistaa lunta.
  * @author virvemaa
  */
 public class Lumikerros {

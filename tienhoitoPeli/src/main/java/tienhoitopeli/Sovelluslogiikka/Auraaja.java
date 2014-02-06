@@ -8,8 +8,8 @@ package tienhoitopeli.Sovelluslogiikka;
 import java.util.ArrayList;
 
 /**
- *
- * @author virvemaa
+ *Olio, jonka tehtava on poistaa lumikerros halutusta pisteesta
+ * @author virve Karsisto
  */
 public class Auraaja {
 

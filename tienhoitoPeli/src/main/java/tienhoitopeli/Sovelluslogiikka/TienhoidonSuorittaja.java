@@ -7,7 +7,9 @@
 package tienhoitopeli.Sovelluslogiikka;
 
 /**
- *
+ *Olio, joka suorittaa aurauksen ja lumen lisaamisen delegoimalla ne
+ * Auraaja oliolle ja Lumikerros oliolle ja laskee myos tienhoidosta 
+ * syntyneet kulut.
  * @author virvemaa
  */
 public class TienhoidonSuorittaja {

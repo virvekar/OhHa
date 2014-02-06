@@ -14,8 +14,9 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
- *
- * @author virvemaa
+ *Olio, jonka tehtavana on lukea sille annettu tiedosto ja palauttaa se
+ * ArrayListina, jonka kukin paikka sisaltaa yhden tiedoston rivin.
+ * @author Virve Karsisto
  */
 public class TiedostonLukija {
     private File tiedosto;
