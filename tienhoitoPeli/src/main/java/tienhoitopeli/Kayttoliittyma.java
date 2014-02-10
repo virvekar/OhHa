@@ -35,8 +35,9 @@ public class Kayttoliittyma {
 
         ReitinLukija reitinLukija = new ReitinLukija(kartta, lumikerros);
         
-        EnnatysListanPitaja pitaja=new EnnatysListanPitaja();
-        pitaja.LisaaEnnatys("ville", "1");
+        EnnatysListanPitaja pitaja=new EnnatysListanPitaja("src/main/java/tienhoitopeli/ennatyslistat/ennatyslista1.txt");
+        pitaja.LisaaEnnatys("ville", "300");
+        System.out.println(pitaja.getEnnatysLista());
         
         GraafinenKayttoliittyma graafinenKayttoliittyma=new GraafinenKayttoliittyma(lumikerros.GetLumikerrosKoordinaateissa(),kartanKoko.get(1),kartanKoko.get(0),ennuste.AnnaSaaennuste(),reitinLukija, lumikerros,saa);
  

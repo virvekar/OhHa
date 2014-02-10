@@ -1,0 +1,3 @@
+300 Eemeli
+500 Liisa
+1000 Olli
