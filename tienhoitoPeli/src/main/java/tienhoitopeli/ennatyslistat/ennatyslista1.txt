@@ -1,10 +1,2 @@
-10 ville
-20 ville
-100 teemu
-200 seppo
-300 kari
-300 ville
-300 ville
-400 kari
-500 kari
-600 kari
+100 Seppo
+200 Virve

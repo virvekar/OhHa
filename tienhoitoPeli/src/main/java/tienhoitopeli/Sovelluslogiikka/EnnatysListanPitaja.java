@@ -119,30 +119,12 @@ public class EnnatysListanPitaja {
 
     }
 
-  //  public boolean LisaaValiin(ArrayList<String> vanhaEnnatysLista, boolean ennatysLisatty, int pisteet, String tekija, String luku, FileWriter kirjoittaja) {
-  //      for (String rivi : vanhaEnnatysLista) {
-  //          String[] osat = rivi.split(" ");
-  //          if (osat[0] != null && OnkoInteger(osat[0]) && riviLuku2 <= 10) {
-  //              if (Integer.parseInt(osat[0]) > pisteet && !ennatysLisatty) {
-  //                  try {
-  //                      kirjoittaja.write(luku + " " + tekija + "\n");
-  //                      riviLuku2++;
-  //                      ennatysLisatty = true;
-  //                  } catch (IOException e) {
-  //                      System.out.println("ei onnistunut");
-  //                  }
-  //              }
-  //              if (riviLuku2 <= 10) {
-  //                  try {
-  //                      kirjoittaja.write(rivi + "\n");
-  //                      riviLuku2++;
-  //                  } catch (IOException e) {
-  //                      System.out.println("ei onnistunut");
-  //                  }
-
-  //              }
-  //          }
-  //      }
-  //      return ennatysLisatty;
-  //  }
+  public String getEnnatysListaTekstina(){
+      ArrayList<String> lista=this.getEnnatysLista();
+      String teksti="";
+      for (String rivi:lista){
+          teksti=teksti+rivi+"\n";
+      }
+      return teksti;
+  }
 }

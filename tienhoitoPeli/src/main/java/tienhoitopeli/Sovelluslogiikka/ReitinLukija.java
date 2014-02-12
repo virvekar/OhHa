@@ -30,7 +30,7 @@ public class ReitinLukija {
         this.kartta = annettuKartta;
         this.lumikerros = annettuLumikerros;
         this.reitti = new ArrayList<ArrayList<Integer>>();
-        this.aloitusAika=1;
+        this.aloitusAika = 1;
 
     }
 
@@ -237,11 +237,13 @@ public class ReitinLukija {
     public ArrayList<ArrayList<Integer>> GetReitti() {
         return this.reitti;
     }
-/**
- * Tarkistaa voiko annetun stringin muuttaa integeriksi
- * @param teksti String josta halutaan tarkistaa, onko se integer
- * @return true, jos teksti on integer
- */
+
+    /**
+     * Tarkistaa voiko annetun stringin muuttaa integeriksi
+     *
+     * @param teksti String josta halutaan tarkistaa, onko se integer
+     * @return true, jos teksti on integer
+     */
     public static boolean OnkoInteger(String teksti) {
         try {
             Integer.parseInt(teksti);
@@ -250,16 +252,22 @@ public class ReitinLukija {
         }
         return true;
     }
-    
-    public boolean LisaaAloitusAika(String aika){
-        if(aika != null && OnkoInteger(aika)){
-            this.aloitusAika=Integer.parseInt(aika);
+
+    public boolean LisaaAloitusAika(String aika) {
+        if (aika != null && OnkoInteger(aika)) {
+            this.aloitusAika = Integer.parseInt(aika);
             return true;
         }
         return false;
-        
+
     }
-    public int getAloitusAika(){
+
+    public int getAloitusAika() {
         return this.aloitusAika;
+    }
+
+    public void TyhjennaReitti() {
+        this.reitti = new ArrayList<ArrayList<Integer>>();
+        this.aloitusAika=0;
     }
 }
