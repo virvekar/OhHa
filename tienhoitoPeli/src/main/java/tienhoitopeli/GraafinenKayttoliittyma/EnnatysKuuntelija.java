@@ -25,4 +25,7 @@ public class EnnatysKuuntelija implements ActionListener{
     public void actionPerformed(ActionEvent ae){
         SwingUtilities.invokeLater(nayttaja);
     }
+    public void VaihdaEnnatysListanNayttaja(EnnatysListanNayttaja ennatysListanNayttaja){
+        this.nayttaja=ennatysListanNayttaja;
+    }
 }

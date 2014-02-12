@@ -58,4 +58,7 @@ public class NappaimistonKuuntelija implements KeyListener {
     public void keyTyped(KeyEvent ke) {
 
     }
+    public void VaihdaReitinLukija(ReitinLukija reitinLukija){
+        this.reitinLukija=reitinLukija;
+    }
 }

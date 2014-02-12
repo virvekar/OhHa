@@ -42,4 +42,7 @@ public class EnnatysListanNayttaja implements Runnable{
         JTextArea teksti=new JTextArea(this.pitaja.getEnnatysListaTekstina());
         container.add(teksti);
     }
+    public void VaihdaEnnatysListanPitaja(EnnatysListanPitaja ennatysListanPitaja){
+        this.pitaja=ennatysListanPitaja;
+    }
 }

@@ -41,4 +41,7 @@ public class Ruutu {
     public int getKoko(){
         return this.koko;
     }
+    public void muutaKoko(int luku){
+        this.koko=luku;
+    }
 }

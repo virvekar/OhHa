@@ -24,37 +24,38 @@ import tienhoitopeli.Sovelluslogiikka.TienhoidonSuorittaja;
  */
 public class ReittiValmisKuuntelija implements ActionListener {
 
-    private Lumikerros lumikerros;
-    private ReitinLukija reitinLukija;
-    private Saa saa;
-    private EnnatysListanPitaja ennatysListanPitaja;
     private PeliKerranOhjaaja peliKerranOhjaaja;
     private JTextArea tuloskentta;
     private int painallukset;
 
-    public ReittiValmisKuuntelija(Lumikerros lumikerros, ReitinLukija reitinLukija, Saa saa, JTextArea tuloskentta,EnnatysListanPitaja pitaja,PeliKerranOhjaaja ohjaaja) {
-        this.lumikerros = lumikerros;
-        this.reitinLukija = reitinLukija;
-        this.saa = saa;
-        this.ennatysListanPitaja=pitaja;
+    public ReittiValmisKuuntelija( JTextArea tuloskentta,PeliKerranOhjaaja ohjaaja) {
         this.peliKerranOhjaaja=ohjaaja;
+        
+        
         this.tuloskentta = tuloskentta;
         this.painallukset=0;
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (this.reitinLukija.GetReitti().size() > 0 && this.painallukset==0) {
-            Auraaja auraaja = new Auraaja(lumikerros, reitinLukija);
-            TienhoidonSuorittaja tienhoidonSuorittaja = new TienhoidonSuorittaja(auraaja, saa, lumikerros,reitinLukija);
+        if (this.peliKerranOhjaaja.getReitinLukija().GetReitti().size() > 0 && this.painallukset==0) {
+            Auraaja auraaja = new Auraaja(this.peliKerranOhjaaja.getLumikerros(), this.peliKerranOhjaaja.getReitinLukija());
+            TienhoidonSuorittaja tienhoidonSuorittaja = new TienhoidonSuorittaja(auraaja, 
+                    this.peliKerranOhjaaja.getSaa(), this.peliKerranOhjaaja.getLumikerros(),this.peliKerranOhjaaja.getReitinLukija());
             tienhoidonSuorittaja.SuoritaTienhoito();
             int kulut=tienhoidonSuorittaja.laskeKulut();
             this.tuloskentta.setText("Kuluja tuli " + kulut + " euroa");
             String pelaaja=this.peliKerranOhjaaja.getPelaajanNimi();
-            this.ennatysListanPitaja.LisaaEnnatys(pelaaja, ""+kulut);
+            this.peliKerranOhjaaja.getEnnatysListanPitaja().LisaaEnnatys(pelaaja, ""+kulut);
             this.painallukset++;
 
         }
     }
+    
+    public void AlustaPainallukset(){
+        this.painallukset=0;
+    }
+    
+   
 
 }

@@ -17,17 +17,14 @@ import javax.swing.JPanel;
  * @author virvemaa
  */
 public class Piirtoalusta extends JPanel{
-    private HashMap lumikerrosKoordinaateissa;
+
     private AurausAuto auto;
-    private int rivit;
-    private int sarakkeet;
+
     private Ruudukko ruudukko;
     
     public Piirtoalusta(HashMap kerros, int rivit, int sarakkeet,AurausAuto auto){
-        this.lumikerrosKoordinaateissa=kerros;
-        this.rivit=rivit;
-        this.sarakkeet=sarakkeet;
-        ruudukko=new Ruudukko(this.lumikerrosKoordinaateissa,this.rivit,this.sarakkeet);
+ 
+        ruudukko=new Ruudukko(kerros,rivit,sarakkeet);
         this.auto=auto;
         super.setBackground(Color.WHITE);
     }
@@ -38,5 +35,9 @@ public class Piirtoalusta extends JPanel{
 
         ruudukko.Piirra(graphics);
         auto.Piirra(graphics);
+    }
+    
+    public void vaihdaKarttaPohja(HashMap kerros, int rivit, int sarakkeet){
+        this.ruudukko=new Ruudukko(kerros,rivit,sarakkeet);
     }
 }

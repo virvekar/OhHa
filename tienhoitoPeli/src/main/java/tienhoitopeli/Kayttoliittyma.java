@@ -24,23 +24,8 @@ public class Kayttoliittyma {
     public static void main(String[] args) {
         
         PeliKerranOhjaaja ohjaaja=new PeliKerranOhjaaja();
-        Kartta kartta = new Kartta("src/main/java/tienhoitopeli/kartat/kartta1.txt");
-        kartta.LueKartta();
-        
-        ArrayList<Integer> kartanKoko=kartta.KartanKoko();
-        
-        Saaennuste ennuste = new Saaennuste("src/main/java/tienhoitopeli/saaennusteet/saaennuste2.txt");
-        ennuste.LueSaaennuste(); 
-        Saa saa=new Saa(ennuste);
-        
-        Lumikerros lumikerros = new Lumikerros(kartta);
-        lumikerros.AlustaLumikerros();
 
-        ReitinLukija reitinLukija = new ReitinLukija(kartta, lumikerros);
-        
-        EnnatysListanPitaja pitaja=new EnnatysListanPitaja("src/main/java/tienhoitopeli/ennatyslistat/ennatyslista1.txt");
-        
-        GraafinenKayttoliittyma graafinenKayttoliittyma=new GraafinenKayttoliittyma(lumikerros.GetLumikerrosKoordinaateissa(),kartanKoko.get(1),kartanKoko.get(0),ennuste.AnnaSaaennuste(),reitinLukija, lumikerros,saa,pitaja,ohjaaja);
+        GraafinenKayttoliittyma graafinenKayttoliittyma=new GraafinenKayttoliittyma(ohjaaja);
  
         SwingUtilities.invokeLater(graafinenKayttoliittyma);
 

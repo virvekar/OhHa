@@ -94,4 +94,7 @@ public class AloitusSyotteenKuuntelija implements ActionListener {
     public void TyhjennaAloitusRivi(){
         this.aloitusRivi=null;
     }
+    public void vaihdaReitinLukija(ReitinLukija reitinLukija){
+        this.reitinLukija=reitinLukija;
+    }
 }

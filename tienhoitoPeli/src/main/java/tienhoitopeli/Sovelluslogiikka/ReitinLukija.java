@@ -85,7 +85,7 @@ public class ReitinLukija {
      */
     public boolean TarkistaOnkoRajojenSisalla(ArrayList<Integer> piste) {
         ArrayList<Integer> kartanKoko = this.kartta.KartanKoko();
-
+        
         //meneeko pisteen rivi yli kartan rajan
         if (piste.get(0) > kartanKoko.get(1) - 1 || piste.get(0) < 0) {
             return false;

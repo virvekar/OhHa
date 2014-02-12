@@ -36,4 +36,7 @@ public class AurausAuto {
     public int getYKoko(){
         return this.ruutu.getKoko();
     }
+    public void MuutaKoko(int koko){
+        this.ruutu.muutaKoko(koko);
+    }
 }
