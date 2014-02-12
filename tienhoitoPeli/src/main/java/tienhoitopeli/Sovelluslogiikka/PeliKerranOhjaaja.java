@@ -32,7 +32,11 @@ public class PeliKerranOhjaaja {
         this.pelaaja = "";
         this.tiedostoPolku = "src/main/java/tienhoitopeli/";
     }
-
+/**
+ * 
+ * @param nimi pelaajan nimi
+ * @return true, jos nimen asettaminen onnistui
+ */
     public boolean setPelaajanNimi(String nimi) {
         if (nimi.isEmpty()) {
             return false;
@@ -46,26 +50,39 @@ public class PeliKerranOhjaaja {
     public String getPelaajanNimi() {
         return this.pelaaja;
     }
-
+/**
+ * 
+ * @return Kyseisen tason kartan tiedostopolku
+ */
     public String getKartanPolku() {
         String polku = this.tiedostoPolku + "kartat/kartta" + this.kentanNumero + ".txt";
         return polku;
     }
-
+/**
+ * 
+ * @return Kyseisen tason saaennusteen tiedostopolku
+ */
     public String getSaaennusteenPolku() {
         String polku = this.tiedostoPolku + "saaennusteet/saaennuste" + this.kentanNumero + ".txt";
         return polku;
     }
-
+/**
+ * 
+ * @return Kyseisen tason ennatyslistan tiedostopolku
+ */
     public String getEnnatysListanPolku() {
         String polku = this.tiedostoPolku + "ennatyslistat/ennatyslista" + this.kentanNumero + ".txt";
         return polku;
     }
-
+/**
+ * Vaihtaa kentan numeron seuraavaan.
+ */
     public void MeneSeuraavaanKenttaan() {
         this.kentanNumero++;
     }
-
+/**
+ * Luo uutta tasoa varten tarvittavat oliot ja tallentaa ne.
+ */
     public void AlustaTaso() {
         Kartta kartta = new Kartta(this.getKartanPolku());
         kartta.LueKartta();

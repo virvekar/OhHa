@@ -1,6 +1,4 @@
-1 Jaakko
 100 Eemeli
-100 Teemu
 200 Liisa
 300 Olli
 400 Ville
@@ -8,3 +6,5 @@
 600 Eemeli
 700 Liisa
 800 Liisa
+900 Olli
+1100 Teemu
