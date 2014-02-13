@@ -14,4 +14,5 @@ ma 3.2 1,5 h OhJa kertaus, graafisen käyttöliittymän suunnittelu
 ti 4.2 2,25 Graafisen käyttöliittymän komponentit
 ke 5.2 5,25 Graafisen käyttöliittymän toiminnallisuus
 to 6.2 4 h javadoc + ennatyslista alku
-ma 10.1 2,25 h ennatyslistan toiminta ja testaus
+ma 10.2 2,25 h ennatyslistan toiminta ja testaus
+ke 12.2 7,5 h Usean tason toiminta, PeliKerranOhjaaja+testeja
