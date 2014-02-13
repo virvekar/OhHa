@@ -51,6 +51,16 @@ public class PeliKerranOhjaajaTest {
         this.peliKerranOhjaaja.setPelaajanNimi("Pekka");
         assertEquals("Pekka",this.peliKerranOhjaaja.getPelaajanNimi());
     }
+    @Test
+    public void SetPelaajanNimiAntaaTrueKunAnnetaanNimi() {
+        assertTrue(this.peliKerranOhjaaja.setPelaajanNimi("Pekka"));
+        
+    }
+    @Test
+    public void SetPelaajanNimiAntaaFalseKunEiAnnetaNimea() {
+        assertTrue(!this.peliKerranOhjaaja.setPelaajanNimi(""));
+        
+    }
     
     @Test
     public void SetPelaajanNimiEiTallennaTyhjaa(){
@@ -117,7 +127,6 @@ public class PeliKerranOhjaajaTest {
     @Test
     public void AlustaTasoAlustaaRivitOikeinEkallaKerralla(){
         this.peliKerranOhjaaja.AlustaTaso();
-        this.peliKerranOhjaaja.MeneSeuraavaanKenttaan();
         assertEquals(5,this.peliKerranOhjaaja.getRivit());
         
     }
@@ -133,7 +142,6 @@ public class PeliKerranOhjaajaTest {
      @Test
     public void AlustaTasoAlustaaSarakkeetOikeinEkallaKerralla(){
         this.peliKerranOhjaaja.AlustaTaso();
-        this.peliKerranOhjaaja.MeneSeuraavaanKenttaan();
         assertEquals(5,this.peliKerranOhjaaja.getSarakkeet());
         
     }
@@ -149,7 +157,6 @@ public class PeliKerranOhjaajaTest {
     @Test
     public void AlustaTasoAlustaaEnnusteenOikeinEkallaKerralla(){
         this.peliKerranOhjaaja.AlustaTaso();
-        this.peliKerranOhjaaja.MeneSeuraavaanKenttaan();
         String ennuste="Seuraavan 1 sekunnin aikana tiedossa 10 cm lunta.";
         assertEquals(ennuste,this.peliKerranOhjaaja.getEnnuste());
     }
@@ -161,5 +168,75 @@ public class PeliKerranOhjaajaTest {
         this.peliKerranOhjaaja.AlustaTaso();
         String ennuste="Seuraavan 5 sekunnin aikana tiedossa 10 cm lunta.";
         assertEquals(ennuste,this.peliKerranOhjaaja.getEnnuste());
+    }
+    
+    @Test
+    public void AlustaTasoAlustaaReitinLukijanOikeinEkallaKerralla(){
+        this.peliKerranOhjaaja.AlustaTaso();
+        ReitinLukija reitinLukija=this.peliKerranOhjaaja.getReitinLukija();
+        ArrayList<Integer> koordinaatit=new ArrayList<Integer>();
+        koordinaatit.add(0);
+        koordinaatit.add(1);
+        reitinLukija.TarkistaPisteJaLisaaReitille(koordinaatit);
+        assertEquals(reitinLukija.GetReitti().size(),1);
+    }
+    @Test
+    public void AlustaTasoAlustaaReitinLukijanOikeinTokallaKerralla(){
+        this.peliKerranOhjaaja.AlustaTaso();
+        ReitinLukija reitinLukija=this.peliKerranOhjaaja.getReitinLukija();
+        ArrayList<Integer> koordinaatit=new ArrayList<Integer>();
+        koordinaatit.add(0);
+        koordinaatit.add(1);
+        reitinLukija.TarkistaPisteJaLisaaReitille(koordinaatit);
+        this.peliKerranOhjaaja.MeneSeuraavaanKenttaan();
+        this.peliKerranOhjaaja.AlustaTaso();
+        ReitinLukija reitinLukija2=this.peliKerranOhjaaja.getReitinLukija();
+        
+        assertEquals(reitinLukija2.GetReitti().size(),0);
+    }
+    @Test
+    public void AlustaTasoAlustaaSaanOikeinEkallaKerralla(){
+        this.peliKerranOhjaaja.AlustaTaso();
+        assertEquals(this.peliKerranOhjaaja.getSaa().getSateenPituus(),1);
+    }
+     @Test
+    public void AlustaTasoAlustaaSaanOikeinTokallaKerralla(){
+        this.peliKerranOhjaaja.AlustaTaso();
+        this.peliKerranOhjaaja.MeneSeuraavaanKenttaan();
+        this.peliKerranOhjaaja.AlustaTaso();
+        assertEquals(this.peliKerranOhjaaja.getSaa().getSateenPituus(),5);
+    }
+    @Test
+    public void AlustaTasoAlustaaLumikerroksenOikeinEkallaKerralla(){
+       this.peliKerranOhjaaja.AlustaTaso();
+       Lumikerros kerros=this.peliKerranOhjaaja.getLumikerros();
+       HashMap lumikerrosKoordinaateissa=kerros.GetLumikerrosKoordinaateissa();
+       ArrayList<Integer> koordinaatit=new ArrayList<Integer>();
+        koordinaatit.add(0);
+        koordinaatit.add(1);
+        assertTrue((double) lumikerrosKoordinaateissa.get(koordinaatit)>-0.001 && (double) lumikerrosKoordinaateissa.get(koordinaatit)<0.001);
+    }
+    @Test
+    public void AlustaTasoAlustaaLumikerroksenOikeinTokallaKerralla(){
+       this.peliKerranOhjaaja.AlustaTaso();
+       this.peliKerranOhjaaja.MeneSeuraavaanKenttaan();
+       this.peliKerranOhjaaja.AlustaTaso();
+       Lumikerros kerros=this.peliKerranOhjaaja.getLumikerros();
+       HashMap lumikerrosKoordinaateissa=kerros.GetLumikerrosKoordinaateissa();
+       ArrayList<Integer> koordinaatit=new ArrayList<Integer>();
+        koordinaatit.add(0);
+        koordinaatit.add(1);
+        assertTrue((double) lumikerrosKoordinaateissa.get(koordinaatit)>-1.001 && (double) lumikerrosKoordinaateissa.get(koordinaatit)<1.001);
+    }
+    @Test
+    public void AlustaTasoVaihtaaEnnatysListaaTokallaKerralla(){
+        this.peliKerranOhjaaja.AlustaTaso();
+        EnnatysListanPitaja pitaja=this.peliKerranOhjaaja.getEnnatysListanPitaja();
+        String ennatykset1=pitaja.getEnnatysListaTekstina();
+        this.peliKerranOhjaaja.MeneSeuraavaanKenttaan();
+        this.peliKerranOhjaaja.AlustaTaso();
+        EnnatysListanPitaja pitaja2=this.peliKerranOhjaaja.getEnnatysListanPitaja();
+        String ennatykset2=pitaja2.getEnnatysListaTekstina();
+        assertTrue(!ennatykset1.equals(ennatykset2));
     }
 }

@@ -52,21 +52,7 @@ public class Kartta {
         return this.karttaPohja;
     }
    
-    /**
-     * Tulostaa kartan riveittain.
-     */
-    public void TulostaKartta(){
-        for(String rivi : this.karttaPohja){
-            System.out.println(rivi);
-        }
-    }
     
-    /**
-     * Tulostaa kartan selitteen.
-     */
-    public void TulostaSelite(){
-        System.out.println("\n lumeton katu=o, luminen katu=s, rakennus=x \n");
-    }
     
     /**
      * Antaa kartan koon.

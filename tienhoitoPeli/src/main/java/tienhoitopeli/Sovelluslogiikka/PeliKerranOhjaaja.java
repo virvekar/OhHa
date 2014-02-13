@@ -92,6 +92,13 @@ public class PeliKerranOhjaaja {
         Saaennuste uusiEnnuste = new Saaennuste(this.getSaaennusteenPolku());
         uusiEnnuste.LueSaaennuste();
         Saa uusiSaa = new Saa(uusiEnnuste);
+        
+        if(uusiEnnuste.GetPituudenMuutoksenKeskihajonta()>0){
+           uusiSaa.ArvoSateenPituus(uusiEnnuste.GetPituudenMuutoksenKeskihajonta());
+        }
+        if(uusiEnnuste.GetMaaranMuutoksenKeskihajonta()>0){
+            uusiSaa.ArvoSateenMaara(uusiEnnuste.GetMaaranMuutoksenKeskihajonta());
+        }
 
         Lumikerros uusiLumikerros = new Lumikerros(kartta);
         uusiLumikerros.AlustaLumikerros();

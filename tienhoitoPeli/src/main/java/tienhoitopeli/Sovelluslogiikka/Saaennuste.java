@@ -17,11 +17,15 @@ public class Saaennuste {
     /**
      * int ennusteenPituus kertoo kuinka monen sekunnin ajalle ennuste on
      * int lumisateenMaara kertoo paljonko sataa yhteensa lunta
-     * String ennusteTiedosto sisaltaa tiedostopolun, josta ennuste loytyy.
+     * String ennusteTiedosto sisaltaa tiedostopolun, josta ennuste loytyy
+     * int pituudenMuutoksenKeskihajonta kertoo ennusteen pituuden virheen keskihajonnan
+     * int maaranMuutoksenKeskihajonta kertoo ennusteen maaran virheen keskihajonnan
      */
     private int ennusteenPituus;
     private String ennusteTiedosto;
     private int lumisateenMaara;
+    private int pituudenMuutoksenKeskihajonta;
+    private int maaranMuutoksenKeskihajonta;
 
     /**
      * 
@@ -42,7 +46,7 @@ public class Saaennuste {
             System.out.println("Ohjelmaa suoritettaessa tapahtui virhe. Ennustetta ei loytynyt.");
             System.exit(0);
         }
-        if(!KirjaaEnnuste(ennuste.get(0),ennuste.get(1))){
+        if(!KirjaaEnnuste(ennuste.get(0),ennuste.get(1),ennuste.get(2),ennuste.get(3))){
             System.out.println("Ennustetiedosto on virheellinen");
             System.exit(0);
         }
@@ -56,15 +60,23 @@ public class Saaennuste {
      * 
      * @param pituus tiedostosta luettu String, joka kertoo ennusteen pituuden
      * @param maara tiedostosta luettu String, joka kertoo sateen maaran
+     * @param pituudenHajonta tiedostosta luettu String, joka kertoo ennusteen pituuden virheen keskihajonnan
+     * @param maaranHajonta tiedostosta luettu String, joka kertoo ennusteen maaran virheen keskihajonnan
      * @return boolean, joka on true, mikali ennusteen kirjaaminen onnistui
      */
-    public boolean KirjaaEnnuste(String pituus, String maara) {
-        if (OnkoInteger(pituus) && OnkoInteger(maara)) {
+    public boolean KirjaaEnnuste(String pituus, String maara,String pituudenHajonta, String maaranHajonta) {
+        if (OnkoInteger(pituus) && OnkoInteger(maara) && OnkoInteger(pituudenHajonta) && OnkoInteger(maaranHajonta)) {
             int pituusLuku = Integer.parseInt(pituus);
             int maaraLuku = Integer.parseInt(maara);
-            if (OnkoSopivaLuku(pituusLuku) && OnkoSopivaLuku(maaraLuku) ) {
+            int pituudenHajontaLuku=Integer.parseInt(pituudenHajonta);
+            int maaranHajontaLuku=Integer.parseInt(maaranHajonta);
+            if (OnkoSopivaLuku(pituusLuku) && OnkoSopivaLuku(maaraLuku) && 
+                    OnkoNollaTaiIsompi(pituudenHajontaLuku) &&
+                    OnkoNollaTaiIsompi(maaranHajontaLuku)) {
                 this.ennusteenPituus = pituusLuku;
                  this.lumisateenMaara = maaraLuku;
+                 this.pituudenMuutoksenKeskihajonta=pituudenHajontaLuku;
+                 this.maaranMuutoksenKeskihajonta=maaranHajontaLuku;
                  return true;
             }
         }
@@ -77,6 +89,12 @@ public class Saaennuste {
 
     public int GetLumisateenMaara() {
         return this.lumisateenMaara;
+    }
+    public int GetPituudenMuutoksenKeskihajonta(){
+        return this.pituudenMuutoksenKeskihajonta;
+    }
+    public int GetMaaranMuutoksenKeskihajonta(){
+        return this.maaranMuutoksenKeskihajonta;
     }
 
     /**
@@ -95,6 +113,18 @@ public class Saaennuste {
      */
     public boolean OnkoSopivaLuku(int luku) {
         if (luku <= 0) {
+            return false;
+        }
+        return true;
+    }
+    
+    /**
+     * Kertoo onko luku nolla tai isompi
+     * @param luku
+     * @return true jos luku on nolla tai isompi
+     */
+    public boolean OnkoNollaTaiIsompi(int luku) {
+        if (luku < 0) {
             return false;
         }
         return true;
