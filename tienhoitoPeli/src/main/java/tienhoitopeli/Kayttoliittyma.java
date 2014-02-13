@@ -26,18 +26,12 @@ public class Kayttoliittyma {
         PeliKerranOhjaaja ohjaaja=new PeliKerranOhjaaja();
 
         GraafinenKayttoliittyma graafinenKayttoliittyma=new GraafinenKayttoliittyma(ohjaaja);
+
         
-        
-        Saaennuste uusiEnnuste = new Saaennuste("src/main/java/tienhoitopeli/saaennusteet/saaennuste2.txt");
-        uusiEnnuste.LueSaaennuste();
-        Saa uusiSaa = new Saa(uusiEnnuste);
-        for(int i=1; i<10; i++){
-            uusiSaa.ArvoSateenMaara(5);
-        }
         
         
  
-      //  SwingUtilities.invokeLater(graafinenKayttoliittyma);
+       SwingUtilities.invokeLater(graafinenKayttoliittyma);
 
        
        
