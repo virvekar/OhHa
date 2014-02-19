@@ -35,7 +35,7 @@ public class Auraaja {
      */
     public void AuraaSeuraavaPiste() {
         ArrayList<ArrayList<Integer>> reitti = this.reitinLukija.GetReitti();
-        if (reitti.size() >= reittiPisteNumero) {
+        if (reitti.size() > reittiPisteNumero) {
             ArrayList<Integer> seuraavaPiste = reitti.get(this.reittiPisteNumero);
             this.lumikerros.PoistaLumikerros(seuraavaPiste);
             this.reittiPisteNumero++;

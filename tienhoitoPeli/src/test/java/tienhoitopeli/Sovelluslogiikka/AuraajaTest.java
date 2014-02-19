@@ -25,7 +25,6 @@ public class AuraajaTest {
     private Kartta kartta;
     private Saaennuste ennuste;
     private Saa saa;
-    private ArrayList<Integer> koordinaatit;
     private Auraaja auraaja;
 
     public AuraajaTest() {
@@ -42,7 +41,7 @@ public class AuraajaTest {
         reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("k");
         
         auraaja = new Auraaja(lumikerros, reitinLukija);
-        koordinaatit = new ArrayList<Integer>();
+        
 
     }
 
@@ -69,27 +68,34 @@ public class AuraajaTest {
     public void AuraaSeuraavaPisteToimii() {
         auraaja.AuraaSeuraavaPiste();
         HashMap kerros = lumikerros.GetLumikerrosKoordinaateissa();
-        koordinaatit.add(1);
-        koordinaatit.add(1);
+        ArrayList<Integer> koordinaatit=this.LuoReittiPiste(1, 1);
         double kerrosKoordinaateissa=(double) kerros.get(koordinaatit);
         boolean vastaus=kerrosKoordinaateissa>-0.01 && kerrosKoordinaateissa<0.01;
         assertEquals(vastaus,true);
 
     }
+    @Test
     public void AuraaSeuraavaPisteAuraaToisenkinPisteen(){
         auraaja.AuraaSeuraavaPiste();
         auraaja.AuraaSeuraavaPiste();
         HashMap kerros = lumikerros.GetLumikerrosKoordinaateissa();
-        koordinaatit.add(2);
-        koordinaatit.add(1);
+        ArrayList<Integer> koordinaatit=this.LuoReittiPiste(2, 1);
         double kerrosKoordinaateissa=(double) kerros.get(koordinaatit);
         boolean vastaus=kerrosKoordinaateissa>-0.01 && kerrosKoordinaateissa<0.01;
         assertEquals(vastaus,true);
     }
+    @Test
     public void AuraaSeuraavaPisteEiAuraaJosEiReittipistetta(){
         auraaja.AuraaSeuraavaPiste();
         auraaja.AuraaSeuraavaPiste();
         auraaja.AuraaSeuraavaPiste();
-        assertEquals(1,auraaja.getReittiPisteNumero());
+        assertEquals(2,auraaja.getReittiPisteNumero());
+    }
+    
+    public ArrayList<Integer> LuoReittiPiste(int rivi, int sarake){
+        ArrayList<Integer> koordinaatit=new ArrayList<Integer>();
+        koordinaatit.add(rivi);
+        koordinaatit.add(sarake);
+        return koordinaatit;
     }
 }

@@ -70,7 +70,7 @@ public class Saaennuste {
             int maaraLuku = Integer.parseInt(maara);
             int pituudenHajontaLuku=Integer.parseInt(pituudenHajonta);
             int maaranHajontaLuku=Integer.parseInt(maaranHajonta);
-            if (OnkoSopivaLuku(pituusLuku) && OnkoSopivaLuku(maaraLuku) && 
+            if (OnkoPositiivinen(pituusLuku) && OnkoPositiivinen(maaraLuku) && 
                     OnkoNollaTaiIsompi(pituudenHajontaLuku) &&
                     OnkoNollaTaiIsompi(maaranHajontaLuku)) {
                 this.ennusteenPituus = pituusLuku;
@@ -113,7 +113,7 @@ public class Saaennuste {
      * @param luku luku joka halutaan tarkistaa
      * @return boolean, joka on true jos luku on positiivinen.
      */
-    public boolean OnkoSopivaLuku(int luku) {
+    public boolean OnkoPositiivinen(int luku) {
         if (luku <= 0) {
             return false;
         }

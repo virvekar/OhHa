@@ -20,6 +20,7 @@ import static org.junit.Assert.*;
  */
 public class KarttaTest {
     private Kartta kartta;
+    private ArrayList<String> karttaPohja;
     
     public KarttaTest() {
     }
@@ -35,6 +36,8 @@ public class KarttaTest {
     @Before
     public void setUp() {
        kartta = new Kartta("src/main/java/tienhoitopeli/kartat/kartta1.txt");
+       this.kartta.LueKartta();
+       this.karttaPohja=this.kartta.GetKarttaPohja();
     }
     
     @After
@@ -46,21 +49,17 @@ public class KarttaTest {
     //
      @Test
      public void LueKarttaTallettaaOikeanRiviMaaran() {
-         this.kartta.LueKartta();
-         ArrayList<String> karttaPohja=this.kartta.GetKarttaPohja();
          assertEquals(5,karttaPohja.size());
      
      }
       @Test
      public void LueKarttaTallettaaOikeanSarakeMaaran() {
-         this.kartta.LueKartta();
-         ArrayList<String> karttaPohja=this.kartta.GetKarttaPohja();
+
          assertEquals(5,karttaPohja.get(0).length());
      
      }
      @Test
      public void KartanKokoAntaaOikeanKoon(){
-         this.kartta.LueKartta();
          ArrayList<Integer> kartanKoko=this.kartta.KartanKoko();
          ArrayList<Integer> koko=new ArrayList<Integer>();
          koko.add(5);

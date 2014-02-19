@@ -53,4 +53,32 @@ public class SaaennusteTest {
          this.ennuste.LueSaaennuste();
          assertEquals(10,this.ennuste.GetLumisateenMaara());
      }
+     @Test
+     public void OnkoPositiivinenPalauttaaOikenNollaSyotteella(){
+         assertFalse(this.ennuste.OnkoPositiivinen(0));
+     }
+     @Test
+     public void OnkoPositiivinenPalauttaaOikenNegatiivisellaSyotteella(){
+         assertFalse(this.ennuste.OnkoPositiivinen(-3));
+     }
+     @Test
+     public void OnkoPositiivinenPalauttaaOikenPositiivisellaSyotteella(){
+         assertTrue(this.ennuste.OnkoPositiivinen(1));
+     }
+     @Test
+     public void OnkoNollaTaiIsompiPalauttaaOikeinNollaSyotteelle(){
+         assertTrue(this.ennuste.OnkoNollaTaiIsompi(0));
+     }
+     @Test
+     public void OnkoNollaTaiIsompiPalauttaaOikeinNegatiiviselleSyotteelle(){
+         assertFalse(this.ennuste.OnkoNollaTaiIsompi(-1));
+     }
+     @Test
+     public void OnkoNollaTaiIsompiPalauttaaOikeinPositiiviselleSyotteelle(){
+         assertTrue(this.ennuste.OnkoNollaTaiIsompi(1));
+     }
+     @Test
+     public void OnkoInteger(){
+         
+     }
 }

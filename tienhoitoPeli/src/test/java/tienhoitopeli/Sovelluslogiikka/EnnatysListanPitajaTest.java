@@ -47,7 +47,7 @@ public class EnnatysListanPitajaTest {
         }catch(IOException e) {
             System.out.println("ei onnistunut");
         }
-        
+        ennatysListanPitaja= new EnnatysListanPitaja(this.tiedostonNimi);
     }
     
     @After
@@ -59,21 +59,18 @@ public class EnnatysListanPitajaTest {
     //
      @Test
      public void LisaaEnnatysLisaaPienimmanEnsimmaiseksi() {
-         ennatysListanPitaja= new EnnatysListanPitaja(this.tiedostonNimi);
          this.ennatysListanPitaja.LisaaEnnatys("Teemu", "100");
          ArrayList<String> lista=this.ennatysListanPitaja.getEnnatysLista();
          assertEquals(lista.get(0),"100 Teemu");
      }
      @Test
      public void LisaaEnnatysLisaaSuurimmanViimeiseksi() {
-         ennatysListanPitaja= new EnnatysListanPitaja(this.tiedostonNimi);
          this.ennatysListanPitaja.LisaaEnnatys("Teemu", "1100");
          ArrayList<String> lista=this.ennatysListanPitaja.getEnnatysLista();
          assertEquals(lista.get(3),"1100 Teemu");
      }
      @Test
      public void LisaaEnnatysLisaaOikeinValiin() {
-         ennatysListanPitaja= new EnnatysListanPitaja(this.tiedostonNimi);
          this.ennatysListanPitaja.LisaaEnnatys("Teemu", "800");
          ArrayList<String> lista=this.ennatysListanPitaja.getEnnatysLista();
          assertEquals(lista.get(2),"800 Teemu");

@@ -81,25 +81,7 @@ public class Lumikerros {
         }
     }
 
-    /**
-     * Tulostaa lumikerroksen ruudulle.
-     */
-    public void TulostaLumikerros() {
-        ArrayList<Integer> kartanKoko = this.kartta.KartanKoko();
-        String tulosteRivi = "";
-        for (int i = 0; i < kartanKoko.get(1); i++) {
-
-            for (int j = 0; j < kartanKoko.get(0); j++) {
-                ArrayList<Integer> koordinaatit = new ArrayList<Integer>();
-                koordinaatit.add(i);
-                koordinaatit.add(j);
-                tulosteRivi = tulosteRivi.concat(this.lumikerrosKoordinaateissa.get(koordinaatit) + " ");
-            }
-            System.out.println(tulosteRivi);
-            tulosteRivi = "";
-        }
-
-    }
+    
 /**
  * Laskee paljonko lunta sataa yhdessa sekunnissa ja lisaa sen veran
  * lunta kaikkiin tiepisteisiin.

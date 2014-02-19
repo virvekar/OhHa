@@ -106,9 +106,7 @@ public class PeliKerranOhjaajaTest {
     public void AlustaTasoAlustaaLumikerroksenKoordinaateissaOikeinEkallaKerralla(){
         this.peliKerranOhjaaja.AlustaTaso();
         HashMap lumikerrosKoordinaateissa=this.peliKerranOhjaaja.getLumikerrosKoordinaateissa();
-        ArrayList<Integer> koordinaatit=new ArrayList<Integer>();
-        koordinaatit.add(0);
-        koordinaatit.add(1);
+        ArrayList<Integer> koordinaatit=this.LuoReittiKoordinaattiPiste(0, 1);
         assertTrue((double) lumikerrosKoordinaateissa.get(koordinaatit)>-0.001 && (double) lumikerrosKoordinaateissa.get(koordinaatit)<0.001);
     }
     
@@ -118,9 +116,7 @@ public class PeliKerranOhjaajaTest {
         this.peliKerranOhjaaja.MeneSeuraavaanKenttaan();
         this.peliKerranOhjaaja.AlustaTaso();
         HashMap lumikerrosKoordinaateissa=this.peliKerranOhjaaja.getLumikerrosKoordinaateissa();
-        ArrayList<Integer> koordinaatit=new ArrayList<Integer>();
-        koordinaatit.add(0);
-        koordinaatit.add(1);
+        ArrayList<Integer> koordinaatit=this.LuoReittiKoordinaattiPiste(0, 1);
         assertTrue((double) lumikerrosKoordinaateissa.get(koordinaatit)>-1.001 && (double) lumikerrosKoordinaateissa.get(koordinaatit)<1.001);
     }
     
@@ -178,9 +174,7 @@ public class PeliKerranOhjaajaTest {
     public void AlustaTasoAlustaaReitinLukijanOikeinEkallaKerralla(){
         this.peliKerranOhjaaja.AlustaTaso();
         ReitinLukija reitinLukija=this.peliKerranOhjaaja.getReitinLukija();
-        ArrayList<Integer> koordinaatit=new ArrayList<Integer>();
-        koordinaatit.add(0);
-        koordinaatit.add(1);
+        ArrayList<Integer> koordinaatit=this.LuoReittiKoordinaattiPiste(0, 1);
         reitinLukija.TarkistaPisteJaLisaaReitille(koordinaatit);
         assertEquals(reitinLukija.GetReitti().size(),1);
     }
@@ -188,9 +182,7 @@ public class PeliKerranOhjaajaTest {
     public void AlustaTasoAlustaaReitinLukijanOikeinTokallaKerralla(){
         this.peliKerranOhjaaja.AlustaTaso();
         ReitinLukija reitinLukija=this.peliKerranOhjaaja.getReitinLukija();
-        ArrayList<Integer> koordinaatit=new ArrayList<Integer>();
-        koordinaatit.add(0);
-        koordinaatit.add(1);
+        ArrayList<Integer> koordinaatit=this.LuoReittiKoordinaattiPiste(0, 1);
         reitinLukija.TarkistaPisteJaLisaaReitille(koordinaatit);
         this.peliKerranOhjaaja.MeneSeuraavaanKenttaan();
         this.peliKerranOhjaaja.AlustaTaso();
@@ -242,5 +234,12 @@ public class PeliKerranOhjaajaTest {
         EnnatysListanPitaja pitaja2=this.peliKerranOhjaaja.getEnnatysListanPitaja();
         String ennatykset2=pitaja2.getEnnatysListaTekstina();
         assertTrue(!ennatykset1.equals(ennatykset2));
+    }
+    
+    public ArrayList<Integer> LuoReittiKoordinaattiPiste(int rivi, int sarake) {
+        ArrayList<Integer> koordinaatit = new ArrayList<Integer>();
+        koordinaatit.add(rivi);
+        koordinaatit.add(sarake);
+        return koordinaatit;
     }
 }

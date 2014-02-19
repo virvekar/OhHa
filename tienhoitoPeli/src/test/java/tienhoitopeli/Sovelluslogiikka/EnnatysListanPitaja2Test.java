@@ -46,6 +46,7 @@ public class EnnatysListanPitaja2Test {
         }catch(IOException e) {
             System.out.println("ei onnistunut");
         }
+        ennatysListanPitaja= new EnnatysListanPitaja(this.tiedostonNimi);
     }
     
     @After
@@ -57,7 +58,6 @@ public class EnnatysListanPitaja2Test {
     //
      @Test
      public void EnnatysListanKokoEiYlitaKymmenta() {
-     ennatysListanPitaja= new EnnatysListanPitaja(this.tiedostonNimi);
          this.ennatysListanPitaja.LisaaEnnatys("Teemu", "100");
          this.ennatysListanPitaja.LisaaEnnatys("Jaakko", "1");
          ArrayList<String> lista=this.ennatysListanPitaja.getEnnatysLista();
@@ -66,7 +66,6 @@ public class EnnatysListanPitaja2Test {
      
      @Test
      public void EnnatysListaVikaOikeinJosKokoKymmenenJaEnnatysSuurempiKuinVika() {
-     ennatysListanPitaja= new EnnatysListanPitaja(this.tiedostonNimi);
          this.ennatysListanPitaja.LisaaEnnatys("Teemu", "1100");
          this.ennatysListanPitaja.LisaaEnnatys("Jaakko", "1200");
          ArrayList<String> lista=this.ennatysListanPitaja.getEnnatysLista();
