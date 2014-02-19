@@ -255,8 +255,11 @@ public class ReitinLukija {
 
     public boolean LisaaAloitusAika(String aika) {
         if (aika != null && OnkoInteger(aika)) {
-            this.aloitusAika = Integer.parseInt(aika);
-            return true;
+            int sekunti=Integer.parseInt(aika);
+            if(sekunti>0){
+                this.aloitusAika = Integer.parseInt(aika);
+                return true;
+            }       
         }
         return false;
 

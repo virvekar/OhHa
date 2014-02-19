@@ -93,6 +93,7 @@ public class LumikerrosTest {
         boolean vastaus=kerrosKoordinaateissa>0.01;
         assertEquals(vastaus,true);
     }
+    @Test
     public void LisaaLuntaYhdenSekunninSateenVerranKadulleEiLisaaRakennuksenPaalle(){        
         lumikerros.LisaaLuntaYhdenSekunninSateenVerran(saa.getSateenMaara(),saa.getSateenPituus());
         HashMap kerros=lumikerros.GetLumikerrosKoordinaateissa();
@@ -101,6 +102,53 @@ public class LumikerrosTest {
         double kerrosKoordinaateissa=(double) kerros.get(koordinaatit);
         boolean vastaus=kerrosKoordinaateissa<-0.01;
         assertEquals(vastaus,true);
+    }
+    @Test
+    public void MerkittavanLumenKestoAlustusOikein(){
+        HashMap merkittavanLumenKesto=lumikerros.GetMerkittavanLumenKestoKoordinaateissa();
+        koordinaatit.add(0);
+        koordinaatit.add(0);
+        int kesto=(int)merkittavanLumenKesto.get(koordinaatit);
+        assertEquals(kesto,0);
+    }
+    @Test
+    public void MerkittavanLumenKestoOikeinJosLuntaKauan(){
+        lumikerros.LisaaLuntaYhdenSekunninSateenVerran(saa.getSateenMaara(),saa.getSateenPituus());
+        lumikerros.PaivitaMerkittavanLumenKesto();
+        lumikerros.PaivitaMerkittavanLumenKesto();
+        lumikerros.PaivitaMerkittavanLumenKesto();
+        HashMap merkittavanLumenKesto=lumikerros.GetMerkittavanLumenKestoKoordinaateissa();
+        koordinaatit.add(2);
+        koordinaatit.add(1);
+        int kesto=(int)merkittavanLumenKesto.get(koordinaatit);
+        assertEquals(kesto,3);
+    }
+    @Test
+    public void MerkittavanLumenKestoOikeinJosLumiPoistetaan(){
+        lumikerros.LisaaLuntaYhdenSekunninSateenVerran(saa.getSateenMaara(),saa.getSateenPituus());
+        lumikerros.PaivitaMerkittavanLumenKesto();
+        lumikerros.PaivitaMerkittavanLumenKesto();
+        lumikerros.PaivitaMerkittavanLumenKesto();
+        koordinaatit.add(2);
+        koordinaatit.add(1);
+        lumikerros.PoistaLumikerros(koordinaatit);
+        lumikerros.PaivitaMerkittavanLumenKesto();
+        HashMap merkittavanLumenKesto=lumikerros.GetMerkittavanLumenKestoKoordinaateissa();
+        int kesto=(int)merkittavanLumenKesto.get(koordinaatit);
+        assertEquals(kesto,0);
+    }
+    
+    @Test
+    public void MonessakoRuudussaOllutLuntaLiianKauanAntaaAluksiNolla(){        
+        assertEquals(lumikerros.MonessakoRuudussaOnOllutLuntaLiianKauan(),0);
+    }
+    @Test
+    public void MonessakoRuudussaOllutLuntaLiianKauanAntaaOikeanMaaran(){ 
+        lumikerros.LisaaLuntaYhdenSekunninSateenVerran(saa.getSateenMaara(),saa.getSateenPituus());
+        for(int i=1; i<55; i++){
+            lumikerros.PaivitaMerkittavanLumenKesto();
+        }
+        assertEquals(lumikerros.MonessakoRuudussaOnOllutLuntaLiianKauan(),16);
     }
     
 }

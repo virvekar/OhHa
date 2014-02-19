@@ -1,10 +1,10 @@
 115 Jaakko
 1105 Yrjö
 1105 Virve
-4060 Seppo
-4060 Seppo
-5060 Jaakko kulta
-5065 Virve
-7050 Polo
-9040 Pelle hermanni
-9040 Yrjö
+1570 Pekka
+1585 l
+2085 Pelle
+2575 Pertti
+3065 Pelle
+3075 Pekka
+3075 Kalle

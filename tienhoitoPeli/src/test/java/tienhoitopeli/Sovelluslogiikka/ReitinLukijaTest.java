@@ -474,4 +474,29 @@ public class ReitinLukijaTest {
         ArrayList<ArrayList<Integer>> reitti = this.reitinLukija.GetReitti();
         assertEquals(1, reitti.size());
     }
+    
+    @Test
+    public void LisaaAloitusAikaEiHyvaksyNegatiivista(){
+        assertFalse(this.reitinLukija.LisaaAloitusAika("-4"));
+    }
+    
+    @Test
+    public void LisaaAloitusAikaEiHyvaksyNollaa(){
+        assertFalse(this.reitinLukija.LisaaAloitusAika("0"));
+    }
+    
+    @Test
+    public void LisaaAloitusAikaHyvaksyyYkkosen(){
+        assertTrue(this.reitinLukija.LisaaAloitusAika("1"));
+    }
+    @Test
+    public void LisaaAloitusAikaLisaaHyvanAjan(){
+        this.reitinLukija.LisaaAloitusAika("5");
+        assertEquals(this.reitinLukija.getAloitusAika(),5);
+    }
+    @Test
+    public void LisaaAloitusAikaEiLisaaHuonoaAikaa(){
+        this.reitinLukija.LisaaAloitusAika("-5");
+        assertEquals(this.reitinLukija.getAloitusAika(),1);
+    }
 }

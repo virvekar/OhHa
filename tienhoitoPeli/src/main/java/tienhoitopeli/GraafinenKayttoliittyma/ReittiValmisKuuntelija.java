@@ -41,13 +41,15 @@ public class ReittiValmisKuuntelija implements ActionListener {
         if (this.peliKerranOhjaaja.getReitinLukija().GetReitti().size() > 0 && this.painallukset==0) {
             Auraaja auraaja = new Auraaja(this.peliKerranOhjaaja.getLumikerros(), this.peliKerranOhjaaja.getReitinLukija());
             TienhoidonSuorittaja tienhoidonSuorittaja = new TienhoidonSuorittaja(auraaja, 
-                    this.peliKerranOhjaaja.getSaa(), this.peliKerranOhjaaja.getLumikerros(),this.peliKerranOhjaaja.getReitinLukija());
+                this.peliKerranOhjaaja.getSaa(), this.peliKerranOhjaaja.getLumikerros(),this.peliKerranOhjaaja.getReitinLukija());
             tienhoidonSuorittaja.SuoritaTienhoito();
-            int kulut=tienhoidonSuorittaja.laskeKulut();
+            int kulut=tienhoidonSuorittaja.laskeKulutLumenMaaranMukaan();
             this.tuloskentta.setText("Kuluja tuli " + kulut + " euroa");
             String pelaaja=this.peliKerranOhjaaja.getPelaajanNimi();
             this.peliKerranOhjaaja.getEnnatysListanPitaja().LisaaEnnatys(pelaaja, ""+kulut);
             this.painallukset++;
+            
+            
 
         }
     }

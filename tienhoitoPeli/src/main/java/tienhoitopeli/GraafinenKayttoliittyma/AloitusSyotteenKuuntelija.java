@@ -59,6 +59,7 @@ public class AloitusSyotteenKuuntelija implements ActionListener {
                 this.ohjeKentta.setText("Anna sen rivin numero, jolta aloitetaan. Ylin rivi on 1.");
             } else {
                 this.ohjeKentta.setText("Aloitusaika ei kelpaa. Koeta uudestaan.");
+                this.aloitusAika=null;
             }
             this.syoteKentta.setText("");
         } else if (aloitusRivi == null) {

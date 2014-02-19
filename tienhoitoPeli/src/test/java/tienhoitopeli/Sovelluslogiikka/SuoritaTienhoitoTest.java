@@ -98,8 +98,18 @@ public class SuoritaTienhoitoTest {
         reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("k");
         reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("k");
         tienhoidonSuorittaja.SuoritaTienhoito();
-        int kulut = tienhoidonSuorittaja.laskeKulut();
+        int kulut = tienhoidonSuorittaja.laskeKulutTonniPerKolari();
         assertEquals(15 + 13000, kulut);
+    }
+    
+    @Test
+    public void LaskeKulutLumenMaaranMukaanToimii(){
+        reitinLukija.KirjaaEnsimmainenPiste("1", "2");
+        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("k");
+        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("k");
+        tienhoidonSuorittaja.SuoritaTienhoito();
+        int kulut=tienhoidonSuorittaja.laskeKulutLumenMaaranMukaan();
+        assertEquals(15 + 500*13, kulut);
     }
 
     @Test
@@ -125,7 +135,7 @@ public class SuoritaTienhoitoTest {
         reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("l");
         reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("i");    
         tienhoidonSuorittaja.SuoritaTienhoito();
-        int kulut=tienhoidonSuorittaja.laskeKulut();
+        int kulut=tienhoidonSuorittaja.laskeKulutTonniPerKolari();
         assertEquals(20*5, kulut);
     }
 

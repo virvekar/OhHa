@@ -44,6 +44,7 @@ public class TienhoidonSuorittaja {
      * <p>
      */
     public void SuoritaTienhoito(){
+
         int aurausAlkaa=this.reitinlukija.getAloitusAika();
         int aurauksenKesto=0;
         
@@ -61,21 +62,46 @@ public class TienhoidonSuorittaja {
             if(aika<=sateenKesto){
                 lumikerros.LisaaLuntaYhdenSekunninSateenVerran(saa.getSateenMaara(), saa.getSateenPituus());
             }
+
             if(aika>=aurausAlkaa && aika<=aurauksenKesto){
                 auraaja.AuraaSeuraavaPiste();
+                
             }
+            lumikerros.PaivitaMerkittavanLumenKesto();
         }    
     }
     
     /**
-     * Pyytaa kululaskuria laskemaan syntyneet kurssit
+     * Pyytaa kululaskuria laskemaan syntyneet kulut siten, etta lumisesta ruudusta
+     * tulee aina 1000 e kuluja
      * @return kulujen maara
      */
-    public int laskeKulut(){
-        kululaskuri.LisaaKolariKulut(lumikerros.laskeRuudutJoissaOnLunta());
+    public int laskeKulutTonniPerKolari(){
+        kululaskuri.LisaaKolariKulutTonniPerKolari(lumikerros.laskeRuudutJoissaOnLunta());
         kululaskuri.LisaaBensakulu(this.auraaja.AnnaAuraajanReitti().size());
         return kululaskuri.getKulujenMaara();
     }
+    
+    /**
+     * Pyytaa kululaskuria laskemaan syntyneet kulut siten,etta kulujen maara
+     * lumisesta ruudusta riippuu lumen maarasta
+     * @return kulujen maara
+     */
+    public int laskeKulutLumenMaaranMukaan(){
+        kululaskuri.LisaaKolariKulutLumenMaaranMukaan(lumikerros.GetLumikerrosKoordinaateissa());
+        kululaskuri.LisaaBensakulu(this.auraaja.AnnaAuraajanReitti().size());
+        return kululaskuri.getKulujenMaara();
+    }
+    
+    /**
+     * Laskee kulut jotka syntyvat siita etta ruudussa on lunta liian kauan
+     * @return kulujen maara
+     */
+    public int laskeKulutLumestaJokaOnMaassaLiianKauan(){
+        kululaskuri.LisaaKolariKulutLumestaJokaOnMaassaLiianKauan(lumikerros.MonessakoRuudussaOnOllutLuntaLiianKauan());
+        return kululaskuri.getKulujenMaara();
+    }
+    
     
     /**
      * Palauttaa luvuista suuremman
