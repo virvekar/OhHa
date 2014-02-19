@@ -157,7 +157,9 @@ public class PeliKerranOhjaajaTest {
     @Test
     public void AlustaTasoAlustaaEnnusteenOikeinEkallaKerralla(){
         this.peliKerranOhjaaja.AlustaTaso();
-        String ennuste="Seuraavan 1 sekunnin aikana tiedossa 10 cm lunta.";
+        String ennuste="Seuraavan 1 sekunnin aikana tiedossa 10 cm lunta.\n" +
+                "Sateen keston epavarmuus: 0\n"+
+                "Sateen maaran epavarmuus: 0";
         assertEquals(ennuste,this.peliKerranOhjaaja.getEnnuste());
     }
     
@@ -166,7 +168,9 @@ public class PeliKerranOhjaajaTest {
         this.peliKerranOhjaaja.AlustaTaso();
         this.peliKerranOhjaaja.MeneSeuraavaanKenttaan();
         this.peliKerranOhjaaja.AlustaTaso();
-        String ennuste="Seuraavan 5 sekunnin aikana tiedossa 10 cm lunta.";
+        String ennuste="Seuraavan 5 sekunnin aikana tiedossa 10 cm lunta.\n" +
+                "Sateen keston epavarmuus: 0\n"+
+                "Sateen maaran epavarmuus: 0";
         assertEquals(ennuste,this.peliKerranOhjaaja.getEnnuste());
     }
     

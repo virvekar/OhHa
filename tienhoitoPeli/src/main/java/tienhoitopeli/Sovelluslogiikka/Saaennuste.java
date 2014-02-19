@@ -103,7 +103,9 @@ public class Saaennuste {
      */
     public String AnnaSaaennuste() {
 
-        return "Seuraavan " + this.ennusteenPituus + " sekunnin aikana tiedossa " + this.lumisateenMaara + " cm lunta.";
+        return "Seuraavan " + this.ennusteenPituus + " sekunnin aikana tiedossa " + this.lumisateenMaara + " cm lunta.\n" +
+                "Sateen keston epavarmuus: "+ this.pituudenMuutoksenKeskihajonta+ "\n"+
+                "Sateen maaran epavarmuus: "+this.maaranMuutoksenKeskihajonta;
     }
 
     /**

@@ -111,6 +111,15 @@ public class SuoritaTienhoitoTest {
         int kulut=tienhoidonSuorittaja.laskeKulutLumenMaaranMukaan();
         assertEquals(15 + 500*13, kulut);
     }
+    
+    @Test
+    public void LaskeKulutLumestaJokaOnMaassaLiianKauanToimii(){
+        reitinLukija.LisaaAloitusAika("51");
+        reitinLukija.KirjaaEnsimmainenPiste("1", "2");
+        tienhoidonSuorittaja.SuoritaTienhoito();
+        int kulut=tienhoidonSuorittaja.getKulut();
+        assertEquals(kulut,200*15);
+    }
 
     @Test
     public void LaskeKulutAntaaBensakulutJosKaikkiKadutAurattu() {
@@ -144,5 +153,7 @@ public class SuoritaTienhoitoTest {
         int luku = tienhoidonSuorittaja.PalautaSuurempi(3, 5);
         assertEquals(5, luku);
     }
+    
+    
     
 }

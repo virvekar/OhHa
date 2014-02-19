@@ -140,15 +140,53 @@ public class LumikerrosTest {
     
     @Test
     public void MonessakoRuudussaOllutLuntaLiianKauanAntaaAluksiNolla(){        
-        assertEquals(lumikerros.MonessakoRuudussaOnOllutLuntaLiianKauan(),0);
+        assertEquals(lumikerros.MonessakoRuudussaOnOllutLuntaLiianKauanEikaOleImoitettu(),0);
     }
     @Test
     public void MonessakoRuudussaOllutLuntaLiianKauanAntaaOikeanMaaran(){ 
         lumikerros.LisaaLuntaYhdenSekunninSateenVerran(saa.getSateenMaara(),saa.getSateenPituus());
+        this.PaivitaLumikerros55Kertaa();
+        assertEquals(lumikerros.MonessakoRuudussaOnOllutLuntaLiianKauanEikaOleImoitettu(),16);
+    }
+    @Test
+    public void MonessakoRuudussaOllutLuntaLiianKauanAntaaOikeanMaaranTokallaKerralla(){ 
+        lumikerros.LisaaLuntaYhdenSekunninSateenVerran(saa.getSateenMaara(),saa.getSateenPituus());
+        this.PaivitaLumikerros55Kertaa();
+        lumikerros.MonessakoRuudussaOnOllutLuntaLiianKauanEikaOleImoitettu();
+        assertEquals(lumikerros.MonessakoRuudussaOnOllutLuntaLiianKauanEikaOleImoitettu(),0);
+    }
+    
+    @Test
+    public void MonessakoRuudussaOllutLuntaLiianKauanAntaaOikeanMaaranTokallaKerrallaKunAurattu(){ 
+        lumikerros.LisaaLuntaYhdenSekunninSateenVerran(saa.getSateenMaara(),saa.getSateenPituus());
+        this.PaivitaLumikerros55Kertaa();
+        lumikerros.MonessakoRuudussaOnOllutLuntaLiianKauanEikaOleImoitettu();
+        ArrayList<Integer> koordinaatit=new ArrayList<Integer>();
+        koordinaatit.add(0);
+        koordinaatit.add(1);
+        lumikerros.PoistaLumikerros(koordinaatit);
+        lumikerros.PaivitaMerkittavanLumenKesto();
+        assertEquals(lumikerros.MonessakoRuudussaOnOllutLuntaLiianKauanEikaOleImoitettu(),0);
+    }
+    @Test
+    public void MonessakoRuudussaOllutLuntaLiianKauanAntaaOikeanMaaranTokallaKerrallaKunAurattuJaLuntaTullutLisaa(){ 
+        lumikerros.LisaaLuntaYhdenSekunninSateenVerran(saa.getSateenMaara(),saa.getSateenPituus());
+        this.PaivitaLumikerros55Kertaa();
+        lumikerros.MonessakoRuudussaOnOllutLuntaLiianKauanEikaOleImoitettu();
+        ArrayList<Integer> koordinaatit=new ArrayList<Integer>();
+        koordinaatit.add(0);
+        koordinaatit.add(1);
+        lumikerros.PoistaLumikerros(koordinaatit);
+        lumikerros.PaivitaMerkittavanLumenKesto();
+        lumikerros.LisaaLuntaYhdenSekunninSateenVerran(saa.getSateenMaara(),saa.getSateenPituus());
+        this.PaivitaLumikerros55Kertaa();
+        assertEquals(lumikerros.MonessakoRuudussaOnOllutLuntaLiianKauanEikaOleImoitettu(),1);
+    }    
+    
+    public void PaivitaLumikerros55Kertaa(){
         for(int i=1; i<55; i++){
             lumikerros.PaivitaMerkittavanLumenKesto();
         }
-        assertEquals(lumikerros.MonessakoRuudussaOnOllutLuntaLiianKauan(),16);
     }
     
 }

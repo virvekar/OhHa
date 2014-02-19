@@ -122,7 +122,24 @@ public class KululaskuriTest {
         this.laskuri.LisaaKolariKulutLumenMaaranMukaan(lumikerrosKoordinaateissa);
         assertEquals(1600,this.laskuri.getKulujenMaara());
     }
+    @Test
+    public void LisaaKolariKulutLumestaJokaOnMaasaLiianKauanLaskeeOikein(){
+        this.laskuri.LisaaKolariKulutLumestaJokaOnMaassaLiianKauan(5);
+        assertEquals(this.laskuri.getKulujenMaara(),1000);
+    }
+    @Test
+    public void LisaaKolariKulutLumestaJokaOnMaassaLiianKauanEiTeeMitaanNollaSyotteella(){
+        this.laskuri.LisaaKolariKulutLumestaJokaOnMaassaLiianKauan(0);
+        assertEquals(this.laskuri.getKulujenMaara(),0);
+        
+    }
     
+    @Test
+    public void LisaaKolariKulutLumestaJokaOnMaassaLiianKauanEiTeeMitaanNegatiivisellaSyotteella(){
+        this.laskuri.LisaaKolariKulutLumestaJokaOnMaassaLiianKauan(-3);
+        assertEquals(this.laskuri.getKulujenMaara(),0);
+        
+    }
     
     public HashMap AnnaLumikerros(){
         Kartta kartta = new Kartta("src/main/java/tienhoitopeli/kartat/kartta1.txt");

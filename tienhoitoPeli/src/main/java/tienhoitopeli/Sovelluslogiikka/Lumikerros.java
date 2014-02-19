@@ -20,10 +20,13 @@ public class Lumikerros {
  * lumen maara kussakin pisteessa
  * merkittavanLumenKestoKoordinaateissa= HashMap  jonka avaimena koordinaattipisteet
  * ja arvoina tieto siita kauanko ruudussa on ollut merkittava maara lunta
+ * merkittavastaLumestaIlmoitettu=HashMap jonka avaimena koordinaattipisteet ja 
+ * arvoina true, jos ruudun liiasta lumesta on ilmoitettu ja false, jos ei ole imoitettu
  */
     private Kartta kartta;
     private HashMap lumikerrosKoordinaateissa;
     private HashMap merkittavanLumenKestoKoordinaateissa;
+    private HashMap merkittavastaLumestaIlmoitettu;
 
     /**
      * 
@@ -33,6 +36,7 @@ public class Lumikerros {
         this.kartta = annettuKartta;
         this.lumikerrosKoordinaateissa = new HashMap();
         this.merkittavanLumenKestoKoordinaateissa=new HashMap();
+        this.merkittavastaLumestaIlmoitettu=new HashMap();
     }
 
     /**
@@ -46,6 +50,8 @@ public class Lumikerros {
      * lumen maaraksi asetetaan 0,0.
      * Alustaa myos HashMapin merkittavanLumenKestoKoordinaateissa, jonka avaimet ovat
      * samat kuin edelleisessa mutta arvot ovat kaikki aluksi nolla.
+     * Alustaa lisaksi HashMapin merkittavastaLumestaIlmoitettu, jonka avaimet ovat
+     * samat kuin edellisessa mutta arvot aluksi false
      */
     public void AlustaLumikerros() {
         ArrayList<Integer> kartanKoko = this.kartta.KartanKoko();
@@ -63,6 +69,7 @@ public class Lumikerros {
                 avainkoordinaatit.add(riviPiste);
 
                 this.merkittavanLumenKestoKoordinaateissa.put(avainkoordinaatit, 0);
+                this.merkittavastaLumestaIlmoitettu.put(avainkoordinaatit, false);
                 
                 if (rivi.charAt(riviPiste) == 'x') {
                     this.lumikerrosKoordinaateissa.put(avainkoordinaatit, (double) -1.0);
@@ -125,10 +132,12 @@ public class Lumikerros {
     public int laskeRuudutJoissaOnLunta(){
         
         int ruutujenMaara=0;
-        for (Object arvo:this.lumikerrosKoordinaateissa.values()){
-            double lumenMaara=( double) arvo;
+        for (Object lumenMaaraObjekti:this.lumikerrosKoordinaateissa.values()){
+            double lumenMaara=(double) lumenMaaraObjekti;
+            
             if(lumenMaara>0.0001){
                 ruutujenMaara++;
+                
             }
         }
         return ruutujenMaara;
@@ -142,12 +151,21 @@ public class Lumikerros {
         return this.merkittavanLumenKestoKoordinaateissa;
     }
     
+    public HashMap GetMerkittavastaLumestaIlmoitettu(){
+        return this.merkittavastaLumestaIlmoitettu;
+    }
     /**
      * Muuttaa lumen maaraksi 0 halutuissa koordinaateissa.
+     * Jos kyseisen ruudun merkittavan lumen kestosta on ilmoitettu, asetetaan
+     * merkittavastaLumestaIlmoiettu arvoksi false kyseisissa koordinaateissa
      * @param koordinaatit koorinaatit, joista lumi halutaan poistaa
      */
     public void PoistaLumikerros(ArrayList<Integer> koordinaatit){
         this.lumikerrosKoordinaateissa.put(koordinaatit, 0.0);
+        if((boolean)this.merkittavastaLumestaIlmoitettu.get(koordinaatit)){
+            this.merkittavastaLumestaIlmoitettu.put(koordinaatit,false);
+        }
+        
     }
     
     /**
@@ -157,6 +175,8 @@ public class Lumikerros {
      * nollaan
      */
     public void PaivitaMerkittavanLumenKesto(){
+        
+        
         for (Object koordinaatit:this.merkittavanLumenKestoKoordinaateissa.keySet()){
             double lumenMaara=(double)this.lumikerrosKoordinaateissa.get(koordinaatit);
             int kesto=(int) this.merkittavanLumenKestoKoordinaateissa.get(koordinaatit);
@@ -171,15 +191,20 @@ public class Lumikerros {
     }
     
     /**
-     * Laskee monessako ruudussa on ollut yli 4.999 cm lunta kauemmin kuin 50 s
+     * Laskee monessako ruudussa on ollut yli 4.999 cm lunta kauemmin kuin 50 s.
+     * Ei laske mukaan ruutuja joista on jo ilmoitettu aiemmin.
      * @return ruutujen maara joissa on ollut liian kauan lunta
      */
-    public int MonessakoRuudussaOnOllutLuntaLiianKauan(){
+    public int MonessakoRuudussaOnOllutLuntaLiianKauanEikaOleImoitettu(){
+        
         int ruutujenMaara=0;
-        for (Object kestoObjekti:this.merkittavanLumenKestoKoordinaateissa.values()){
-            int kesto=(int) kestoObjekti;
-            if(kesto>50){
+        for (Object koordinaatit:this.lumikerrosKoordinaateissa.keySet()){
+            int kesto=(int) this.merkittavanLumenKestoKoordinaateissa.get(koordinaatit);
+             boolean onkoIlmoitettu=(boolean)this.merkittavastaLumestaIlmoitettu.get(koordinaatit);
+            
+            if(kesto>50 && !onkoIlmoitettu){
                 ruutujenMaara++;
+                this.merkittavastaLumestaIlmoitettu.put(koordinaatit, true);
             }
         }
         return ruutujenMaara;

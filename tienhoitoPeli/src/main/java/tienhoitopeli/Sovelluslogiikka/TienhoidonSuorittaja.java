@@ -68,6 +68,7 @@ public class TienhoidonSuorittaja {
                 
             }
             lumikerros.PaivitaMerkittavanLumenKesto();
+            this.laskeKulutLumestaJokaOnMaassaLiianKauan();
         }    
     }
     
@@ -98,7 +99,7 @@ public class TienhoidonSuorittaja {
      * @return kulujen maara
      */
     public int laskeKulutLumestaJokaOnMaassaLiianKauan(){
-        kululaskuri.LisaaKolariKulutLumestaJokaOnMaassaLiianKauan(lumikerros.MonessakoRuudussaOnOllutLuntaLiianKauan());
+        kululaskuri.LisaaKolariKulutLumestaJokaOnMaassaLiianKauan(lumikerros.MonessakoRuudussaOnOllutLuntaLiianKauanEikaOleImoitettu());
         return kululaskuri.getKulujenMaara();
     }
     
@@ -115,5 +116,8 @@ public class TienhoidonSuorittaja {
         }else{
             return luku1;
         }
+    }
+    public int getKulut(){
+        return this.kululaskuri.getKulujenMaara();
     }
 }
