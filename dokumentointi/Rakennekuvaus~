@@ -1,0 +1,5 @@
+Rakennekuvaus
+
+PelikerranOhjaaja on luokkahierarkiassa ylimpänä luokan TienhoidonSuorittaja kanssa. Niiden kautta päästään käsiksi kaikkiin muihin luokkiin. PelikerranOhjaajassa on talletettuna ReitinLukija, Lumikerros, Saa ja EnnatyslistanPitaja. ReitinLukija tuntee myös Lumikerroksen ja lisäksi se tuntee myös luokan Kartta. Lumikerros tuntee myös kartan. Kartta on luokkahierarkiassa toiseksi alimmalla tasolla. Se ei itse sisällä tietoa toisista projektin luokista, mutta käyttää luokkaa TiedostonLukija. TiedostonLukija on luokkahierarkiassa alimmalla tasolla.Luokka Saa tuntee luokan Saaennuste. Saaennuste on samantasoinen luokka kuin Kartta ja se käyttää luokkaa TiedostonLukija.
+
+TienhoidonSuorittaja käyttää luokkia Auraaja, Saa, Lumikerros, Kululaskuri ja ReitinLukija. Auraaja tuntee luokat Lumikerros ja ReitinLukija. Kululaskuri on myös luokkahierarkian alimmalla tasolla, sillä se ei sisalla tietoa muista projektin luokista.
