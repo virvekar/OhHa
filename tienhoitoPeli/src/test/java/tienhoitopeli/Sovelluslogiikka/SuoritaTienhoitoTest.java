@@ -53,7 +53,7 @@ public class SuoritaTienhoitoTest {
         
         auraaja = new Auraaja(lumikerros, reitinLukija);
         tienhoidonSuorittaja = new TienhoidonSuorittaja(auraaja, saa, lumikerros,reitinLukija);
-        koordinaattiLista = new ArrayList<ArrayList<Integer>>();
+
 
     }
 
@@ -65,18 +65,12 @@ public class SuoritaTienhoitoTest {
     // The methods must be annotated with annotation @Test. For example:
     //
     @Test
-    public void SuoritaTienhoitoAuraa() {
+    public void SuoritaTienhoitoAuraaKolmeEkaaRuutua() {
         reitinLukija.KirjaaEnsimmainenPiste("1", "2");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("k");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("k");
+        this.KirjaaReitti("kk");
         tienhoidonSuorittaja.SuoritaTienhoito();
         HashMap kerros = lumikerros.GetLumikerrosKoordinaateissa();
-        for (int i = 0; i <= 3; i++) {
-            ArrayList<Integer> koordinaattiPiste = new ArrayList<Integer>();
-            koordinaattiPiste.add(i);
-            koordinaattiPiste.add(1);
-            koordinaattiLista.add(koordinaattiPiste);
-        }
+        ArrayList<ArrayList<Integer>> koordinaattiLista =this.KirjaaKoordinaatitKolmelleEkalleRuudulle();
         double lumiMaara = 0.0;
         for (int j = 0; j < 3; j++) {
             lumiMaara += (double) kerros.get(koordinaattiLista.get(j));
@@ -85,6 +79,19 @@ public class SuoritaTienhoitoTest {
         assertEquals(vastaus, true);
 
     }
+    
+    public ArrayList<ArrayList<Integer>> KirjaaKoordinaatitKolmelleEkalleRuudulle(){    
+        ArrayList<ArrayList<Integer>> koordinaattiLista = new ArrayList<ArrayList<Integer>>();
+        for (int i = 0; i <= 3; i++) {
+            ArrayList<Integer> koordinaattiPiste = new ArrayList<Integer>();
+            koordinaattiPiste.add(i);
+            koordinaattiPiste.add(1);
+            koordinaattiLista.add(koordinaattiPiste);
+        }
+        return koordinaattiLista;
+    }
+    
+    
     @Test
     public void SuoritaTienhoitoEiAuraaJosEiReittia(){
         tienhoidonSuorittaja.SuoritaTienhoito();
@@ -95,8 +102,7 @@ public class SuoritaTienhoitoTest {
     @Test
     public void LaskeKulutToimii() {
         reitinLukija.KirjaaEnsimmainenPiste("1", "2");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("k");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("k");
+        this.KirjaaReitti("kk");
         tienhoidonSuorittaja.SuoritaTienhoito();
         int kulut = tienhoidonSuorittaja.laskeKulutTonniPerKolari();
         assertEquals(15 + 13000, kulut);
@@ -105,8 +111,7 @@ public class SuoritaTienhoitoTest {
     @Test
     public void LaskeKulutLumenMaaranMukaanToimii(){
         reitinLukija.KirjaaEnsimmainenPiste("1", "2");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("k");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("k");
+        this.KirjaaReitti("kk");
         tienhoidonSuorittaja.SuoritaTienhoito();
         int kulut=tienhoidonSuorittaja.laskeKulutLumenMaaranMukaan();
         assertEquals(15 + 500*13, kulut);
@@ -124,34 +129,56 @@ public class SuoritaTienhoitoTest {
     @Test
     public void LaskeKulutAntaaBensakulutJosKaikkiKadutAurattu() {
         reitinLukija.KirjaaEnsimmainenPiste("1", "2");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("k");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("k");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("j");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("l");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("l");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("l");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("i");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("i");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("k");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("k");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("l");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("k");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("k");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("j");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("j");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("j");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("j");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("l");
-        reitinLukija.KirjaaReittiPisteJosKomentoKelpaa("i");    
+        
+        this.KirjaaReitti("kkjllliikklkkjjjjli");   
         tienhoidonSuorittaja.SuoritaTienhoito();
         int kulut=tienhoidonSuorittaja.laskeKulutTonniPerKolari();
         assertEquals(20*5, kulut);
     }
 
     @Test
-    public void PalautaSuurempiToimii() {
+    public void PalautaSuurempiToimii1() {
         int luku = tienhoidonSuorittaja.PalautaSuurempi(3, 5);
         assertEquals(5, luku);
+    }
+    @Test
+    public void PalautaSuurempiToimii2() {
+        int luku = tienhoidonSuorittaja.PalautaSuurempi(5, 3);
+        assertEquals(5, luku);
+    }
+    @Test
+    public void KerroAurauksenKestoPalauttaaOikeinKunAloitusAikaaEiValittuEikaReittia(){
+        assertEquals(0,tienhoidonSuorittaja.KerroAurauksenKesto());
+    }
+    @Test
+    public void KerroAurauksenKestoPalauttaaOikeinKunAloitusAikaaEiValittuJaReitinPituusYksi(){
+        reitinLukija.KirjaaEnsimmainenPiste("1", "2");
+        assertEquals(1,tienhoidonSuorittaja.KerroAurauksenKesto());
+    }
+    @Test
+    public void KerroAurauksenKestoPalauttaaOikeinKunAloitusAikaaEiValittuJaReitinPituusKolme(){
+        reitinLukija.KirjaaEnsimmainenPiste("1", "2");
+        this.KirjaaReitti("kk");
+        assertEquals(3,tienhoidonSuorittaja.KerroAurauksenKesto());
+    }
+    @Test
+    public void KerroAurauksenKestoPalauttaaOikeinKunAloitusAikaValittuMutteiReittia(){
+        this.reitinLukija.LisaaAloitusAika("5");
+        assertEquals(4,tienhoidonSuorittaja.KerroAurauksenKesto());
+    }
+    @Test
+    public void KerroAurauksenKestoPalauttaaOikeinKunAloitusAikaValittuJaReitinPituusKolme(){
+        this.reitinLukija.LisaaAloitusAika("5");
+        reitinLukija.KirjaaEnsimmainenPiste("1", "2");
+        this.KirjaaReitti("kk");
+        assertEquals(7,tienhoidonSuorittaja.KerroAurauksenKesto());
+    }
+    public void KirjaaReitti(String komennot){
+        
+        for(int kirjain=0; kirjain<komennot.length();kirjain++){
+            char komento=komennot.charAt(kirjain);
+            reitinLukija.KirjaaReittiPisteJosKomentoKelpaa(Character.toString(komento));
+        }
     }
     
     

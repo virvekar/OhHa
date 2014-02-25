@@ -78,7 +78,15 @@ public class SaaennusteTest {
          assertTrue(this.ennuste.OnkoNollaTaiIsompi(1));
      }
      @Test
-     public void OnkoInteger(){
-         
+     public void OnkoIntegerPalauttaaOkeinNumeroSyotteelle(){
+         assertTrue(this.ennuste.OnkoInteger("2"));
+     }
+     @Test
+     public void OnkoIntegerPalauttaaOkeinHuonolleSyotteelle(){
+         assertFalse(this.ennuste.OnkoInteger("e"));
+     }
+      @Test
+     public void OnkoIntegerPalauttaaOkeinTyhjalleSyotteelle(){
+         assertFalse(this.ennuste.OnkoInteger(""));
      }
 }

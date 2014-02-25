@@ -253,6 +253,11 @@ public class ReitinLukija {
         return true;
     }
 
+    /**
+     * Tallentaa hetken jolloin auraus aloitetaan
+     * @param aika annettu aloitusaika
+     * @return true jos aloitusajan lisays onnistui
+     */
     public boolean LisaaAloitusAika(String aika) {
         if (aika != null && OnkoInteger(aika)) {
             int sekunti=Integer.parseInt(aika);
@@ -268,9 +273,11 @@ public class ReitinLukija {
     public int getAloitusAika() {
         return this.aloitusAika;
     }
-
+/**
+ * Korvaa reitin tyhjalla arrayListilla ja alustaa aloitusajan
+ */
     public void TyhjennaReitti() {
         this.reitti = new ArrayList<ArrayList<Integer>>();
-        this.aloitusAika=0;
+        this.aloitusAika=1;
     }
 }

@@ -39,6 +39,7 @@ public class TienhoidonSuorittaja {
     /**
      * <p>
      * Kutsuu vuorotellen auraajaa poistamaan lunta ja lumikerrosta lisaamaan lunta.
+     * Auraus aloitetaan aloitusajan kertomana ajankohtana.
      * Auraaja auraa yhden reittipisteen yhdessa sekunnissa ja aina kun yksi
      * piste on aurattu lisataan lunta yhden sekunnin sateen verran.
      * <p>
@@ -46,26 +47,16 @@ public class TienhoidonSuorittaja {
     public void SuoritaTienhoito(){
 
         int aurausAlkaa=this.reitinlukija.getAloitusAika();
-        int aurauksenKesto=0;
-        
-        int sateenKesto=this.saa.getSateenPituus();
-        if(aurausAlkaa==1){
-            aurauksenKesto=this.auraaja.AnnaAuraajanReitti().size();
-        }else{
-            aurauksenKesto=this.auraaja.AnnaAuraajanReitti().size()+aurausAlkaa-1;
-        }
-        
-        
+        int aurauksenKesto=this.KerroAurauksenKesto();      
+        int sateenKesto=this.saa.getSateenPituus();          
         int OperaationKesto=this.PalautaSuurempi(sateenKesto, aurauksenKesto);
         
         for (int aika=1; aika<=OperaationKesto; aika++){
             if(aika<=sateenKesto){
                 lumikerros.LisaaLuntaYhdenSekunninSateenVerran(saa.getSateenMaara(), saa.getSateenPituus());
             }
-
             if(aika>=aurausAlkaa && aika<=aurauksenKesto){
-                auraaja.AuraaSeuraavaPiste();
-                
+                auraaja.AuraaSeuraavaPiste();             
             }
             lumikerros.PaivitaMerkittavanLumenKesto();
             this.laskeKulutLumestaJokaOnMaassaLiianKauan();
@@ -98,9 +89,9 @@ public class TienhoidonSuorittaja {
      * Laskee kulut jotka syntyvat siita etta ruudussa on lunta liian kauan
      * @return kulujen maara
      */
-    public int laskeKulutLumestaJokaOnMaassaLiianKauan(){
+    public void laskeKulutLumestaJokaOnMaassaLiianKauan(){
         kululaskuri.LisaaKolariKulutLumestaJokaOnMaassaLiianKauan(lumikerros.MonessakoRuudussaOnOllutLuntaLiianKauanEikaOleImoitettu());
-        return kululaskuri.getKulujenMaara();
+        
     }
     
     
@@ -119,5 +110,20 @@ public class TienhoidonSuorittaja {
     }
     public int getKulut(){
         return this.kululaskuri.getKulujenMaara();
+    }
+    
+    /**
+     * Kertoo aurauksen lopetushetken
+     * @return aurauken lopetushetki
+     */
+    public int KerroAurauksenKesto(){
+        int aurausAlkaa=this.reitinlukija.getAloitusAika();
+        int aurauksenKesto=0;
+        if(aurausAlkaa==1){
+            aurauksenKesto=this.auraaja.AnnaAuraajanReitti().size();
+        }else{
+            aurauksenKesto=this.auraaja.AnnaAuraajanReitti().size()+aurausAlkaa-1;
+        }
+        return aurauksenKesto;
     }
 }

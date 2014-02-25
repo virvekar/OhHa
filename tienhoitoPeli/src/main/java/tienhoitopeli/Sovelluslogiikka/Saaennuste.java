@@ -137,7 +137,7 @@ public class Saaennuste {
      * @param teksti String josta halutaan tarkistaa, onko se luku
      * @return boolean ,joka on true jos annettu String on luku
      */
-    public static boolean OnkoInteger(String teksti) {
+    public boolean OnkoInteger(String teksti) {
         try {
             Integer.parseInt(teksti);
         } catch (NumberFormatException e) {
