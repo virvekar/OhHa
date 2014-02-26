@@ -31,7 +31,7 @@ public class PeliKerranOhjaaja {
     public PeliKerranOhjaaja() {
         this.kentanNumero = 1;
         this.pelaaja = "";
-        this.tiedostoPolku = "tienhoitoPeli/src/main/java/tienhoitopeli/";
+        this.tiedostoPolku = "src/main/java/tienhoitopeli/";
         this.kenttienMaara = 6;
     }
 
