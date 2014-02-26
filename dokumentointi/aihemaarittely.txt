@@ -1,28 +1,17 @@
 Aihe: Tienhoitopeli
 Toteutetaan peli, jossa aurataan lumen peittämiä katuja.Pelin aluksi pelaajalle
 annetaan sääennuste, jossa kerrotaan paljonko lunta sataa ja kuinka nopeasti. 
-Pelaajan tulee päättää, montako aurausautoa tehtävään käytetään ja määrittää 
-niille reitit. Katuverkkona toimii yksinkertainen ruudukkomalli. Erilaisia
-tieverkkoja on useita ja ne vastaavat pelin eri kenttiä. Myös mahdollisia 
-sääennusteita on useita. Kun pelaaja on määrittänyt reitit, hän painaa 
-"käynnistä" nappia. Ruudulla näkyy aurauksen kulku ja lopuksi näytetään tulokset.
+Pelaajan tulee määrittää aurausautolle reitti. Katuverkkona toimii yksinkertainen ruudukkomalli. Erilaisia tieverkkoja on useita ja ne vastaavat pelin eri kenttiä. Myös mahdollisia  sääennusteita on useita. Kun pelaaja on määrittänyt reitin, hän painaa  "Reitti valmis" nappia. Ohjelma suorittaa aurauksen ja lopuksi näytetään tulokset.
 
-Pelin tavoitteena on selvitä mahdollisimman vähillä kuluilla. Kuluja aiheuttavat
-aurausauton kuljettan palkka, bensa ja epäonnistuneesta aurauksesta aiheutuneet 
-tavallisten autojen kolarit. Jos pelaaja selviää tarpeeksi pienillä kuluilla, 
-seuraava taso aukeaa. Pelaajan nimimerkki tallennetaan, jotta hän voi ensi kerrallla
-jatkaa samasta tasosta. Peliä voidaan mahdollisesti laajentaa siten, että
-pelaajan tulee myös suolata tiet ja estää niiden jäätyminen.
+Pelin tavoitteena on selvitä mahdollisimman vähillä kuluilla. Kuluja aiheuttavat bensa ja epäonnistuneesta aurauksesta aiheutuneet 
+tavallisten autojen kolarit. Kuluja syntyy lisäksi silloin, kun lunta on tiellä 5 cm tai enemmän liian kauan. Peliä voidaan mahdollisesti laajentaa siten, että pelaajan tulee myös suolata tiet ja estää niiden jäätyminen.
 
 Käyttäjät: pelaaja
 
 Pelaajan toiminnot:
--kirjautuminen peliin
 -pelin aloittaminen
--kentän valitseminen
--sääennusteen katselu
--aurausautojen määrän päättäminen
--aurausautojen reittien määrittäminen
--aurauksen kulun katselu
--tulosten tarkastelu
--tallentaminen
+-nimen syöttaminen
+-seuraavaan kenttään meneminen
+-aurausauton reittin määrittäminen
+-kentän aloittaminen uudestaan
+-ennätysten tarkastelu

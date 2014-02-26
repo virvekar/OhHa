@@ -19,4 +19,6 @@ ke 12.2 7,5 h Usean tason toiminta, PeliKerranOhjaaja+testeja
 to 13.2 2 h PelikerranOhjaajalle testeja, saan arpominen+testeja
 pe 14.2 2 h Koodikatselmointi
 ke 19.2 6,7 h Kulujen laskemisen muokkaus + testeja + koodin esittelyt
-to 20.2 1,5 h testien viimeistely, rakennekuvaus
+ti 25.2 1,5 h testien viimeistely, rakennekuvaus
+ke 26.2 3,5 h Ohjelman ja dokumenttien viimeistely, käyttöohje, jar tiedosto
+
