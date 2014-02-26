@@ -20,11 +20,13 @@ import java.util.HashMap;
  */
 public class Ruudukko {
     private HashMap lumikerrosKoordinaateissa;
+    private HashMap merkittavastiLunta;
     private int rivit;
     private int sarakkeet;
     
-    public Ruudukko(HashMap lumikerros, int annetutRivit, int annetutSarakkeet){
+    public Ruudukko(HashMap lumikerros, HashMap merkittavastiLunta,int annetutRivit, int annetutSarakkeet){
         this.lumikerrosKoordinaateissa=lumikerros;
+        this.merkittavastiLunta=merkittavastiLunta;
         this.rivit=annetutRivit;
         this.sarakkeet=annetutSarakkeet;
         
@@ -45,6 +47,11 @@ public class Ruudukko {
                 ruutu.Piirra(graphics);
             }else{
                 Ruutu ruutu=new Ruutu(x,y,ruudunKoko,Color.WHITE); 
+                ruutu.Piirra(graphics);
+            }
+            
+            if((boolean)this.merkittavastiLunta.get(koordinaatit)){
+                Ruutu ruutu=new Ruutu(x,y,ruudunKoko,Color.RED); 
                 ruutu.Piirra(graphics);
             }
         }

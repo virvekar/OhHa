@@ -49,11 +49,14 @@ public class SeuraavaTasoKuuntelija implements ActionListener {
 
         if (this.peliKerranOhjaaja.getPelaajanNimi().isEmpty()) {
             this.ohjeKentta.setText("Anna nimesi ensin");
+        }else if(this.peliKerranOhjaaja.getKentanNumero()==this.peliKerranOhjaaja.getKenttienMaara()){
+            this.ohjeKentta.setText("Tama on viimeinen kentta.");
         } else {
             this.peliKerranOhjaaja.MeneSeuraavaanKenttaan();
             this.peliKerranOhjaaja.AlustaTaso();
 
             this.piirtoalusta.vaihdaKarttaPohja(this.peliKerranOhjaaja.getLumikerrosKoordinaateissa(),
+                    this.peliKerranOhjaaja.getLumikerros().GetMerkittavastaLumestaIlmoitettuJoskus(),
                     this.peliKerranOhjaaja.getRivit(), this.peliKerranOhjaaja.getSarakkeet());
             this.ohjeKentta.setText("Milla sekunnilla auraus aloitetaan?");
             this.aloitusSyotteenKuuntelija.TyhjennaAloitusAika();

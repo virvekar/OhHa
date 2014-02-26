@@ -26,17 +26,20 @@ public class PeliKerranOhjaaja {
     private Lumikerros lumikerros;
     private Saa saa;
     private EnnatysListanPitaja ennatysListanPitaja;
+    private int kenttienMaara;
 
     public PeliKerranOhjaaja() {
         this.kentanNumero = 1;
         this.pelaaja = "";
         this.tiedostoPolku = "src/main/java/tienhoitopeli/";
+        this.kenttienMaara = 6;
     }
-/**
- * 
- * @param nimi pelaajan nimi
- * @return true, jos nimen asettaminen onnistui
- */
+
+    /**
+     *
+     * @param nimi pelaajan nimi
+     * @return true, jos nimen asettaminen onnistui
+     */
     public boolean setPelaajanNimi(String nimi) {
         if (nimi.isEmpty()) {
             return false;
@@ -50,71 +53,80 @@ public class PeliKerranOhjaaja {
     public String getPelaajanNimi() {
         return this.pelaaja;
     }
-/**
- * 
- * @return Kyseisen tason kartan tiedostopolku
- */
+
+    /**
+     *
+     * @return Kyseisen tason kartan tiedostopolku
+     */
     public String getKartanPolku() {
         String polku = this.tiedostoPolku + "kartat/kartta" + this.kentanNumero + ".txt";
         return polku;
     }
-/**
- * 
- * @return Kyseisen tason saaennusteen tiedostopolku
- */
+
+    /**
+     *
+     * @return Kyseisen tason saaennusteen tiedostopolku
+     */
     public String getSaaennusteenPolku() {
         String polku = this.tiedostoPolku + "saaennusteet/saaennuste" + this.kentanNumero + ".txt";
         return polku;
     }
-/**
- * 
- * @return Kyseisen tason ennatyslistan tiedostopolku
- */
+
+    /**
+     *
+     * @return Kyseisen tason ennatyslistan tiedostopolku
+     */
     public String getEnnatysListanPolku() {
         String polku = this.tiedostoPolku + "ennatyslistat/ennatyslista" + this.kentanNumero + ".txt";
         return polku;
     }
-/**
- * Vaihtaa kentan numeron seuraavaan.
- */
+
+    /**
+     * Vaihtaa kentan numeron seuraavaan.
+     */
     public void MeneSeuraavaanKenttaan() {
-        this.kentanNumero++;
+        if (this.kentanNumero < this.kenttienMaara) {
+            this.kentanNumero++;
+        }
     }
-/**
- * Luo uutta tasoa varten tarvittavat oliot ja tallentaa ne.
- */
+
+    /**
+     * Luo uutta tasoa varten tarvittavat oliot ja tallentaa ne.
+     */
     public void AlustaTaso() {
-        Kartta kartta = new Kartta(this.getKartanPolku());
-        kartta.LueKartta();
+        if (this.kentanNumero <= this.kenttienMaara) {
+            Kartta kartta = new Kartta(this.getKartanPolku());
+            kartta.LueKartta();
 
-        ArrayList<Integer> kartanKoko = kartta.KartanKoko();
+            ArrayList<Integer> kartanKoko = kartta.KartanKoko();
 
-        Saaennuste uusiEnnuste = new Saaennuste(this.getSaaennusteenPolku());
-        uusiEnnuste.LueSaaennuste();
-        Saa uusiSaa = new Saa(uusiEnnuste);
-        
-        if(uusiEnnuste.GetPituudenMuutoksenKeskihajonta()>0){
-           uusiSaa.ArvoSateenPituus(uusiEnnuste.GetPituudenMuutoksenKeskihajonta());
+            Saaennuste uusiEnnuste = new Saaennuste(this.getSaaennusteenPolku());
+            uusiEnnuste.LueSaaennuste();
+            Saa uusiSaa = new Saa(uusiEnnuste);
+
+            if (uusiEnnuste.GetPituudenMuutoksenKeskihajonta() > 0) {
+                uusiSaa.ArvoSateenPituus(uusiEnnuste.GetPituudenMuutoksenKeskihajonta());
+            }
+            if (uusiEnnuste.GetMaaranMuutoksenKeskihajonta() > 0) {
+                uusiSaa.ArvoSateenMaara(uusiEnnuste.GetMaaranMuutoksenKeskihajonta());
+            }
+
+            Lumikerros uusiLumikerros = new Lumikerros(kartta);
+            uusiLumikerros.AlustaLumikerros();
+
+            ReitinLukija uusiReitinLukija = new ReitinLukija(kartta, uusiLumikerros);
+
+            EnnatysListanPitaja pitaja = new EnnatysListanPitaja(this.getEnnatysListanPolku());
+
+            this.lumikerrosKoordinaateissa = uusiLumikerros.GetLumikerrosKoordinaateissa();
+            this.rivit = kartanKoko.get(1);
+            this.sarakkeet = kartanKoko.get(0);
+            this.ennuste = uusiEnnuste.AnnaSaaennuste();
+            this.reitinLukija = uusiReitinLukija;
+            this.saa = uusiSaa;
+            this.lumikerros = uusiLumikerros;
+            this.ennatysListanPitaja = pitaja;
         }
-        if(uusiEnnuste.GetMaaranMuutoksenKeskihajonta()>0){
-            uusiSaa.ArvoSateenMaara(uusiEnnuste.GetMaaranMuutoksenKeskihajonta());
-        }
-
-        Lumikerros uusiLumikerros = new Lumikerros(kartta);
-        uusiLumikerros.AlustaLumikerros();
-
-        ReitinLukija uusiReitinLukija = new ReitinLukija(kartta, uusiLumikerros);
-
-        EnnatysListanPitaja pitaja = new EnnatysListanPitaja(this.getEnnatysListanPolku());
-
-        this.lumikerrosKoordinaateissa = uusiLumikerros.GetLumikerrosKoordinaateissa();
-        this.rivit = kartanKoko.get(1);
-        this.sarakkeet = kartanKoko.get(0);
-        this.ennuste = uusiEnnuste.AnnaSaaennuste();
-        this.reitinLukija = uusiReitinLukija;
-        this.saa = uusiSaa;
-        this.lumikerros = uusiLumikerros;
-        this.ennatysListanPitaja = pitaja;
     }
 
     public HashMap getLumikerrosKoordinaateissa() {
@@ -124,22 +136,36 @@ public class PeliKerranOhjaaja {
     public int getRivit() {
         return this.rivit;
     }
-    public int getSarakkeet(){
+
+    public int getSarakkeet() {
         return this.sarakkeet;
     }
-    public String getEnnuste(){
+
+    public String getEnnuste() {
         return this.ennuste;
     }
-    public ReitinLukija getReitinLukija(){
+
+    public ReitinLukija getReitinLukija() {
         return this.reitinLukija;
     }
-    public Saa getSaa(){
+
+    public Saa getSaa() {
         return this.saa;
     }
-    public Lumikerros getLumikerros(){
+
+    public Lumikerros getLumikerros() {
         return this.lumikerros;
     }
-    public EnnatysListanPitaja getEnnatysListanPitaja(){
+
+    public EnnatysListanPitaja getEnnatysListanPitaja() {
         return this.ennatysListanPitaja;
+    }
+
+    public int getKenttienMaara() {
+        return this.kenttienMaara;
+    }
+
+    public int getKentanNumero() {
+        return this.kentanNumero;
     }
 }

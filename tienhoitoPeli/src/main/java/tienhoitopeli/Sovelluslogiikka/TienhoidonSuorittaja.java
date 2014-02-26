@@ -87,7 +87,7 @@ public class TienhoidonSuorittaja {
     
     /**
      * Laskee kulut jotka syntyvat siita etta ruudussa on lunta liian kauan
-     * @return kulujen maara
+     * 
      */
     public void laskeKulutLumestaJokaOnMaassaLiianKauan(){
         kululaskuri.LisaaKolariKulutLumestaJokaOnMaassaLiianKauan(lumikerros.MonessakoRuudussaOnOllutLuntaLiianKauanEikaOleImoitettu());

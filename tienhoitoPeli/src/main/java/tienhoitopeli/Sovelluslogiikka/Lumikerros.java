@@ -15,18 +15,23 @@ import java.util.HashMap;
  */
 public class Lumikerros {
 /**
- * Kartta=Kartta olio joka tietaa kartan ArrayListin<String> oliona
+ * Kartta=Kartta olio joka tietaa kartan ArrayListin<String> oliona.
  * lumikerrosKoordinaateissa= HashMap jonka avaimena koordinaattipisteet ja arvoina
- * lumen maara kussakin pisteessa
+ * lumen maara kussakin pisteessa. 
  * merkittavanLumenKestoKoordinaateissa= HashMap  jonka avaimena koordinaattipisteet
- * ja arvoina tieto siita kauanko ruudussa on ollut merkittava maara lunta
+ * ja arvoina tieto siita kauanko ruudussa on ollut merkittava maara lunta. 
  * merkittavastaLumestaIlmoitettu=HashMap jonka avaimena koordinaattipisteet ja 
- * arvoina true, jos ruudun liiasta lumesta on ilmoitettu ja false, jos ei ole imoitettu
+ * arvoina true, jos ruudun liiasta lumesta on ilmoitettu ja false, jos ei ole imoitettu.
+ * Kun lumi ruudusta aurataan, arvoksi muutetaan false.
+ * merkittavastaLumestaIlmoitettuJoskus= sama kuin ylla, mutta auratessa arvoksi ei muuteta
+ * false. Se siis kertoo missa ruuduissa on joskus ollut liikaa lunta pelin aikana.
  */
     private Kartta kartta;
     private HashMap lumikerrosKoordinaateissa;
     private HashMap merkittavanLumenKestoKoordinaateissa;
     private HashMap merkittavastaLumestaIlmoitettu;
+    private HashMap merkittavastaLumestaIlmoitettuJoskus;
+    
 
     /**
      * 
@@ -37,6 +42,7 @@ public class Lumikerros {
         this.lumikerrosKoordinaateissa = new HashMap();
         this.merkittavanLumenKestoKoordinaateissa=new HashMap();
         this.merkittavastaLumestaIlmoitettu=new HashMap();
+        this.merkittavastaLumestaIlmoitettuJoskus=new HashMap();
     }
 
     /**
@@ -70,6 +76,7 @@ public class Lumikerros {
 
                 this.merkittavanLumenKestoKoordinaateissa.put(avainkoordinaatit, 0);
                 this.merkittavastaLumestaIlmoitettu.put(avainkoordinaatit, false);
+                this.merkittavastaLumestaIlmoitettuJoskus.put(avainkoordinaatit, false);
                 
                 if (rivi.charAt(riviPiste) == 'x') {
                     this.lumikerrosKoordinaateissa.put(avainkoordinaatit, (double) -1.0);
@@ -136,10 +143,13 @@ public class Lumikerros {
     public HashMap GetMerkittavastaLumestaIlmoitettu(){
         return this.merkittavastaLumestaIlmoitettu;
     }
+    public HashMap GetMerkittavastaLumestaIlmoitettuJoskus(){
+        return this.merkittavastaLumestaIlmoitettuJoskus;
+    }
     /**
      * Muuttaa lumen maaraksi 0 halutuissa koordinaateissa.
      * Jos kyseisen ruudun merkittavan lumen kestosta on ilmoitettu, asetetaan
-     * merkittavastaLumestaIlmoiettu arvoksi false kyseisissa koordinaateissa
+     * merkittavastaLumestaIlmoiettu arvoksi false kyseisissa koordinaateissa.
      * @param koordinaatit koorinaatit, joista lumi halutaan poistaa
      */
     public void PoistaLumikerros(ArrayList<Integer> koordinaatit){
@@ -187,8 +197,11 @@ public class Lumikerros {
             if(kesto>50 && !onkoIlmoitettu){
                 ruutujenMaara++;
                 this.merkittavastaLumestaIlmoitettu.put(koordinaatit, true);
+                this.merkittavastaLumestaIlmoitettuJoskus.put(koordinaatit, true);
             }
         }
+        
         return ruutujenMaara;
+        
     }
 }

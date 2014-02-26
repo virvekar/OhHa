@@ -177,6 +177,22 @@ public class LumikerrosTest {
         assertEquals(lumikerros.MonessakoRuudussaOnOllutLuntaLiianKauanEikaOleImoitettu(), 1);
     }
 
+    @Test
+    public void MerkittavastaLumestaIlmoitettuJoskusOikeinJosEiIlmoituksia(){
+        HashMap ilmoitukset=this.lumikerros.GetMerkittavastaLumestaIlmoitettuJoskus();
+        ArrayList<Integer> koordinaatit=this.LuoReittiKoordinaattiPiste(0, 1);
+        assertFalse((boolean)ilmoitukset.get(koordinaatit));
+    }
+    @Test
+    public void MerkittavastaLumestaIlmoitettuJoskusOikeinJosIlmoitus(){
+        lumikerros.LisaaLuntaYhdenSekunninSateenVerran(saa.getSateenMaara(), saa.getSateenPituus());
+        this.PaivitaLumikerros55Kertaa();
+        lumikerros.MonessakoRuudussaOnOllutLuntaLiianKauanEikaOleImoitettu();
+        HashMap ilmoitukset=this.lumikerros.GetMerkittavastaLumestaIlmoitettuJoskus();
+        ArrayList<Integer> koordinaatit=this.LuoReittiKoordinaattiPiste(0, 1);
+        assertTrue((boolean)ilmoitukset.get(koordinaatit));
+    }
+    
     public void PaivitaLumikerros55Kertaa() {
         for (int i = 1; i < 55; i++) {
             lumikerros.PaivitaMerkittavanLumenKesto();

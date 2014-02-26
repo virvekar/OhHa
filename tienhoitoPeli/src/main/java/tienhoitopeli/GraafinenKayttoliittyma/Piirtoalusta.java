@@ -22,9 +22,9 @@ public class Piirtoalusta extends JPanel{
 
     private Ruudukko ruudukko;
     
-    public Piirtoalusta(HashMap kerros, int rivit, int sarakkeet,AurausAuto auto){
+    public Piirtoalusta(HashMap kerros, HashMap merkittavastiLunta,int rivit, int sarakkeet,AurausAuto auto){
  
-        ruudukko=new Ruudukko(kerros,rivit,sarakkeet);
+        ruudukko=new Ruudukko(kerros,merkittavastiLunta,rivit,sarakkeet);
         this.auto=auto;
         super.setBackground(Color.WHITE);
     }
@@ -37,7 +37,7 @@ public class Piirtoalusta extends JPanel{
         auto.Piirra(graphics);
     }
     
-    public void vaihdaKarttaPohja(HashMap kerros, int rivit, int sarakkeet){
-        this.ruudukko=new Ruudukko(kerros,rivit,sarakkeet);
+    public void vaihdaKarttaPohja(HashMap kerros, HashMap merkittavastiLunta,int rivit, int sarakkeet){
+        this.ruudukko=new Ruudukko(kerros,merkittavastiLunta,rivit,sarakkeet);
     }
 }

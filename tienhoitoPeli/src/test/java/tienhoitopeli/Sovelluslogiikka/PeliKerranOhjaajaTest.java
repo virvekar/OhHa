@@ -80,6 +80,15 @@ public class PeliKerranOhjaajaTest {
         assertEquals(polku,this.peliKerranOhjaaja.getKartanPolku());
     }
     @Test
+    public void getKartanPolkuAntaaOikeanPolunVikanTasonJalkeen(){
+        int maara=this.peliKerranOhjaaja.getKenttienMaara();
+        String polku="src/main/java/tienhoitopeli/kartat/kartta"+maara+".txt";
+        for (int i=1;i<=maara;i++){
+            this.peliKerranOhjaaja.MeneSeuraavaanKenttaan();
+        }      
+        assertEquals(polku,this.peliKerranOhjaaja.getKartanPolku());
+    }
+    @Test
     public void getSaaennusteenPolkuAntaaOikeanPolunEkallaTasolla(){
         String polku="src/main/java/tienhoitopeli/saaennusteet/saaennuste1.txt";
         assertEquals(polku,this.peliKerranOhjaaja.getSaaennusteenPolku());
@@ -88,6 +97,15 @@ public class PeliKerranOhjaajaTest {
     public void getSaaennusteenPolkuAntaaOikeanPolunTokallaTasolla(){
         String polku="src/main/java/tienhoitopeli/saaennusteet/saaennuste2.txt";
         this.peliKerranOhjaaja.MeneSeuraavaanKenttaan();
+        assertEquals(polku,this.peliKerranOhjaaja.getSaaennusteenPolku());
+    }
+    @Test
+    public void getSaaennusteenPolkuAntaaOikeanPolunVikanTasonJalkeen(){
+        int maara=this.peliKerranOhjaaja.getKenttienMaara();
+        String polku="src/main/java/tienhoitopeli/saaennusteet/saaennuste"+maara+".txt";
+        for (int i=1;i<=maara;i++){
+            this.peliKerranOhjaaja.MeneSeuraavaanKenttaan();
+        }      
         assertEquals(polku,this.peliKerranOhjaaja.getSaaennusteenPolku());
     }
     @Test
@@ -101,7 +119,15 @@ public class PeliKerranOhjaajaTest {
         this.peliKerranOhjaaja.MeneSeuraavaanKenttaan();
         assertEquals(polku,this.peliKerranOhjaaja.getEnnatysListanPolku());
     }
-    
+    @Test
+    public void getEnnatyslistanPolkuAntaaOikeanPolunVikanTasonJalkeen(){
+        int maara=this.peliKerranOhjaaja.getKenttienMaara();
+        String polku="src/main/java/tienhoitopeli/ennatyslistat/ennatyslista"+maara+".txt";
+        for (int i=1;i<=maara;i++){
+            this.peliKerranOhjaaja.MeneSeuraavaanKenttaan();
+        }      
+        assertEquals(polku,this.peliKerranOhjaaja.getEnnatysListanPolku());
+    }
     @Test
     public void AlustaTasoAlustaaLumikerroksenKoordinaateissaOikeinEkallaKerralla(){
         this.peliKerranOhjaaja.AlustaTaso();
@@ -234,6 +260,20 @@ public class PeliKerranOhjaajaTest {
         EnnatysListanPitaja pitaja2=this.peliKerranOhjaaja.getEnnatysListanPitaja();
         String ennatykset2=pitaja2.getEnnatysListaTekstina();
         assertTrue(!ennatykset1.equals(ennatykset2));
+    }
+    @Test
+    public void AlustaTasoEiVaihdaEnantyslistaaVikassaKentassa(){
+        int kenttienMaara=this.peliKerranOhjaaja.getKenttienMaara();
+        for(int i=1;i<=kenttienMaara;i++){
+            this.peliKerranOhjaaja.AlustaTaso();
+            this.peliKerranOhjaaja.MeneSeuraavaanKenttaan();
+        }
+        EnnatysListanPitaja pitaja=this.peliKerranOhjaaja.getEnnatysListanPitaja();
+        String ennatykset1=pitaja.getEnnatysListaTekstina();
+        this.peliKerranOhjaaja.AlustaTaso();
+        EnnatysListanPitaja pitaja2=this.peliKerranOhjaaja.getEnnatysListanPitaja();
+        String ennatykset2=pitaja2.getEnnatysListaTekstina();
+        assertTrue(ennatykset1.equals(ennatykset2));
     }
     
     public ArrayList<Integer> LuoReittiKoordinaattiPiste(int rivi, int sarake) {

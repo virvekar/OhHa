@@ -105,6 +105,7 @@ public class GraafinenKayttoliittyma implements Runnable {
 
         AurausAuto auto = new AurausAuto(-1000, -1000, 400 / this.peliKerranOhjaaja.getRivit());
         this.piirtoalusta = new Piirtoalusta(this.peliKerranOhjaaja.getLumikerrosKoordinaateissa(),
+                this.peliKerranOhjaaja.getLumikerros().GetMerkittavastaLumestaIlmoitettuJoskus(),
                 this.peliKerranOhjaaja.getRivit(), this.peliKerranOhjaaja.getSarakkeet(), auto);
         c.ipady = 400;
         c.ipadx = 1000;

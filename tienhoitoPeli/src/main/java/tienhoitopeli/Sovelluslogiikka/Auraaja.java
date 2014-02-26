@@ -30,8 +30,8 @@ public class Auraaja {
 
     /**
      * Kysyy seuraavan reittipisteen reitinlukijalta ja pyytaa lumikerrosta
-     * poistamaan siita lumen
-     * Reittipistenumeron kertoo monennessako ruudussa mennaan.
+     * poistamaan siita lumen.
+     * Reittipistenumero kertoo monennessako ruudussa mennaan.
      */
     public void AuraaSeuraavaPiste() {
         ArrayList<ArrayList<Integer>> reitti = this.reitinLukija.GetReitti();

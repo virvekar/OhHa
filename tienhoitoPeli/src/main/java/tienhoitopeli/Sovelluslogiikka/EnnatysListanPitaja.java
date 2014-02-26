@@ -113,12 +113,19 @@ public class EnnatysListanPitaja {
         }
     }
 
+    /**
+     * Antaa ennatyslistan ArrayList muodossa
+     * @return ennatyslista siten etta jokainen rivi on arraylistissa
+     */
     public ArrayList<String> getEnnatysLista() {
         TiedostonLukija ennatystenLukija = new TiedostonLukija(this.tiedostonNimi);
         return ennatystenLukija.LueTiedosto();
 
     }
-
+/**
+ * Antaa ennatyslistan tekstimuodossa
+ * @return ennatyslistan tekstimuoto
+ */
   public String getEnnatysListaTekstina(){
       ArrayList<String> lista=this.getEnnatysLista();
       String teksti="";
