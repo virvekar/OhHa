@@ -1,10 +1,1 @@
-105 Virve
-110 Virve
-115 Jaakko
-1105 Yrjö
-1105 Virve
-1570 Pekka
-1585 l
-2085 Pelle
-2575 Pertti
-3065 Pelle
+100 Koodari

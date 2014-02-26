@@ -1,2 +1,1 @@
-600 Julia
-2780 Pekka
+545 Koodari
