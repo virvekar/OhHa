@@ -1,0 +1,13 @@
+Käyttöohje
+
+Pelin idea on suunnitella aurausautolle reitti, jolla koko katuverkosto tulee auratuksi. Tavoite on selvitä mahdollisimman pienillä kuluilla. Yhden ruudun auraamisesta tulee bensakulua 5 euroa. Jos johonkin ruutuun jää lunta aurauksen jälkeen, siinä tapahtuu kolari ja syntyy paljon kuluja. Kulumäärä riippuu ruudussa olevan lumen määrästä.
+
+Ensimmäiseksi peli kysyy pelaajan nimeä, joka kirjoitetaan ylhäällä keskellä olevaan palkiin. Sitten peli kysyy millä sekunnilla auraus aloitetaan. Ennen tähän vastaamista kannattaa katsoa sääennustetta, joka on ruudun vasemmassa alalaidassa. Aurausauto ajaa yhden ruudun yhdessä sekunnissa. Jos sade kestää esim. viisi sekuntia, kannattaa auraus aloittaa vasta sekunnilla 5, jotta ensimmäisiä ruutuja ei tarvitse aurata uudestaan. Jos sade kestää kuitenkin hyvin kauan, esim. 60 sekuntia, kannattaa auraus aloittaa ennen sateen loppumista, sillä peli sakottaa yli 5 cm paksuisesta lumikerroksesta, joka on tiellä kauemmin kuin 50 sekuntia.
+
+Seuraavaksi peli kysyy aloitusriviä ja saraketta. Rivien aloittaminen aloitetaan ylhäältä, eli ylin rivi on 1. Sarakkeiden laskeminen aloitetaan vasemmalta, eli vasemman puoleisin sarake on 1. Peli ei hyväksy aloitusruutuja, jotka menevät rakennuksen (musta ruutu) päälle.
+
+Kun aloitusruutu on valittu, aloitetaan reitin suunnittelu. Suunnitelma annetaan liikuttamalla orassia aurausautoa nuolinäppäimillä. Kun reitti on valmis, painetaan "Reitti valmis" -painiketta. Tällöin peli suorittaa aurauksen ja ilmoitaa syntyneiden kulujen määrän. Reittiä suunnitellessa kannattaa olla tarkkana, sillä voi olla vaikea muistaa missä ruuduissa on jo käynyt!
+
+Jos tahtoo yrittää kenttää uudelleen tai aloittaa sen alusta kesken pelin, voi painaa "Yrita uudelleen" -painiketta. Seuraavaan tasoon pääsee painamalla "Seuraava taso" -painiketta. Seuraavaan tasoon voi siirtyä vaikkei olisi pelannut edellistä kenttää loppuun. Milloin vain voi tarkastella kyseisen tason ennätyslistaa "Ennatyslista" -painikkeesta.
+ 
+Sademäärä jakautuu joka sekunnille tasaisesti. Esim. jos 10 sekunnissa sataa 5 cm lunta, yhdessä sekunnissa sataa 0,5 cm lunta. Joissain kentissä sääennusteella on kuitenkin epävarmuutta. Epävarmuus ilmoitetaan ennusteen alapuolella. Sekä lumisateen kesto että sateen määrä voivat vaihdella. Vaihtelun suuruus ilmoitetaan keskihajontana. Jos esim. lumen määrän ennustettu arvo on 10 cm ja sateen määrän epävarmuus on 3, niin sateen määrä osuu 68 % todennäköisyydellä välille 7-13 cm. On myös mahdollista ettei sada lunta lainkaan, joskin se on epätodennäiköistä.
