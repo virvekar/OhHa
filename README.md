@@ -1,3 +1,3 @@
 OhHa
 ====
-Ohjelmoinnin harjoitusttyo. Lue dokumentointi kansiosta aihemaarittelly.
+Ohjelmoinnin harjoitustyo. Lue dokumentointi kansiosta aihemaarittelly.
